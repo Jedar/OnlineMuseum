@@ -1,7 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ef726efb-4679-412c-a0e8-bc529568aecc" name="Default Changelist" comment="" />
+    <list default="true" id="ef726efb-4679-412c-a0e8-bc529568aecc" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/commons_beanutils_1_9_3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_16.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fudan/ossw/dao/ArtworkDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fudan/ossw/dao/Dao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fudan/ossw/dao/NormalUserDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fudan/ossw/entity/Artwork.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fudan/ossw/entity/NormalUser.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/fudan/ossw/util/PropertyRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/lib/commons-beanutils-1.9.3.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/lib/commons-dbcp2-2.6.0.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/lib/commons-logging-1.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/lib/commons-pool2-2.6.2.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/WEB-INF/lib/fastjson-1.2.53.jar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/css/bootstrap.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/css/bootstrap.min.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/css/util.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/019070.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/201902.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/201903.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/201904.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/Test.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/满族平金绣云龙纹朝袍.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/玉鹿.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/竹根雕群仙祝寿山.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/竹根雕蝠桃盂.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/竹雕提梁卣.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/img/鸟纹玉璧.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/inc/footer.inc.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/inc/header.inc.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/inc/search.inc.jsp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/js/bootstrap.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/js/jquery-3.3.1.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/js/popper.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/web/js/util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/OnlineMuseum.iml" beforeDir="false" afterPath="$PROJECT_DIR$/OnlineMuseum.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/jdbc.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/jdbc.properties" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -10,12 +48,66 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/fudan/ossw/dao/ArtworkDao.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/fudan/ossw/dao/Dao.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/fudan/ossw/dao/NormalUserDao.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/fudan/ossw/entity/NormalUser.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/fudan/ossw/entity/Artwork.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/fudan/ossw/util/PropertyRepository.java">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/font/font-awesome-4.7.0/css/font-awesome.css">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/inc/footer.inc.jsp">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/js/bootstrap.js">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/jdbc.properties" />
+        <option value="$PROJECT_DIR$/src/fudan/ossw/util/PropertyRepository.java" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="460" />
     <option name="y" value="20" />
     <option name="width" value="1030" />
@@ -26,6 +118,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -47,40 +141,48 @@
             <path>
               <item name="OnlineMuseum" type="b2602c69:ProjectViewProjectNode" />
               <item name="OnlineMuseum" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="ossw" type="462c0819:PsiDirectoryNode" />
+              <item name="util" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="OnlineMuseum" type="b2602c69:ProjectViewProjectNode" />
+              <item name="OnlineMuseum" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="OnlineMuseum" type="b2602c69:ProjectViewProjectNode" />
               <item name="OnlineMuseum" type="462c0819:PsiDirectoryNode" />
               <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="OnlineMuseum" type="b2602c69:ProjectViewProjectNode" />
-              <item name="OnlineMuseum" type="462c0819:PsiDirectoryNode" />
-              <item name="web" type="462c0819:PsiDirectoryNode" />
-              <item name="WEB-INF" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
+              <item name="inc" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563032382499" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../WebDemo" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1563440011552" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../WebMuseum" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Repository\Web\OnlineMuseum\web" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="fudan.ossw.util" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Repository\Web\OnlineMuseum\web\WEB-INF\lib" />
+      <recent name="D:\Repository\Web\OnlineMuseum\web\js" />
+      <recent name="D:\Repository\Web\OnlineMuseum\web\inc" />
+      <recent name="D:\Repository\Web\OnlineMuseum\web\img" />
+      <recent name="D:\Repository\Web\OnlineMuseum\web\font" />
+      <recent name="D:\Repository\Web\OnlineMuseum\web\css" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -107,16 +209,17 @@
       <updated>1563032167393</updated>
       <workItem from="1563032172541" duration="253000" />
       <workItem from="1563033160511" duration="17000" />
+      <workItem from="1563438594587" duration="1242000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="270000" />
+    <option name="totallyTimeSpent" value="1512000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.2533512" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25670242" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -164,6 +267,62 @@
           <caret line="5" column="10" lean-forward="true" selection-start-line="5" selection-start-column="10" selection-end-line="5" selection-end-column="10" />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fudan/ossw/dao/NormalUserDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fudan/ossw/dao/ArtworkDaoImpl.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fudan/ossw/dao/JDBCDao.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fudan/ossw/dao/ArtworkDao.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fudan/ossw/dao/Dao.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fudan/ossw/dao/NormalUserDao.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fudan/ossw/entity/NormalUser.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fudan/ossw/entity/Artwork.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/jdbc.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="14" lean-forward="true" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/bootstrap.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="20" lean-forward="true" selection-start-line="9" selection-start-column="20" selection-end-line="9" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/css/bootstrap.min.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/fudan/ossw/util/PropertyRepository.java">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/img/font/font-awesome-4.7.0/css/font-awesome.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/font/font-awesome-4.7.0/css/font-awesome.css">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/inc/footer.inc.jsp">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/js/bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
   </component>
   <component name="masterDetails">
