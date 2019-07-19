@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Artwork Information</title>
+    <title>People Management</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
     <link href="../font/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/util.css"/>
@@ -58,95 +58,67 @@
 <main class="container row-fix">
     <div class="card">
         <div class="card-header">
-            藏品信息
+            人员信息
         </div>
         <div class="card-body">
-            <form class="form row">
-                <div class="form-group col-12">
-                    <label for="info-title">
-                        藏品名称
-                    </label>
-                    <input class="form-control" type="text" name="info-tile" id="info-title" placeholder="Title">
-                    <small class="form-text text-muted invisible" id="helpBlock-name">名称不能为空</small>
-                </div>
-                <div class="form-group col-12">
-                    <label for="info-description">藏品描述:</label>
-                    <textarea class="form-control" rows="5" id="info-description" name="description" placeholder="Enter description"></textarea>
-                    <small class="form-text text-muted invisible">不能为空</small>
-                </div>
-                <div class="col-5">
-                    <div class="form-group">
-                        <label for="info-size">
-                            尺寸
-                        </label>
-                        <input class="form-control" type="text" name="info-size" id="info-address" placeholder="address">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="info-location">
-                            馆藏地点
-                        </label>
-                        <input class="form-control" type="text" name="info-name" id="info-location" placeholder="address">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                </div>
-                <div class="col-5 offset-1 border border-primary rounded">
-                    <div class="form-group">
-                        <label for="info-age">
-                            年代
-                        </label>
-                        <input class="form-control" type="text" name="info-age" id="info-age" placeholder="address">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="info-find-time">
-                            出土时间
-                        </label>
-                        <input class="form-control" type="text" name="info-find-time" id="info-find-time" placeholder="address">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                </div>
-                <hr class="col-11">
-                <div class="col-3">
-                    <div class="form-group">
-                        <label for="info-image">
-                            上传图片
-                        </label>
-                        <input type="file" class="form-control" name="info-image" id="info-image">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="info-video">
-                            上传介绍视频
-                        </label>
-                        <input type="file" class="form-control" name="info-video" id="info-video">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                </div>
-                <div class="col-5 offset-3">
-                    <div class="card">
-                        <div class="card-header">
-                            图片预览
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-3 offset-1">
+                            <table class="table">
+                                <tr>
+                                    <td>用户ID</td>
+                                    <td>10326</td>
+                                </tr>
+                                <tr>
+                                    <td>用户名</td>
+                                    <td>Mike</td>
+                                </tr>
+                                <tr>
+                                    <td>邮箱</td>
+                                    <td>you@163.com</td>
+                                </tr>
+                                <tr>
+                                    <td>最近登陆</td>
+                                    <td>2019-07-17</td>
+                                </tr>
+                                <tr>
+                                    <td>是否管理员</td>
+                                    <td>是</td>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="card-body">
-                            <div class="img-thumbnail">
-                                <img id="img-preview" class="card-img" src="" width="250" height="250">
+                        <div class="col-3 offset-1 align-self-center">
+                            <h6>管理员权限管理</h6>
+                            <hr>
+                            <div class="btn-group-vertical">
+                                <button class="btn btn-primary disabled"><i class="fa fa-arrow-up"></i> 提升为管理员</button>
+                                <button class="btn btn-primary"><i class="fa fa-arrow-down"></i>降级为普通用户</button>
                             </div>
+                            <hr>
+                        </div>
+                        <div class="col-3 offset-1 align-self-center">
+                            <h6>用户信息管理</h6>
+                            <hr>
+                            <div class="btn-group-vertical">
+                                <button class="btn btn-info">查看用户</button>
+                                <button class="btn btn-info">更改用户信息</button>
+                                <button class="btn btn-danger">删除用户</button>
+                            </div>
+                            <hr>
                         </div>
                     </div>
-                </div>
-
-            </form>
+                </li>
+            </ul>
         </div>
         <div class="card-footer">
             <div class="row">
                 <div class="offset-9 col-3">
-                    <button class="btn btn-primary"><i class="fa fa-plus"></i>添加新藏品</button>
+                    <button class="btn btn-primary"><i class="fa fa-plus"></i>添加新用户</button>
                 </div>
             </div>
         </div>
     </div>
-    <br>
 
 </main>
 
@@ -243,5 +215,6 @@
         </p>
     </div>
 </footer>
+
 </body>
 </html>

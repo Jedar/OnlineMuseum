@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Artwork Information</title>
+    <title>Artwork Management</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
     <link href="../font/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/util.css"/>
@@ -39,115 +39,65 @@
             </form>
         </div>
     </div>
-</header>
-
-<div class="container-fluid">
     <nav class="row bg-light" id="header-nav">
         <div class="col-md-5 offset-md-1">
             <ul class="nav nav-tabs nav-justified">
                 <li class="nav-item"><a href="#" class="a-black nav-link">首页</a></li>
                 <li class="nav-item"><a href="#" class="a-black nav-link">搜索</a></li>
                 <li class="nav-item"><a href="#" class="a-black nav-link">详情</a></li>
-                <li class="nav-item"><a href="#" class="a-black nav-link">发布艺术品</a> </li>
+                <li class="nav-item"><a href="#" class="a-black nav-link active">个人页面</a> </li>
             </ul>
         </div>
-
     </nav>
-</div>
+</header>
 
-<main class="container row-fix">
-    <div class="card">
-        <div class="card-header">
-            藏品信息
-        </div>
-        <div class="card-body">
-            <form class="form row">
-                <div class="form-group col-12">
-                    <label for="info-title">
-                        藏品名称
-                    </label>
-                    <input class="form-control" type="text" name="info-tile" id="info-title" placeholder="Title">
-                    <small class="form-text text-muted invisible" id="helpBlock-name">名称不能为空</small>
-                </div>
-                <div class="form-group col-12">
-                    <label for="info-description">藏品描述:</label>
-                    <textarea class="form-control" rows="5" id="info-description" name="description" placeholder="Enter description"></textarea>
-                    <small class="form-text text-muted invisible">不能为空</small>
-                </div>
-                <div class="col-5">
-                    <div class="form-group">
-                        <label for="info-size">
-                            尺寸
-                        </label>
-                        <input class="form-control" type="text" name="info-size" id="info-address" placeholder="address">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="info-location">
-                            馆藏地点
-                        </label>
-                        <input class="form-control" type="text" name="info-name" id="info-location" placeholder="address">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                </div>
-                <div class="col-5 offset-1 border border-primary rounded">
-                    <div class="form-group">
-                        <label for="info-age">
-                            年代
-                        </label>
-                        <input class="form-control" type="text" name="info-age" id="info-age" placeholder="address">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="info-find-time">
-                            出土时间
-                        </label>
-                        <input class="form-control" type="text" name="info-find-time" id="info-find-time" placeholder="address">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                </div>
-                <hr class="col-11">
-                <div class="col-3">
-                    <div class="form-group">
-                        <label for="info-image">
-                            上传图片
-                        </label>
-                        <input type="file" class="form-control" name="info-image" id="info-image">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="info-video">
-                            上传介绍视频
-                        </label>
-                        <input type="file" class="form-control" name="info-video" id="info-video">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                </div>
-                <div class="col-5 offset-3">
-                    <div class="card">
-                        <div class="card-header">
-                            图片预览
+<main>
+    <div class="container row-fix">
+        <div class="card">
+            <div class="card-header">
+                藏品列表
+            </div>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <div class="row">
+                        <figure class="img-thumbnail col-2 offset-1">
+                            <img src="../img/Test.jpg" width="150" height=150 alt="" />
+                        </figure>
+                        <div class="col-3 offset-1">
+                            <table class="table">
+                                <tr>
+                                    <td>名称</td>
+                                    <td>玉马</td>
+                                </tr>
+                                <tr>
+                                    <td>上传日期</td>
+                                    <td>2019-07-19</td>
+                                </tr>
+                                <tr>
+                                    <td>尺寸</td>
+                                    <td>12cm*13cm</td>
+                                </tr>
+                            </table>
                         </div>
-                        <div class="card-body">
-                            <div class="img-thumbnail">
-                                <img id="img-preview" class="card-img" src="" width="250" height="250">
+                        <div class="col-2 offset-2 align-self-center">
+                            <div class="btn-group-vertical justify-content-center">
+                                <button class="btn btn-info"><i class="fa fa-info"></i> 查看详情</button>
+                                <button class="btn btn-info"><i class="fa fa-cogs"></i> 修改信息</button>
+                                <button class="btn btn-danger"><i class="fa fa-close"></i> 删除藏品</button>
                             </div>
                         </div>
                     </div>
-                </div>
-
-            </form>
-        </div>
-        <div class="card-footer">
-            <div class="row">
-                <div class="offset-9 col-3">
-                    <button class="btn btn-primary"><i class="fa fa-plus"></i>添加新藏品</button>
+                </li>
+            </ul>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="offset-9 col-3">
+                        <button class="btn btn-primary"><i class="fa fa-plus"></i>添加藏品</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <br>
-
 </main>
 
 <div class="hidePane">

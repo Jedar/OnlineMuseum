@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Artwork Information</title>
+    <meta charset="UTF-8"/>
+    <title>Detail</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
     <link href="../font/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/util.css"/>
     <script type="text/javascript" rel="script" src="../js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" rel="script" src="../js/popper.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" rel="script" src="../js/util.js"></script>
 </head>
 <body>
 <nav class="row-fix  bg-dark text-white container-fluid">
@@ -40,116 +38,67 @@
         </div>
     </div>
 </header>
-
 <div class="container-fluid">
     <nav class="row bg-light" id="header-nav">
         <div class="col-md-5 offset-md-1">
             <ul class="nav nav-tabs nav-justified">
                 <li class="nav-item"><a href="#" class="a-black nav-link">首页</a></li>
                 <li class="nav-item"><a href="#" class="a-black nav-link">搜索</a></li>
-                <li class="nav-item"><a href="#" class="a-black nav-link">详情</a></li>
-                <li class="nav-item"><a href="#" class="a-black nav-link">发布艺术品</a> </li>
+                <li class="nav-item"><a href="#" class="a-black nav-link active">详情</a></li>
+                <li class="nav-item"><a href="#" class="a-black nav-link disabled">发布艺术品</a> </li>
             </ul>
         </div>
 
     </nav>
 </div>
-
-<main class="container row-fix">
-    <div class="card">
-        <div class="card-header">
-            藏品信息
-        </div>
-        <div class="card-body">
-            <form class="form row">
-                <div class="form-group col-12">
-                    <label for="info-title">
-                        藏品名称
-                    </label>
-                    <input class="form-control" type="text" name="info-tile" id="info-title" placeholder="Title">
-                    <small class="form-text text-muted invisible" id="helpBlock-name">名称不能为空</small>
-                </div>
-                <div class="form-group col-12">
-                    <label for="info-description">藏品描述:</label>
-                    <textarea class="form-control" rows="5" id="info-description" name="description" placeholder="Enter description"></textarea>
-                    <small class="form-text text-muted invisible">不能为空</small>
-                </div>
-                <div class="col-5">
-                    <div class="form-group">
-                        <label for="info-size">
-                            尺寸
-                        </label>
-                        <input class="form-control" type="text" name="info-size" id="info-address" placeholder="address">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="info-location">
-                            馆藏地点
-                        </label>
-                        <input class="form-control" type="text" name="info-name" id="info-location" placeholder="address">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                </div>
-                <div class="col-5 offset-1 border border-primary rounded">
-                    <div class="form-group">
-                        <label for="info-age">
-                            年代
-                        </label>
-                        <input class="form-control" type="text" name="info-age" id="info-age" placeholder="address">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="info-find-time">
-                            出土时间
-                        </label>
-                        <input class="form-control" type="text" name="info-find-time" id="info-find-time" placeholder="address">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                </div>
-                <hr class="col-11">
-                <div class="col-3">
-                    <div class="form-group">
-                        <label for="info-image">
-                            上传图片
-                        </label>
-                        <input type="file" class="form-control" name="info-image" id="info-image">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="info-video">
-                            上传介绍视频
-                        </label>
-                        <input type="file" class="form-control" name="info-video" id="info-video">
-                        <small class="form-text text-muted invisible">不能为空</small>
-                    </div>
-                </div>
-                <div class="col-5 offset-3">
-                    <div class="card">
-                        <div class="card-header">
-                            图片预览
-                        </div>
-                        <div class="card-body">
-                            <div class="img-thumbnail">
-                                <img id="img-preview" class="card-img" src="" width="250" height="250">
-                            </div>
+<main class="container-fluid">
+    <div class="row">
+        <section class="detail-div offset-md-1 col-md-8">
+            <div class="container">
+                <h2 class="goods-name">玉马</h2>
+            </div>
+            <div class="row row-fix">
+                <figure class="detail-fig col-md-5">
+                    <div class="box" id="box">
+                        <div id="smallBox" class="small">
+                            <img src="../img/Test.jpg" width="350" height="350" alt="" />
+                            <div id="mask" class="mask"></div>
                         </div>
                     </div>
-                </div>
-
-            </form>
-        </div>
-        <div class="card-footer">
-            <div class="row">
-                <div class="offset-9 col-3">
-                    <button class="btn btn-primary"><i class="fa fa-plus"></i>添加新藏品</button>
+                </figure>
+                <div class="col-md-7" id="details">
+                    <table class="table table-striped">
+                        <tr><th></th><th>藏品详情</th></tr>
+                        <tr><td>名称:</td><td>玉马</td></tr>
+                        <tr><td>类别:</td><td>玉石</td></tr>
+                        <tr><td>年代:</td><td>唐</td></tr>
+                        <tr><td>尺寸:</td><td>100cm * 80cm</td></tr>
+                        <tr><td>描述:</td><td>唐代玉马</td></tr>
+                        <tr><td>馆藏地点:</td><td>上海博物馆</td></tr>
+                        <tr><td>热度:</td><td>32</td></tr>
+                    </table>
+                    <div>
+                        <button id="bt-addToWish" class="btn btn-primary btn-sm"><i class="fa fa-star"></i> 加入收藏夹</button>
+                        <button id="bt-video" class="btn btn-info btn-sm"><i class="fa fa-file-video-o"></i> 观看藏品视频</button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+        <aside class="asideBar col-md-2 row-fix">
+            <div class="list-group" id="artist-list">
+                <span class="list-group-item list-group-item-info">推荐藏品</span>
+                <a href="#" class="list-group-item list-group-item-action">青铜器</a>
+                <a href="#" class="list-group-item list-group-item-action">青花瓷</a>
+                <a href="#" class="list-group-item list-group-item-action">水墨画</a>
+                <a href="#" class="list-group-item list-group-item-action">山水画</a>
+                <a href="#" class="list-group-item list-group-item-action">梅花图</a>
+                <a href="#" class="list-group-item list-group-item-action">菊花图</a>
+                <a href="#" class="list-group-item list-group-item-action">天王石像</a>
+            </div>
+        </aside>
     </div>
     <br>
-
 </main>
-
 <div class="hidePane">
     <div id="tip" class="invisible">
         <i class="fa fa-check"></i><span class="tip-content"></span>
@@ -235,7 +184,6 @@
         </div>
     </div>
 </div>
-
 <footer class="navbar navbar-default navbar-fixed-bottom bg-dark text-white justify-content-center">
     <div class="text-center">
         <p>

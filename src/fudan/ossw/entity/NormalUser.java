@@ -1,5 +1,7 @@
 package fudan.ossw.entity;
 
+import java.sql.Date;
+
 public class NormalUser {
     private int userID;
     private String username;
@@ -10,6 +12,7 @@ public class NormalUser {
     private boolean isDelete;
     private boolean isManager;
     private boolean visible;
+    private Date lastLogin;
 
     public NormalUser() {
     }
@@ -24,6 +27,14 @@ public class NormalUser {
         isDelete = false;
         isManager = false;
         visible = false;
+    }
+
+    public Date getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
     }
 
     public int getUserID() {

@@ -8,13 +8,13 @@ public class NormalUserDaoImpl implements NormalUserDao {
 
     private Dao<NormalUser> dao = new JDBCDao<>();
 
-    private static String SQL_SELECT_BY_ID = "SELECT userID, username, password, email, phone, address, isManager, visible, isDelete "
+    private static String SQL_SELECT_BY_ID = "SELECT userID, username, password, email, phone, address, isManager, visible, isDelete, lastLogin "
             + "FROM users WHERE userID=?";
 
-    private static String SQL_SELECT_BY_NAME = "SELECT userID, username, password, email, phone, address, isManager, visible, isDelete "
+    private static String SQL_SELECT_BY_NAME = "SELECT userID, username, password, email, phone, address, isManager, visible, isDelete, lastLogin "
             + "FROM users WHERE username=?";
 
-    private static String SQL_UPDATE = "UPDATE users SET username=?, password=?,email=?,phone=?,address=?,isManager=?,visible=?,isDelete=? "
+    private static String SQL_UPDATE = "UPDATE users SET username=?, password=?,email=?,phone=?,address=?,isManager=?,visible=?,isDelete=?,lastLogin=? "
             + "WHERE userID=?";
 
     private static String SQL_INSERT = "INSERT INTO users VALUES (NULL,?,?,?,?,?,?,?,?)";
@@ -40,7 +40,7 @@ public class NormalUserDaoImpl implements NormalUserDao {
         }
         user.setIsDelete(true);
         dao.update(NormalUser.class,SQL_UPDATE,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
-                user.getAddress(),user.getIsManager(),user.getVisible(),user.getIsDelete(),id);
+                user.getAddress(),user.getIsManager(),user.getVisible(),user.getIsDelete(),user.getLastLogin(),id);
         return true;
     }
 
@@ -53,6 +53,6 @@ public class NormalUserDaoImpl implements NormalUserDao {
     @Override
     public void updateUser(int id, NormalUser user) {
         dao.update(NormalUser.class,SQL_UPDATE,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
-                user.getAddress(),user.getIsManager(),user.getVisible(),user.getIsDelete(),id);
+                user.getAddress(),user.getIsManager(),user.getVisible(),user.getIsDelete(),user.getLastLogin(),id);
     }
 }
