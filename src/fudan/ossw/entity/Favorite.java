@@ -1,4 +1,4 @@
-package entity;
+package fudan.ossw.entity;
 
 /**
  * @ClassName Favorite

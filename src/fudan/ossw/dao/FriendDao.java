@@ -1,5 +1,7 @@
 package fudan.ossw.dao;
 
+import fudan.ossw.entity.Friend;
+
 import java.util.List;
 
 public interface FriendDao {
@@ -7,5 +9,5 @@ public interface FriendDao {
 
     public boolean deleteFriend(int userAID, int userBID);
 
-    public List<entity.Friend> getFriendList(int userAID);
+    public List<Friend> getFriendList(int userAID);
 }

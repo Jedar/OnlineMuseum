@@ -1,12 +1,13 @@
 package fudan.ossw.dao.impl;
 
 import fudan.ossw.dao.FavoriteDao;
+import fudan.ossw.entity.Favorite;
 
 import java.util.List;
 
 public class FavoriteDaoImpl implements FavoriteDao {
     @Override
-    public List<Integer> getFavoriteList(int userID) {
+    public List<Favorite> getFavoriteList(int userID) {
         return null;
     }
 
