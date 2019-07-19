@@ -1,9 +1,9 @@
 package fudan.ossw.servlet;
 
 import com.alibaba.fastjson.JSONObject;
-import fudan.ossw.dao.NormalUserDao;
-import fudan.ossw.dao.impl.NormalUserDaoImpl;
-import fudan.ossw.entity.NormalUser;
+import fudan.ossw.dao.UserDao;
+import fudan.ossw.dao.impl.UserDaoImpl;
+import fudan.ossw.entity.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "LoginServlet",value = "/jsp/login")
 public class LoginServlet extends HttpServlet {
-    private NormalUserDao normalUserDao = new NormalUserDaoImpl();
+    private UserDao userDao = new UserDaoImpl();
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         response.setCharacterEncoding("UTF-8");
@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
         name = name.trim();
         pwd = pwd.trim();
 
-        NormalUser user = normalUserDao.getUserByName(name);
+        User user = userDao.getUserByName(name);
 
         if(user != null){
 

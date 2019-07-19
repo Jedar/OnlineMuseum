@@ -2,7 +2,7 @@ package fudan.ossw.entity;
 
 import java.sql.Date;
 
-public class NormalUser {
+public class User {
     private int userID;
     private String username;
     private String password;
@@ -14,10 +14,10 @@ public class NormalUser {
     private boolean visible;
     private Date lastLogin;
 
-    public NormalUser() {
+    public User() {
     }
 
-    public NormalUser(int userID, String username, String password, String email, String phone, String address) {
+    public User(int userID, String username, String password, String email, String phone, String address) {
         this.userID = userID;
         this.username = username;
         this.password = password;

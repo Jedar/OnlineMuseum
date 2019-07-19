@@ -1,12 +1,12 @@
 package fudan.ossw.dao.impl;
 
 import fudan.ossw.dao.Dao;
-import fudan.ossw.dao.NormalUserDao;
-import fudan.ossw.entity.NormalUser;
+import fudan.ossw.dao.UserDao;
+import fudan.ossw.entity.User;
 
-public class NormalUserDaoImpl implements NormalUserDao {
+public class UserDaoImpl implements UserDao {
 
-    private Dao<NormalUser> dao = new JDBCDao<>();
+    private Dao<User> dao = new JDBCDao<>();
 
     private static String SQL_SELECT_BY_ID = "SELECT userID, username, password, email, phone, address, isManager, visible, isDelete, lastLogin "
             + "FROM users WHERE userID=?";
@@ -20,18 +20,18 @@ public class NormalUserDaoImpl implements NormalUserDao {
     private static String SQL_INSERT = "INSERT INTO users VALUES (NULL,?,?,?,?,?,?,?,?)";
 
     @Override
-    public NormalUser getUserByID(int id) {
-        return dao.get(NormalUser.class, SQL_SELECT_BY_ID,id);
+    public User getUserByID(int id) {
+        return dao.get(User.class, SQL_SELECT_BY_ID,id);
     }
 
     @Override
-    public NormalUser getUserByName(String name) {
-        return dao.get(NormalUser.class,SQL_SELECT_BY_NAME,name);
+    public User getUserByName(String name) {
+        return dao.get(User.class,SQL_SELECT_BY_NAME,name);
     }
 
     @Override
     public boolean deleteUser(int id) {
-        NormalUser user = getUserByID(id);
+        User user = getUserByID(id);
         if(user == null){
             return false;
         }
@@ -39,20 +39,20 @@ public class NormalUserDaoImpl implements NormalUserDao {
             return false;
         }
         user.setIsDelete(true);
-        dao.update(NormalUser.class,SQL_UPDATE,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
+        dao.update(User.class,SQL_UPDATE,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
                 user.getAddress(),user.getIsManager(),user.getVisible(),user.getIsDelete(),user.getLastLogin(),id);
         return true;
     }
 
     @Override
-    public void addUser(NormalUser user) {
-        dao.update(NormalUser.class,SQL_INSERT,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
+    public void addUser(User user) {
+        dao.update(User.class,SQL_INSERT,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
                 user.getAddress(),user.getIsManager(),user.getVisible(),user.getIsDelete());
     }
 
     @Override
-    public void updateUser(int id, NormalUser user) {
-        dao.update(NormalUser.class,SQL_UPDATE,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
+    public void updateUser(int id, User user) {
+        dao.update(User.class,SQL_UPDATE,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
                 user.getAddress(),user.getIsManager(),user.getVisible(),user.getIsDelete(),user.getLastLogin(),id);
     }
 }

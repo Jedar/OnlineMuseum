@@ -59,7 +59,7 @@ public class JDBCDao<T> implements Dao<T> {
                     Object value = resultSet.getObject(key);
                     map.put(key,value);
                 }
-                entity = clazz.newInstance();
+                entity = clazz.getDeclaredConstructor().newInstance();
                 for(Map.Entry<String,Object> entry:map.entrySet()){
                     String name = entry.getKey();
                     Object value = entry.getValue();
