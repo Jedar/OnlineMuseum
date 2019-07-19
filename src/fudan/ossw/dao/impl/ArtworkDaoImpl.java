@@ -1,11 +1,11 @@
 package fudan.ossw.dao.impl;
 
 import fudan.ossw.dao.ArtworkDao;
-import fudan.ossw.dao.Dao;
+import fudan.ossw.dao.BaseDao;
 import fudan.ossw.entity.Artwork;
 
 public class ArtworkDaoImpl implements ArtworkDao {
-    private Dao<Artwork> dao = new JDBCDao<>();
+    private BaseDao<Artwork> baseDao = new JDBCDao<>();
 
     private static String SQL_SELECT = "SELECT `arts`.`artID`," +
             "    `arts`.`title`," +
@@ -57,7 +57,7 @@ public class ArtworkDaoImpl implements ArtworkDao {
 
     @Override
     public Artwork getArtwork(int id) {
-        return dao.get(Artwork.class,SQL_SELECT,id);
+        return baseDao.get(Artwork.class,SQL_SELECT,id);
     }
 
     @Override
@@ -76,14 +76,14 @@ public class ArtworkDaoImpl implements ArtworkDao {
 
     @Override
     public void addArtwork(Artwork artwork) {
-        dao.update(Artwork.class,SQL_INSERT,artwork.getTitle(),artwork.getImageFileName(),artwork.getVideoFileName(),
+        baseDao.update(Artwork.class,SQL_INSERT,artwork.getTitle(),artwork.getImageFileName(),artwork.getVideoFileName(),
                 artwork.getAge(),artwork.getSize(),artwork.getDescription(),artwork.getView(),artwork.getLocation(),
                 artwork.getFindTime(),artwork.getTimeReleased(),artwork.getIsDelete(),artwork.getUploadID());
     }
 
     @Override
     public void updateArtwork(int id, Artwork artwork) {
-        dao.update(Artwork.class,SQL_UPDATE,artwork.getTitle(),artwork.getImageFileName(),artwork.getVideoFileName(),
+        baseDao.update(Artwork.class,SQL_UPDATE,artwork.getTitle(),artwork.getImageFileName(),artwork.getVideoFileName(),
                 artwork.getAge(),artwork.getSize(),artwork.getDescription(),artwork.getView(),artwork.getLocation(),
                 artwork.getFindTime(),artwork.getTimeReleased(),artwork.getIsDelete(),artwork.getUploadID(),id);
     }

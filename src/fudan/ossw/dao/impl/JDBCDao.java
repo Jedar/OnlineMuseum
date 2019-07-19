@@ -1,6 +1,6 @@
 package fudan.ossw.dao.impl;
 
-import fudan.ossw.dao.Dao;
+import fudan.ossw.dao.BaseDao;
 import fudan.ossw.util.PropertyRepository;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.dbcp2.BasicDataSource;
@@ -8,7 +8,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import java.sql.*;
 import java.util.*;
 
-public class JDBCDao<T> implements Dao<T> {
+public class JDBCDao<T> implements BaseDao<T> {
     private BasicDataSource dataSource = null;
 
     public JDBCDao(){

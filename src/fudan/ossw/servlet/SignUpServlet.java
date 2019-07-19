@@ -1,9 +1,9 @@
 package fudan.ossw.servlet;
 
 import com.alibaba.fastjson.JSONObject;
-import fudan.ossw.dao.NormalUserDao;
-import fudan.ossw.dao.impl.NormalUserDaoImpl;
-import fudan.ossw.entity.NormalUser;
+import fudan.ossw.dao.UserDao;
+import fudan.ossw.dao.impl.UserDaoImpl;
+import fudan.ossw.entity.User;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,7 +16,7 @@ import java.util.ArrayList;
 
 @WebServlet(name = "SignUpServlet",value = "/jsp/SignUp")
 public class SignUpServlet extends HttpServlet {
-    private NormalUserDao normalUserDao = new NormalUserDaoImpl();
+    private UserDao userDao = new UserDaoImpl();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -52,9 +52,9 @@ public class SignUpServlet extends HttpServlet {
         address = address.trim();
         phone = phone.trim();
         email = email.trim();
-        NormalUser newUser = new NormalUser(1,name,pwd,email,phone,address);
+        User newUser = new User(1,name,pwd,email,phone,address);
 
-        NormalUser user = normalUserDao.getUserByName(name);
+        User user = userDao.getUserByName(name);
 
         JSONObject json = new JSONObject();
 
@@ -64,7 +64,7 @@ public class SignUpServlet extends HttpServlet {
             response.getWriter().println(json.toJSONString());
         }
         else{
-            normalUserDao.addUser(newUser);
+            userDao.addUser(newUser);
 
             HttpSession session = request.getSession();
             session.setAttribute("username",name);
