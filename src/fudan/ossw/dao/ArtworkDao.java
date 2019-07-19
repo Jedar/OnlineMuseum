@@ -8,7 +8,7 @@ public interface ArtworkDao {
 
     public boolean deleteArtwork(int id);
 
-    public void addArtwork(Artwork artwork);
+    public boolean addArtwork(Artwork artwork);
 
-    public void updateArtwork(int id, Artwork artwork);
+    public boolean updateArtwork(int id, Artwork artwork);
 }

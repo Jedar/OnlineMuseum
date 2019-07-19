@@ -39,20 +39,19 @@ public class UserDaoImpl implements UserDao {
             return false;
         }
         user.setIsDelete(true);
-        baseDao.update(User.class,SQL_UPDATE,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
+        return baseDao.update(User.class,SQL_UPDATE,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
                 user.getAddress(),user.getIsManager(),user.getVisible(),user.getIsDelete(),user.getLastLogin(),id);
-        return true;
     }
 
     @Override
-    public void addUser(User user) {
-        baseDao.update(User.class,SQL_INSERT,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
+    public boolean addUser(User user) {
+        return baseDao.update(User.class,SQL_INSERT,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
                 user.getAddress(),user.getIsManager(),user.getVisible(),user.getIsDelete());
     }
 
     @Override
-    public void updateUser(int id, User user) {
-        baseDao.update(User.class,SQL_UPDATE,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
+    public boolean updateUser(int id, User user) {
+        return baseDao.update(User.class,SQL_UPDATE,user.getUsername(),user.getPassword(),user.getEmail(),user.getPhone(),
                 user.getAddress(),user.getIsManager(),user.getVisible(),user.getIsDelete(),user.getLastLogin(),id);
     }
 }

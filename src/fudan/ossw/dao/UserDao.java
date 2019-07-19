@@ -10,7 +10,7 @@ public interface UserDao {
 
     public boolean deleteUser(int id);
 
-    public void addUser(User user);
+    public boolean addUser(User user);
 
-    public void updateUser(int id, User user);
+    public boolean updateUser(int id, User user);
 }

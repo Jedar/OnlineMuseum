@@ -75,15 +75,15 @@ public class ArtworkDaoImpl implements ArtworkDao {
     }
 
     @Override
-    public void addArtwork(Artwork artwork) {
-        baseDao.update(Artwork.class,SQL_INSERT,artwork.getTitle(),artwork.getImageFileName(),artwork.getVideoFileName(),
+    public boolean addArtwork(Artwork artwork) {
+        return baseDao.update(Artwork.class,SQL_INSERT,artwork.getTitle(),artwork.getImageFileName(),artwork.getVideoFileName(),
                 artwork.getAge(),artwork.getSize(),artwork.getDescription(),artwork.getView(),artwork.getLocation(),
                 artwork.getFindTime(),artwork.getTimeReleased(),artwork.getIsDelete(),artwork.getUploadID());
     }
 
     @Override
-    public void updateArtwork(int id, Artwork artwork) {
-        baseDao.update(Artwork.class,SQL_UPDATE,artwork.getTitle(),artwork.getImageFileName(),artwork.getVideoFileName(),
+    public boolean updateArtwork(int id, Artwork artwork) {
+        return baseDao.update(Artwork.class,SQL_UPDATE,artwork.getTitle(),artwork.getImageFileName(),artwork.getVideoFileName(),
                 artwork.getAge(),artwork.getSize(),artwork.getDescription(),artwork.getView(),artwork.getLocation(),
                 artwork.getFindTime(),artwork.getTimeReleased(),artwork.getIsDelete(),artwork.getUploadID(),id);
     }

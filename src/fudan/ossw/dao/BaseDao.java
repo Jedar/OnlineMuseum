@@ -7,7 +7,7 @@ public interface BaseDao<T>{
 
     T get(Class<T> clazz, String sql, Object... args);
 
-    void update(Class<T> clazz, String sql, Object... args);
+    boolean update(Class<T> clazz, String sql, Object... args);
 
-    void batch(Class<T> clazz, String sql, Object... args);
+    boolean batch(Class<T> clazz, String sql, Object... args);
 }

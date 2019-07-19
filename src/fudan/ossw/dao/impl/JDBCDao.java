@@ -91,9 +91,10 @@ public class JDBCDao<T> implements BaseDao<T> {
     }
 
     @Override
-    public void update(Class<T> clazz, String sql, Object... args) {
+    public boolean update(Class<T> clazz, String sql, Object... args) {
         Connection conn = null;
         PreparedStatement ps = null;
+        int exeNum = 0;
         try {
             conn = dataSource.getConnection();
             ps = conn.prepareStatement(sql);
@@ -102,17 +103,19 @@ public class JDBCDao<T> implements BaseDao<T> {
             for(Object object:args){
                 ps.setObject(idx++,object);
             }
-            ps.executeUpdate();
+            exeNum = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             release(null,ps,conn);
         }
+
+        return (exeNum > 0);
     }
 
     @Override
-    public void batch(Class<T> clazz, String sql, Object... args) {
-
+    public boolean batch(Class<T> clazz, String sql, Object... args) {
+        return false;
     }
 
     private void release(ResultSet rs, Statement statement, Connection conn){
