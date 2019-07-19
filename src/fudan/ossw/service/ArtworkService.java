@@ -1,4 +1,4 @@
-package service;
+package fudan.ossw.service;
 
 import fudan.ossw.entity.Artwork;
 

@@ -1,5 +1,4 @@
-package service;
-
+package fudan.ossw.service;
 import fudan.ossw.entity.Message;
 
 import java.util.List;
