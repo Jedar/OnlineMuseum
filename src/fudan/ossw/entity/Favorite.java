@@ -12,6 +12,15 @@ public class Favorite {
     int userID;
     int artID;
 
+    public Favorite() {
+    }
+
+    public Favorite(int favoriteID, int userID, int artID) {
+        this.favoriteID = favoriteID;
+        this.userID = userID;
+        this.artID = artID;
+    }
+
     public int getFavoriteID() {
         return favoriteID;
     }

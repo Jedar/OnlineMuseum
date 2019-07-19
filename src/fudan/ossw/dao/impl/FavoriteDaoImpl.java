@@ -15,7 +15,7 @@ public class FavoriteDaoImpl implements FavoriteDao {
         String sql = "SELECT `favorites`.`favoriteID`,\n" +
                 "    `favorites`.`userID`,\n" +
                 "    `favorites`.`artID`\n" +
-                "FROM `OnlineMuseum`.`favorites`;\n" +
+                "FROM `OnlineMuseum`.`favorites`\n" +
                 "WHERE userID=?;";
 
         List<Favorite> list = null;
@@ -48,12 +48,13 @@ public class FavoriteDaoImpl implements FavoriteDao {
     }
 
     @Override
-    public void cancelFavorite(int userID, int artworkID) {
-        String sql = "DELETE FROM Person WHERE LastName = 'Wilson' ";
+    public boolean cancelFavorite(int userID, int artworkID) {
+        String sql = "DELETE FROM `OnlineMuseum`.`favorites` WHERE userID=? AND artID=?;";
+        return dao.update(Favorite.class,sql,userID,artworkID);
     }
 
     @Override
     public int getFavoriteCount(int userID) {
-        return 0;
+        return getFavoriteList(userID).size();
     }
 }

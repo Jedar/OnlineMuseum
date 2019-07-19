@@ -8,10 +8,20 @@ package fudan.ossw.entity;
  * @Version 1.0
  **/
 public class Friend {
-    int friendID;
-    int partyAID;
-    int partyBID;
-    boolean favoritesVisible;
+    private int friendID;
+    private int partyAID;
+    private int partyBID;
+    private boolean favoritesVisible;
+
+    public Friend() {
+    }
+
+    public Friend(int partyAID, int partyBID, boolean favoritesVisible) {
+        this.friendID = 0;
+        this.partyAID = partyAID;
+        this.partyBID = partyBID;
+        this.favoritesVisible = favoritesVisible;
+    }
 
     public int getFriendID() {
         return friendID;
@@ -37,7 +47,7 @@ public class Friend {
         this.partyBID = partyBID;
     }
 
-    public boolean isFavoritesVisible() {
+    public boolean getFavoritesVisible() {
         return favoritesVisible;
     }
 

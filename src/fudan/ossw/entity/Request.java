@@ -1,5 +1,5 @@
 package fudan.ossw.entity;
-import javax.xml.crypto.Data;
+import java.sql.Date;
 
 /**
  * @ClassName dao.impl.RequestDaoImpl
@@ -9,13 +9,26 @@ import javax.xml.crypto.Data;
  * @Version 1.0
  **/
 public class Request {
-    int requestID;
-    int senderID;
-    int receiverID;
-    String content;
-    Data sendTime;
-    boolean agree;
-    boolean isRead;
+    private int requestID;
+    private int senderID;
+    private int receiverID;
+    private String content;
+    private Date sendTime;
+    private boolean agree;
+    private boolean isRead;
+
+    public Request() {
+    }
+
+    public Request(int requestID, int senderID, int receiverID, String content, Date sendTime, boolean agree, boolean isRead) {
+        this.requestID = requestID;
+        this.senderID = senderID;
+        this.receiverID = receiverID;
+        this.content = content;
+        this.sendTime = sendTime;
+        this.agree = agree;
+        this.isRead = isRead;
+    }
 
     public int getRequestID() {
         return requestID;
@@ -49,11 +62,11 @@ public class Request {
         this.content = content;
     }
 
-    public Data getSendTime() {
+    public Date getSendTime() {
         return sendTime;
     }
 
-    public void setSendTime(Data sendTime) {
+    public void setSendTime(Date sendTime) {
         this.sendTime = sendTime;
     }
 

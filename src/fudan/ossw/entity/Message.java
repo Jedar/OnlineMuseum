@@ -62,11 +62,11 @@ public class Message {
         this.sendTime = sendTime;
     }
 
-    public boolean isRead() {
+    public boolean getIsRead() {
         return isRead;
     }
 
-    public void setRead(boolean read) {
+    public void setIsRead(boolean read) {
         isRead = read;
     }
 }

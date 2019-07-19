@@ -13,6 +13,7 @@ public class User {
     private boolean isManager;
     private boolean visible;
     private Date lastLogin;
+    private String signature;
 
     public User() {
     }
@@ -24,6 +25,8 @@ public class User {
         this.email = email;
         this.phone = phone;
         this.address = address;
+        this.signature = "这个人很懒，什么都没有留下";
+        this.lastLogin = new Date(new java.util.Date().getTime());
         isDelete = false;
         isManager = false;
         visible = false;
@@ -107,5 +110,13 @@ public class User {
 
     public void setVisible(boolean visible) {
         this.visible = visible;
+    }
+
+    public String getSignature() {
+        return signature;
+    }
+
+    public void setSignature(String signature) {
+        this.signature = signature;
     }
 }

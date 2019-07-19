@@ -11,7 +11,7 @@ public interface FavoriteDao {
 
     public boolean addFavorite(int userID, int artworkID);
 
-    public void cancelFavorite(int userID, int artworkID);
+    public boolean cancelFavorite(int userID, int artworkID);
 
     public int getFavoriteCount(int userID);
 }

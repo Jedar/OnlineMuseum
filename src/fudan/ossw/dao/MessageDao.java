@@ -9,9 +9,9 @@ public interface MessageDao {
 
     public List<Message> getMessageByReceiver(int id);
 
-    public void sendMessage(Message msg);
+    public boolean sendMessage(Message msg);
 
-    public void readMessage(Message msg);
+    public boolean readMessage(int msgID);
 
-    public void deleteMessage(Message message);
+    public boolean deleteMessage(int msgID);
 }
