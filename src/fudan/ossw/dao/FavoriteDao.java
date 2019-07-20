@@ -5,6 +5,9 @@ import fudan.ossw.entity.Favorite;
 import java.util.List;
 
 public interface FavoriteDao {
+
+    public Favorite getFavorite(int userID, int artworkID);
+
     public List<Favorite> getFavoriteList(int userID);
 
     public List<Favorite> getWhoFavorite(int artworkID);

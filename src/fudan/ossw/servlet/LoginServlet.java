@@ -20,6 +20,7 @@ public class LoginServlet extends HttpServlet {
         String name = request.getParameter("username");
         String pwd = request.getParameter("password");
         JSONObject json = new JSONObject();
+
         if("".equals(name) || name == null){
             json.put("success",false);
             json.put("message","You must enter name");
@@ -45,7 +46,7 @@ public class LoginServlet extends HttpServlet {
                 System.out.println("Success");
                 HttpSession session = request.getSession();
                 session.setAttribute("wish",new ArrayList<Integer>());
-                session.setAttribute("username",name);
+                session.setAttribute("user",user);
                 session.setAttribute("isLogin",true);
             }
             else{

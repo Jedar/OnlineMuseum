@@ -11,6 +11,12 @@ public class FavoriteDaoImpl implements FavoriteDao {
     private BaseDao<Favorite> dao = new JDBCDao<>();
 
     @Override
+    public Favorite getFavorite(int userID, int artworkID) {
+        String sql = "SELECT * FROM favorites WHERE userID = ? AND artID = ?";
+        return dao.get(Favorite.class, sql, userID, artworkID);
+    }
+
+    @Override
     public List<Favorite> getFavoriteList(int userID) {
         String sql = "SELECT `favorites`.`favoriteID`,\n" +
                 "    `favorites`.`userID`,\n" +

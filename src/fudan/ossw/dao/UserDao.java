@@ -1,6 +1,9 @@
 package fudan.ossw.dao;
 
+import fudan.ossw.entity.CriteriaUser;
 import fudan.ossw.entity.User;
+
+import java.util.List;
 
 public interface UserDao {
 
@@ -13,4 +16,6 @@ public interface UserDao {
     public boolean addUser(User user);
 
     public boolean updateUser(int id, User user);
+
+    public List<User> getCriteriaUsers(CriteriaUser cu);
 }

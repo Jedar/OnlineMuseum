@@ -119,4 +119,10 @@ public class User {
     public void setSignature(String signature) {
         this.signature = signature;
     }
+
+    @Override
+    public String toString() {
+        return userID + " " + username + " " + password + " " + email + " " + phone + " " + address + " " +
+                isManager + " " + visible + " " + isDelete + " " + lastLogin + " " + signature;
+    }
 }

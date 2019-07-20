@@ -1,4 +1,3 @@
-
 <%@ page import="java.util.List" %>
 <%@ page import="fudan.ossw.dao.ArtworkDao" %>
 <%@ page import="fudan.ossw.dao.impl.ArtworkDaoImpl" %>

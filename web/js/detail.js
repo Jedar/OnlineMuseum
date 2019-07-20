@@ -1,8 +1,8 @@
 $(function () {
     $("#bt-addToWish").on("click",function () {
-        $.post( "./favor", {
-            action:"add",
-            id:$("#id-num").html()
+        alert($("#id-num").html());
+        $.post( "./addFavorite.us", {
+            artwordID:$("#id-num").html()
         },function (result) {
             result = JSON.parse(result);
             if (result.success){

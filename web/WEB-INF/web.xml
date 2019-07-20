@@ -3,4 +3,29 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <!--检测用户是否登录的过滤器配置-->
+    <!--用户信息存放到session中的键的名字-->
+    <context-param>
+        <param-name>userSessionKey</param-name>
+        <param-value>user</param-value>
+    </context-param>
+    <!--若未登录，需要重定向的页面-->
+    <context-param>
+        <param-name>redirectPage</param-name>
+        <param-value>/jsp/login.jsp</param-value>
+    </context-param>
+    <!--不需要拦截的URL列表-->
+    <context-param>
+        <param-name>uncheckedUrls</param-name>
+        <param-value>/index.jsp,/jsp/login.jsp,/jsp/signup.jsp,/jsp/detail.jsp</param-value>
+    </context-param>
+
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>fudan.ossw.filter.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
 </web-app>

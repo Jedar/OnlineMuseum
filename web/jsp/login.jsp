@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group">
                         <label for="user-psw">密码：</label>
-                        <input class="form-control" type="password" id="user-psw" name="user-psw">
+                        <input class="form-control" type="password" name="user-psw" id="user-psw" placeholder="请输入密码">
                         <div class="conflictDiv invisible"><i class="fa fa-exclamation-circle fa-lg"></i> </div>
                     </div>
                     <%--<div class="form-group">--%>

@@ -31,7 +31,10 @@ public class CriteriaUser {
     }
 
     public String getAddress() {
-        return address;
+        if(address == null)
+            return "%%";
+        else
+            return "%" + address + "%";
     }
 
     public void setAddress(String address) {

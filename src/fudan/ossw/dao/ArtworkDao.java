@@ -18,4 +18,6 @@ public interface ArtworkDao {
     public List<Artwork> getAllArtworks();
 
     public List<Artwork> getCriteriaArtworks(CriteriaArtwork ca);
+
+    public List<Artwork> getPageCriteriaArtworks(CriteriaArtwork ca, String orderWay, int mark, int size);
 }

@@ -2,7 +2,10 @@ package fudan.ossw.dao.impl;
 
 import fudan.ossw.dao.BaseDao;
 import fudan.ossw.dao.UserDao;
+import fudan.ossw.entity.CriteriaUser;
 import fudan.ossw.entity.User;
+
+import java.util.List;
 
 public class UserDaoImpl implements UserDao {
 
@@ -117,5 +120,11 @@ public class UserDaoImpl implements UserDao {
                 user.getLastLogin(),
                 user.getSignature(),
                 id);
+    }
+
+    @Override
+    public List<User> getCriteriaUsers(CriteriaUser cu) {
+        String sql = "SELECT * FROM users WHERE username LIKE ? AND address LIKE ? AND isDelete = ?";
+        return baseDao.getForList(User.class, sql, cu.getUsername(), cu.getAddress(), false);
     }
 }

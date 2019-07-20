@@ -102,4 +102,10 @@ public class ArtworkDaoImpl implements ArtworkDao {
         String sql = "SELECT * FROM arts WHERE title LIKE ? AND description LIKE ? AND location LIKE ? AND isDelete = ?";
         return baseDao.getForList(Artwork.class, sql, ca.getTitle(), ca.getDescription(), ca.getLocation(), false);
     }
+
+    @Override
+    public List<Artwork> getPageCriteriaArtworks(CriteriaArtwork ca, String orderWay, int mark, int size) {
+        String sql = "SELECT * FROM arts WHERE title LIKE ? AND description LIKE ? AND location LIKE ? AND isDelete = ? ORDER BY ? LIMIT ? , ?";
+        return baseDao.getForList(Artwork.class, sql, ca.getTitle(), ca.getDescription(), ca.getLocation(), false, orderWay, mark, size);
+    }
 }

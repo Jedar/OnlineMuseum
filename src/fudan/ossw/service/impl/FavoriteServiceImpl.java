@@ -17,9 +17,10 @@ import java.util.List;
  * @Version 1.0
  **/
 public class FavoriteServiceImpl implements FavoriteService {
+    String errorMessage = null;
     @Override
     public String getErrorMessage() {
-        return null;
+        return errorMessage;
     }
 
     @Override
@@ -30,6 +31,17 @@ public class FavoriteServiceImpl implements FavoriteService {
             artworks.add(DaoFactory.getInstance().getArtworkDao().getArtwork(favorite.getArtID()));
         }
         return artworks;
+    }
+
+    @Override
+    public boolean addFavorite(int userID, int artworkID) {
+        Favorite favorite = DaoFactory.getInstance().getFavoriteDao().getFavorite(userID, artworkID);
+        if(favorite != null) {
+            errorMessage = "您的收藏夹中已经存在该藏品";
+            return false;
+        }else {
+            return DaoFactory.getInstance().getFavoriteDao().addFavorite(userID, artworkID);
+        }
     }
 
     @Override
