@@ -14,7 +14,7 @@ public class Artwork {
     private String location;
     private String findTime;
     private Date timeReleased;
-    private boolean isDelete;
+    private boolean isDelete = false;
     private int uploadID;
 
     public Artwork(){
@@ -139,5 +139,10 @@ public class Artwork {
 
     public void setUploadID(int uploadID) {
         this.uploadID = uploadID;
+    }
+
+    @Override
+    public String toString() {
+        return artID + " " + title + " " + description;
     }
 }

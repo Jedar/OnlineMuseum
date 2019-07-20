@@ -57,4 +57,10 @@ public class RequestDaoImpl implements RequestDao {
         String sql = "DELETE FROM `requests` WHERE `requestID`=?;";
         return dao.update(Request.class,sql,requestID);
     }
+
+    @Override
+    public Request getRequest(int requestID) {
+        String sql = "SELECT * FROM requests WHERE requestID = ?";
+        return dao.get(Request.class, sql, requestID);
+    }
 }

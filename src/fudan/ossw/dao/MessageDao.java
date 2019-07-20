@@ -7,6 +7,10 @@ import java.util.List;
 public interface MessageDao {
     public List<Message> getMessageBySender(int id);
 
+    public List<Message> getReadMessage(int receiverID);
+
+    public List<Message> getUnreadMessage(int receiverID);
+
     public List<Message> getMessageByReceiver(int id);
 
     public boolean sendMessage(Message msg);

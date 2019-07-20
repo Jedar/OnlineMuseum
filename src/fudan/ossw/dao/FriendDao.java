@@ -11,5 +11,7 @@ public interface FriendDao {
 
     public boolean deleteFriend(int friendID);
 
+    public Friend getFriend(int partyAID, int partyBID);
+
     public List<Friend> getFriendList(int userAID);
 }

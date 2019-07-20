@@ -46,4 +46,10 @@ public class FriendDaoImpl implements FriendDao {
                 "WHERE `partyAID`=?;";
         return dao.getForList(Friend.class,sql,userAID);
     }
+
+    @Override
+    public Friend getFriend(int partyAID, int partyBID) {
+        String sql = "SELECT * FROM friends WHERE partyAID = ? AND partyBID = ?";
+        return dao.get(Friend.class, sql, partyAID, partyBID);
+    }
 }

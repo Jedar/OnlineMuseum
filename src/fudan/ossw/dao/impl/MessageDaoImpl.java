@@ -24,6 +24,32 @@ public class MessageDaoImpl implements MessageDao {
     }
 
     @Override
+    public List<Message> getReadMessage(int receiverID) {
+        String sql = "SELECT `messages`.`messageID`,\n" +
+                "    `messages`.`senderID`,\n" +
+                "    `messages`.`receiverID`,\n" +
+                "    `messages`.`content`,\n" +
+                "    `messages`.`sendTime`,\n" +
+                "    `messages`.`isRead`\n" +
+                "FROM `OnlineMuseum`.`messages`\n" +
+                "WHERE senderID=? AND isRead = ?;";
+        return dao.getForList(Message.class,sql,receiverID, true);
+    }
+
+    @Override
+    public List<Message> getUnreadMessage(int receiverID) {
+        String sql = "SELECT `messages`.`messageID`,\n" +
+                "    `messages`.`senderID`,\n" +
+                "    `messages`.`receiverID`,\n" +
+                "    `messages`.`content`,\n" +
+                "    `messages`.`sendTime`,\n" +
+                "    `messages`.`isRead`\n" +
+                "FROM `OnlineMuseum`.`messages`\n" +
+                "WHERE senderID=? AND isRead = ?;";
+        return dao.getForList(Message.class,sql,receiverID, false);
+    }
+
+    @Override
     public List<Message> getMessageByReceiver(int id) {
         String sql = "SELECT `messages`.`messageID`,\n" +
                 "    `messages`.`senderID`,\n" +

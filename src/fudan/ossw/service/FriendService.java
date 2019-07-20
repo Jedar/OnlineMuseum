@@ -15,8 +15,10 @@ public interface FriendService {
     String getErrorMessage();
     List<User> getFriendsList(int userID);
     List<Request> getRequestList(int userID);
-    boolean changePermission(int userID, int friendID);
+    boolean changePermission(int userID, int friendID, boolean permission);
     boolean deleteFriend(int userID, int friendID);
     boolean addFriend(int userID, int friendID);
+    boolean sendRequest(Request request);
     void agreeRequest(int requestID);
+    void refuseRequest(int requestID);
 }

@@ -3,6 +3,9 @@ package fudan.ossw.dao.impl;
 import fudan.ossw.dao.ArtworkDao;
 import fudan.ossw.dao.BaseDao;
 import fudan.ossw.entity.Artwork;
+import fudan.ossw.entity.CriteriaArtwork;
+
+import java.util.List;
 
 public class ArtworkDaoImpl implements ArtworkDao {
     private BaseDao<Artwork> baseDao = new JDBCDao<>();
@@ -86,5 +89,17 @@ public class ArtworkDaoImpl implements ArtworkDao {
         return baseDao.update(Artwork.class,SQL_UPDATE,artwork.getTitle(),artwork.getImageFileName(),artwork.getVideoFileName(),
                 artwork.getAge(),artwork.getSize(),artwork.getDescription(),artwork.getView(),artwork.getLocation(),
                 artwork.getFindTime(),artwork.getTimeReleased(),artwork.getIsDelete(),artwork.getUploadID(),id);
+    }
+
+    @Override
+    public List<Artwork> getAllArtworks() {
+        String sql = "SELECT * FROM arts";
+        return baseDao.getForList(Artwork.class, sql);
+    }
+
+    @Override
+    public List<Artwork> getCriteriaArtworks(CriteriaArtwork ca) {
+        String sql = "SELECT * FROM arts WHERE title LIKE ? AND description LIKE ? AND location LIKE ? AND isDelete = ?";
+        return baseDao.getForList(Artwork.class, sql, ca.getTitle(), ca.getDescription(), ca.getLocation(), false);
     }
 }
