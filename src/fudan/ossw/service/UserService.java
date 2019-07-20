@@ -12,7 +12,7 @@ import java.util.List;
  **/
 public interface UserService  extends BaseService {
     User login(String username, String password);
-    User signup(List<String> msgs);
+    User signup(User user);
     boolean update(User user);
-    boolean delete(User user);
+    boolean delete(int userID);
 }

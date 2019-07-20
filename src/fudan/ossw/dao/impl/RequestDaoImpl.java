@@ -16,7 +16,7 @@ public class RequestDaoImpl implements RequestDao {
                 "`agree` = ?,\n" +
                 "`isRead` = ?\n" +
                 "WHERE `requestID`=? AND `isRead`=?;\n";
-        return dao.update(Request.class,sql,agree,requestID,false);
+        return dao.update(Request.class,sql,agree,true,requestID,false);
     }
 
     @Override

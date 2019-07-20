@@ -1,9 +1,12 @@
 package fudan.ossw.service.impl;
 
+import fudan.ossw.dao.DaoFactory;
+import fudan.ossw.dao.UserDao;
 import fudan.ossw.entity.User;
 import fudan.ossw.service.UserService;
 
-import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * @ClassName UserServiceImpl
@@ -17,6 +20,10 @@ public class UserServiceImpl implements UserService {
 
     private int code;
 
+    private UserDao userDao = DaoFactory.getInstance().getUserDao();
+
+    private String STR_ERROR = "用户名和密码错误";
+
     @Override
     public int getErrorCode() {
         return code;
@@ -29,21 +36,105 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(String username, String password) {
-        return null;
+        if (username == null || password == null){
+            message = STR_ERROR;
+            return null;
+        }
+        User user = userDao.getUserByName(username);
+        if (user == null){
+            message = STR_ERROR;
+            return null;
+        }
+        if (!password.equals(user.getPassword())){
+            message = STR_ERROR;
+            return null;
+        }
+        return user;
     }
 
     @Override
-    public User signup(List<String> msgs) {
+    public User signup(User user) {
+        if (isWrongUser(user)){
+            return null;
+        }
+
+        User check = userDao.getUserByName(user.getUsername());
+        if (check != null){
+            code = 17;
+            message = "用户名重复";
+            return null;
+        }
+
+        boolean flag = userDao.addUser(user);
+        if (flag){
+            return userDao.getUserByName(user.getUsername());
+        }
+        else{
+            code = 18;
+            message = "添加数据异常";
+        }
         return null;
     }
 
     @Override
     public boolean update(User user) {
-        return false;
+        if (isWrongUser(user)){
+            return false;
+        }
+
+        return userDao.updateUser(user.getUserID(),user);
     }
 
     @Override
-    public boolean delete(User user) {
+    public boolean delete(int userID) {
+        return userDao.deleteUser(userID);
+    }
+
+    private boolean isEmail(String string) {
+        if (string == null)
+            return false;
+        String regEx1 = "^([a-z0-9A-Z]+[-|.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+        Pattern p;
+        Matcher m;
+        p = Pattern.compile(regEx1);
+        m = p.matcher(string);
+        return m.matches();
+    }
+
+    private boolean isWrongUser(User user){
+        if (user == null){
+            code = 10;
+            message = "注册异常";
+            return true;
+        }
+        if ("".equals(user.getUsername())){
+            code = 11;
+            message = "用户名为空";
+            return true;
+        }
+        if ("".equals(user.getPassword())){
+            code = 12;
+            message = "密码为空";
+            return true;
+        }
+        if ("".equals(user.getEmail())){
+            code = 13;
+            message = "邮箱为空";
+            return true;
+        }
+
+        int nameLen = user.getUsername().length();
+        if (nameLen < 4 || nameLen > 15){
+            code = 14;
+            message = "用户名格式错误";
+            return true;
+        }
+
+        if (!isEmail(user.getEmail())){
+            code = 16;
+            message = "邮箱格式错误";
+            return true;
+        }
         return false;
     }
 }

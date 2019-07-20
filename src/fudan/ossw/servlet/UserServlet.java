@@ -71,8 +71,9 @@ public class UserServlet extends HttpServlet {
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
-        List<String> msg = Arrays.asList(name, pwd, address, phone, email);
-        User user = userService.signup(msg);
+//        List<String> msg = Arrays.asList(name, pwd, address, phone, email);
+        User user = new User(-1,name,pwd,email);
+        user = userService.signup(user);
         if(user == null) {
             json.put("success", false);
             json.put("message", userService.getErrorMessage());
