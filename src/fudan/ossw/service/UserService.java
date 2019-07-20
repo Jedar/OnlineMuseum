@@ -10,8 +10,7 @@ import java.util.List;
  * @Date 2019/7/19 15:52
  * @Version 1.0
  **/
-public interface UserService {
-    String getErrorMessage();
+public interface UserService  extends BaseService {
     User login(String username, String password);
     User signup(List<String> msgs);
     boolean update(User user);

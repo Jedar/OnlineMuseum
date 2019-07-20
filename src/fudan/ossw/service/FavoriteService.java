@@ -3,8 +3,7 @@ import fudan.ossw.entity.Artwork;
 
 import java.util.List;
 
-public interface FavoriteService {
-    String getErrorMessage();
+public interface FavoriteService extends BaseService {
     List<Artwork> getFavoriteList(int userID);
     boolean deleteFavorite(int userID, int artworkID);
     boolean addFavorite(int userID, int artworkID);

@@ -18,6 +18,11 @@ import java.util.List;
 public class FriendServiceImpl implements FriendService {
 
     @Override
+    public int getErrorCode() {
+        return 0;
+    }
+
+    @Override
     public String getErrorMessage() {
         return null;
     }

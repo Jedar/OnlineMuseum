@@ -15,6 +15,11 @@ import java.util.List;
  **/
 public class MessageServiceImpl implements MessageService {
     @Override
+    public int getErrorCode() {
+        return 0;
+    }
+
+    @Override
     public String getErrorMessage() {
         return null;
     }

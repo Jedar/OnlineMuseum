@@ -13,9 +13,18 @@ import java.util.List;
  * @Version 1.0
  **/
 public class UserServiceImpl implements UserService {
+    private String message;
+
+    private int code;
+
+    @Override
+    public int getErrorCode() {
+        return code;
+    }
+
     @Override
     public String getErrorMessage() {
-        return null;
+        return message;
     }
 
     @Override

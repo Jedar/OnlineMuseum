@@ -29,7 +29,7 @@
                 <form class="card-body" id="form-login">
                     <div class="form-group">
                         <label for="user-name">用户名：</label>
-                        <input class="form-control" type="text" name="user-name" id="user-name" placeholder="请输入用户名">
+                        <input class="form-control is-invalid" type="text" name="user-name" id="user-name" placeholder="请输入用户名">
                         <div class="conflictDiv hidden"></div>
                     </div>
                     <div class="form-group">

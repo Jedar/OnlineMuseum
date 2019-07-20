@@ -17,6 +17,11 @@ import java.util.List;
 public class ArtworkServiceImpl implements ArtworkService{
     String errorMessage;
 
+    @Override
+    public int getErrorCode() {
+        return 0;
+    }
+
     public String getErrorMessage() {
         return errorMessage;
     }

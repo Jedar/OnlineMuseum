@@ -18,6 +18,12 @@ import java.util.List;
  **/
 public class FavoriteServiceImpl implements FavoriteService {
     String errorMessage = null;
+
+    @Override
+    public int getErrorCode() {
+        return 0;
+    }
+
     @Override
     public String getErrorMessage() {
         return errorMessage;

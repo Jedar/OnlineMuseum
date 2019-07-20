@@ -11,8 +11,7 @@ import java.util.List;
  * @Date 2019/7/19 16:20
  * @Version 1.0
  **/
-public interface FriendService {
-    String getErrorMessage();
+public interface FriendService extends BaseService {
     List<User> getFriendsList(int userID);
     List<Request> getRequestList(int userID);
     boolean changePermission(int userID, int friendID, boolean permission);

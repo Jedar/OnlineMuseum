@@ -31,7 +31,7 @@
 <footer class="navbar navbar-default navbar-fixed-bottom bg-dark text-white justify-content-center">
     <div class="text-center">
         <p>
-            Produced and maintained by YuJitao in July,2019.
+            Produced and maintained by DengPeng and YuJitao in July,2019.
         </p>
     </div>
 </footer>

@@ -3,8 +3,7 @@ import fudan.ossw.entity.Message;
 
 import java.util.List;
 
-public interface MessageService {
-    String getErrorMessage();
+public interface MessageService  extends BaseService {
     List<Message> getReadMessageList(int userID);
     List<Message> getUnreadMessageList(int useID);
     List<Message> getReceivedMessage(int userID);
