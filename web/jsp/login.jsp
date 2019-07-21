@@ -17,6 +17,7 @@
     <script type="text/javascript" rel="script" src="../js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/util.js"></script>
+    <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
     <script type="text/javascript" rel="script" src="../js/login.js"></script>
 </head>
 <body>
@@ -29,7 +30,7 @@
                 <form class="card-body" id="form-login">
                     <div class="form-group">
                         <label for="user-name">用户名：</label>
-                        <input class="form-control is-invalid" type="text" name="user-name" id="user-name" placeholder="请输入用户名">
+                        <input class="form-control" type="text" name="user-name" id="user-name" placeholder="请输入用户名">
                         <div class="conflictDiv hidden"></div>
                     </div>
                     <div class="form-group">

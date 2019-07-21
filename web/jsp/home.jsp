@@ -27,10 +27,22 @@
         </div>
         <div class="nav col-md-4 offset-md-2">
             <a href="#" class="nav-link">首页</a>
-            <a href="#" class="nav-link">搜索</a>
-            <a href="#" class="nav-link">详情</a>
-            <a href="#" class="sign nav-link" data-toggle="modal" data-target="#signModal">登陆</a>
-            <a href="#" class="register nav-link" data-toggle="modal" data-target="#registerModal">注册</a>
+            <a href="./search.jsp" class="nav-link">搜索</a>
+            <a href="./detail.jsp" class="nav-link">详情</a>
+            <%
+                if (session.getAttribute("user") == null){
+            %>
+            <a href="./login.jsp" class="sign nav-link">登陆</a>
+            <a href="./signup.jsp" class="register nav-link">注册</a>
+            <%
+                }
+                else{
+            %>
+            <a href="./profile.jsp" class="sign nav-link">个人中心</a>
+            <%
+                }
+            %>
+
         </div>
     </nav>
     <!-- 指示符 -->

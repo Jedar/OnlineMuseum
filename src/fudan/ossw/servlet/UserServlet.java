@@ -52,10 +52,17 @@ public class UserServlet extends HttpServlet {
         if(user == null) {
             json.put("success", false);
             json.put("message", userService.getErrorMessage());
-            response.getWriter().println(json);
+            json.put("code",userService.getErrorCode());
+            json.put("link",request.getContextPath());
+            response.getWriter().println(json.toJSONString());
         }else {
             HttpSession session = request.getSession();
             session.setAttribute("user",user);
+            json.put("success", true);
+            json.put("message", userService.getErrorMessage());
+            json.put("code",userService.getErrorCode());
+            json.put("link",request.getContextPath()+"/jsp/home.jsp");
+            response.getWriter().println(json.toJSONString());
         }
     }
 
@@ -71,16 +78,22 @@ public class UserServlet extends HttpServlet {
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
-//        List<String> msg = Arrays.asList(name, pwd, address, phone, email);
         User user = new User(-1,name,pwd,email);
         user = userService.signup(user);
         if(user == null) {
             json.put("success", false);
             json.put("message", userService.getErrorMessage());
+            json.put("code",userService.getErrorCode());
+            json.put("link",request.getContextPath());
             response.getWriter().println(json);
         }else {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
+            json.put("success", true);
+            json.put("message", userService.getErrorMessage());
+            json.put("code",userService.getErrorCode());
+            json.put("link",request.getContextPath()+"/jsp/home.jsp");
+            response.getWriter().println(json);
         }
     }
 

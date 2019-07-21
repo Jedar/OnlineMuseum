@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="../css/util.css"/>
     <script type="text/javascript" rel="script" src="../js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
+    <script type="text/javascript" rel="script" src="../js/popper.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/util.js"></script>
 </head>
 <body>
@@ -22,7 +23,7 @@
     <div class="row justify-content-center">
             <%
                 boolean isLogin;
-                isLogin = (session.getAttribute("isLogin") != null);
+                isLogin = (session.getAttribute("user") != null);
             %>
 
             <% if(!isLogin){%>
@@ -35,8 +36,8 @@
                 </small>
             </div>
             <ul class="col-md-3 offset-md-3 nav nav-justified">
-                <li class="nav-item"><a href="#" class="a-white nav-link"><i class="fa fa-user-circle"></i> Login</a></li>
-                <li class="nav-item"><a href="#" class="a-white nav-link"><i class="fa fa-star"></i> Favorite <span>0</span></a> </li>
+                <li class="nav-item"><a href="../jsp/search.jsp" class="a-white nav-link"><i class="fa fa-search"></i> Search</a></li>
+                <li class="nav-item"><a href="../jsp/login.jsp" class="a-white nav-link"><i class="fa fa-user-circle"></i> Login</a></li>
             </ul>
             <%}
             else {
@@ -45,11 +46,27 @@
                 <h5>Online Museum</h5>
             </div>
             <ul class="col-md-3 offset-md-3 nav nav-justified">
-                <li class="nav-item"><a href="#" class="a-white nav-link"><i class="fa fa-sign-out"></i> Logout</a></li>
-                <li class="nav-item"><a href="#" class="a-white nav-link"><i class="fa fa-star"></i> Favorite <span>0</span></a> </li>
+                <li class="nav-item">
+                    <a href="../jsp/search.jsp" class="a-white nav-link"><i class="fa fa-search"></i> Search</a>
+                </li>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle btn" type="link" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-user-circle"></i> UserName
+                        </a>
+                        <div class="dropdown-menu bg-dark text-white" aria-labelledby="dropdownMenuButton">
+                            <a href="../jsp/message.jsp" class="a-white dropdown-item"><i class="fa fa-mail-forward"></i> Message</a>
+                            <a href="../jsp/favorite.jsp" class="a-white dropdown-item"><i class="fa fa-star"></i> Favorite <span>0</span></a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="a-white dropdown-item"><i class="fa fa-sign-out"></i> Logout</a>
+                        </div>
+                    </div>
+                </li>
             </ul>
             <%
             }%>
+
+        <div id="top-signin" class="invisible" data-sign="<%= isLogin?"1":"0" %>"></div>
 
     </div>
 </nav>

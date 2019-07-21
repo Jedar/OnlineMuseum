@@ -107,17 +107,17 @@ public class UserServiceImpl implements UserService {
             message = "注册异常";
             return true;
         }
-        if ("".equals(user.getUsername())){
+        if ("".equals(user.getUsername()) || user.getUsername() == null){
             code = 11;
             message = "用户名为空";
             return true;
         }
-        if ("".equals(user.getPassword())){
+        if ("".equals(user.getPassword()) || user.getPassword() == null){
             code = 12;
             message = "密码为空";
             return true;
         }
-        if ("".equals(user.getEmail())){
+        if ("".equals(user.getEmail()) || user.getEmail() == null){
             code = 13;
             message = "邮箱为空";
             return true;
