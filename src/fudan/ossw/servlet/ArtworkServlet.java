@@ -18,19 +18,19 @@ public class ArtworkServlet extends HttpServlet {
 
     }
 
-    private void upload(HttpServletRequest request, HttpServletResponse response) {
+    private void uploadArtwork(HttpServletRequest request, HttpServletResponse response) {
 
     }
 
-    private void delete(HttpServletRequest request, HttpServletResponse response) {
+    private void deleteArtwork(HttpServletRequest request, HttpServletResponse response) {
 
     }
 
-    private void change(HttpServletRequest request, HttpServletResponse response) {
+    private void changeArtwork(HttpServletRequest request, HttpServletResponse response) {
 
     }
 
-    private void search(HttpServletRequest request, HttpServletResponse response) {
+    private void searchArtwork(HttpServletRequest request, HttpServletResponse response) {
         String title = request.getParameter("title");
         String description  = request.getParameter("description");
         String location = request.getParameter("location");

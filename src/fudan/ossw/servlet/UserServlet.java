@@ -2,10 +2,16 @@ package fudan.ossw.servlet;
 
 import com.alibaba.fastjson.JSONObject;
 import fudan.ossw.dao.DaoFactory;
+import fudan.ossw.entity.Message;
+import fudan.ossw.entity.Request;
 import fudan.ossw.entity.User;
 import fudan.ossw.service.FavoriteService;
+import fudan.ossw.service.FriendService;
+import fudan.ossw.service.MessageService;
 import fudan.ossw.service.UserService;
 import fudan.ossw.service.impl.FavoriteServiceImpl;
+import fudan.ossw.service.impl.FriendServiceImpl;
+import fudan.ossw.service.impl.MessageServiceImpl;
 import fudan.ossw.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
@@ -17,6 +23,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -71,8 +78,7 @@ public class UserServlet extends HttpServlet {
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
-        List<String> msg = Arrays.asList(name, pwd, address, phone, email);
-        User user = userService.signup(msg);
+        User user = userService.signup(new User(-1, name, pwd, email, phone, address));
         if(user == null) {
             json.put("success", false);
             json.put("message", userService.getErrorMessage());
@@ -90,20 +96,20 @@ public class UserServlet extends HttpServlet {
 
     /*更改用户类型，管理员<-->普通用户*/
     private void changeType(HttpServletRequest request, HttpServletResponse response) {
-
+        int userID = Integer.parseInt(request.getParameter("userID"));
     }
 
     /*删除用户*/
     private void delete(HttpServletRequest request, HttpServletResponse response) {
-
+        int userID = Integer.parseInt(request.getParameter("userID"));
+        userService.delete(userID);
     }
 
     /*添加收藏夹*/
     private void addFavorite(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        System.out.println("addFavorite");
         User user = (User)request.getSession().getAttribute("user");
         if(user == null) {
-
+            /*登陆*/
         }else {
             FavoriteService favoriteService = new FavoriteServiceImpl();
             int artworkID = Integer.parseInt(request.getParameter("artworkID"));
@@ -117,6 +123,45 @@ public class UserServlet extends HttpServlet {
 
     /*删除收藏夹*/
     private void deleteFavorite(HttpServletRequest request, HttpServletResponse response) {
+        int artworkID = Integer.parseInt(request.getParameter("artworkID"));
+        int userID = ((User)request.getSession().getAttribute("user")).getUserID();
+        FavoriteService favoriteService = new FavoriteServiceImpl();
+        favoriteService.deleteFavorite(userID, artworkID);
+    }
+
+    private void sendRequest(HttpServletRequest request, HttpServletResponse response) {
+        int senderID = ((User)request.getSession().getAttribute("user")).getUserID();
+        int receiverID = Integer.parseInt(request.getParameter("receiverID"));
+        String content = request.getParameter("content");
+        Request addRequest = new Request(-1, senderID, receiverID, content, new Date(new java.util.Date().getTime()), false, false);
+        FriendService friendService = new FriendServiceImpl();
+        friendService.sendRequest(addRequest);
+    }
+
+    private void readRequest(HttpServletRequest request, HttpServletResponse response) {
+        int receiverID = ((User)request.getSession().getAttribute("user")).getUserID();
+        int senderID  = Integer.parseInt(request.getParameter("receiverID"));
+        boolean agree = Boolean.parseBoolean(request.getParameter("agree"));
+        FriendService friendService = new FriendServiceImpl();
+        friendService.readRequest(senderID, receiverID, agree);
+    }
+
+    private void deleteFriend(HttpServletRequest request, HttpServletResponse response) {
+        int userID = ((User)request.getSession().getAttribute("user")).getUserID();
+        int friendID = Integer.parseInt(request.getParameter("friendID"));
+        FriendService friendService = new FriendServiceImpl();
+        friendService.deleteFriend(userID,friendID);
+    }
+
+    private void sendMessage(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
+    private void readMessage(HttpServletRequest request, HttpServletResponse response) {
+
+    }
+
+    private void deleteMessage(HttpServletRequest request, HttpServletResponse response) {
 
     }
 

@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User signup(List<String> msgs) {
+    public User signup(User user) {
         return null;
     }
 
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean delete(User user) {
+    public boolean delete(int userID) {
         return false;
     }
 }
