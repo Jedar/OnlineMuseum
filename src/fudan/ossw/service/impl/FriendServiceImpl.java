@@ -6,6 +6,7 @@ import fudan.ossw.entity.Request;
 import fudan.ossw.entity.User;
 import fudan.ossw.service.FriendService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -29,7 +30,12 @@ public class FriendServiceImpl implements FriendService {
 
     @Override
     public List<User> getFriendsList(int userID) {
-        return null;
+        List<Friend> friends = DaoFactory.getInstance().getFriendDao().getFriendList(userID);
+        List<User> users = new ArrayList<>();
+        for(Friend friend : friends) {
+            users.add(DaoFactory.getInstance().getUserDao().getUserByID(friend.getPartyBID()));
+        }
+        return users;
     }
 
     @Override

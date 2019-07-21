@@ -18,7 +18,7 @@ public class ArtworkDaoImplTest {
     /*测试模糊查询*/
     public static void testGetCriteriaArtworks() {
         CriteriaArtwork criteriaArtwork = new CriteriaArtwork();
-        System.out.println(DaoFactory.getInstance().getArtworkDao().getCriteriaArtworks(criteriaArtwork,"view"));
+        System.out.println(DaoFactory.getInstance().getArtworkDao().getCriteriaArtworks(criteriaArtwork, "view"));
         criteriaArtwork.setLocation("上海");
         System.out.println(DaoFactory.getInstance().getArtworkDao().getPageCriteriaArtworks(criteriaArtwork, "title", 0, 3));
     }

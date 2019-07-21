@@ -37,6 +37,7 @@ public class UserServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String servletPath = request.getServletPath();
         String methodName = servletPath.substring(5, servletPath.length() - 3);
+        System.out.println(methodName);
         try {
             /*利用反射得到对应的方法*/
             Method method = getClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);

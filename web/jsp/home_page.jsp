@@ -38,7 +38,7 @@
                 }
                 else{
             %>
-            <a href="./profile.jsp" class="sign nav-link">个人中心</a>
+            <a href="profile.jsp" class="sign nav-link">个人中心</a>
             <%
                 }
             %>

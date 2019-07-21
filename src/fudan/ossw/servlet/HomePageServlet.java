@@ -3,8 +3,6 @@ package fudan.ossw.servlet;
 import fudan.ossw.entity.Artwork;
 import fudan.ossw.service.ArtworkService;
 import fudan.ossw.service.impl.ArtworkServiceImpl;
-
-import javax.jws.WebService;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

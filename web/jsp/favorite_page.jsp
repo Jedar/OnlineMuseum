@@ -17,7 +17,6 @@
 </head>
 <body>
 <jsp:include page="../inc/header.inc.jsp"/>
-<jsp:include page="../inc/search.inc.jsp"/>
 
 <div class="container-fluid">
     <nav class="row bg-light" id="header-nav">
@@ -25,8 +24,8 @@
             <ul class="nav nav-tabs nav-justified">
                 <li class="nav-item"><a href="#" class="a-black nav-link">首页</a></li>
                 <li class="nav-item"><a href="#" class="a-black nav-link">搜索</a></li>
-                <li class="nav-item"><a href="./detail.jsp" class="a-black nav-link">详情</a></li>
-                <li class="nav-item"><a href="./favorite.jsp" class="a-black nav-link active">个人界面</a> </li>
+                <li class="nav-item"><a href="detail.jsp" class="a-black nav-link">详情</a></li>
+                <li class="nav-item"><a href="profile.jsp" class="a-black nav-link active">个人界面</a> </li>
             </ul>
         </div>
     </nav>
@@ -40,25 +39,23 @@
             </div>
             <ul class="list-group">
                 <%
-                    ArtworkDao artworkDao = new ArtworkDaoImpl();
-                    List<Integer> wish = (List<Integer>)session.getAttribute("wish");
-                    for(int val: wish){
-                        Artwork artwork = artworkDao.getArtwork(val);
+                    List<Artwork> favorite = (List<Artwork>)request.getAttribute("favorite");
+                    for(Artwork artwork : favorite) {
                 %>
                 <li class="list-group-item">
                     <div class="row">
                         <figure class="img-thumbnail col-2 offset-1">
-                            <img src="../img/<%=artwork.getImageFileName()  %>" width="150" height=150 alt="" />
+                            <img src="../img/<%=artwork.getImageFileName()%>" width="150" height=150 alt="" />
                         </figure>
                         <div class="col-3 offset-1">
                             <table class="table">
                                 <tr>
                                     <td>名称</td>
-                                    <td><%=artwork.getTitle()  %></td>
+                                    <td><%=artwork.getTitle()%></td>
                                 </tr>
                                 <tr>
-                                    <td>上传时间</td>
-                                    <td><%=artwork.getTimeReleased().toString()  %></td>
+                                    <td>年代</td>
+                                    <td><%=artwork.getAge()%></td>
                                 </tr>
                                 <tr>
                                     <td>尺寸</td>
@@ -68,8 +65,8 @@
                         </div>
                         <div class="col-3 offset-1 align-self-center">
                             <div class="btn-group justify-content-center">
-                                <a class="btn btn-info button-detail" href="./detail.jsp?id=<%=artwork.getArtID() %>">查看详情</a>
-                                <button class="btn btn-danger button-delete" data-target="<%=wish.indexOf(artwork.getArtID())  %>">删除藏品</button>
+                                <a class="btn btn-info button-detail" href="./detail.jsp?id=<%=artwork.getArtID()%>">查看详情</a>
+                                <button class="btn btn-danger button-delete" data-target="<%=artwork.getArtID()%>">删除藏品</button>
                             </div>
                         </div>
                     </div>
