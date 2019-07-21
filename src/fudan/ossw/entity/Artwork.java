@@ -1,20 +1,47 @@
 package fudan.ossw.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.sql.Date;
 
 public class Artwork {
+    @JSONField(name="artworkID")
     private int artID;
+
+    @JSONField(name="title")
     private String title;
+
+    @JSONField(name="imageFileName")
     private String imageFileName;
+
+    @JSONField(name="videoFileName", serialize=false)
     private String videoFileName;
+
+    @JSONField(name="age")
     private String age;
+
+    @JSONField(name="size", serialize=false)
     private String size;
+
+    @JSONField(name="description")
     private String description;
+
+    @JSONField(name="view")
     private int view;
+
+    @JSONField(name="location", serialize=false)
     private String location;
+
+    @JSONField(name="findTime", serialize=false)
     private String findTime;
+
+    @JSONField(name="timeReleased", serialize=false)
     private Date timeReleased;
+
+    @JSONField(name="delete", serialize=false)
     private boolean isDelete = false;
+
+    @JSONField(name="uploadID", serialize=false)
     private int uploadID;
 
     public Artwork(){

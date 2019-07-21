@@ -50,7 +50,9 @@ public class SearchPageServlet extends HttpServlet {
 
         req.setAttribute("artworkList",list);
 
-        req.setAttribute("totalNumber",totalNumber/6);
+        int pageNumber = totalNumber%6==0?totalNumber/6:totalNumber/6+1;
+
+        req.setAttribute("totalNumber",pageNumber);
 
         if ("view".equals(sort)){
             req.setAttribute("option1","selected");
