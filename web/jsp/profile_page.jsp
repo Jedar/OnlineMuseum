@@ -1,4 +1,7 @@
-<%--
+<%@ page import="fudan.ossw.entity.User" %>
+<%@ page import="java.util.List" %>
+<%@ page import="fudan.ossw.entity.Favorite" %>
+<%@ page import="fudan.ossw.entity.Artwork" %><%--
   Created by IntelliJ IDEA.
   User: Peng Deng
   Date: 2019/7/20
@@ -21,6 +24,10 @@
 <body>
 <jsp:include page="../inc/header.inc.jsp"/>
 <jsp:include page="../inc/search.inc.jsp"/>
+<%
+    List<User> friends = (List<User>)request.getAttribute("friends");
+    List<Artwork> favorite = (List<Artwork>)request.getAttribute("favorite");
+%>
 <main class="container-fluid">
     <div class="row">
         <div class="offset-1 col-2">
@@ -35,55 +42,59 @@
         <div class = "offset-1 col-8">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="true">收藏夹 <span class="badge badge-pill badge-secondary">4</span></a>
+                    <a class="nav-link active" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="true">收藏夹 <span class="badge badge-pill badge-secondary"><%=favorite.size()%></span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="friends-tab" data-toggle="tab" href="#friends" role="tab" aria-controls="friends" aria-selected="false">好友 <span class="badge badge-pill badge-secondary">4</span></a>
+                    <a class="nav-link" id="friends-tab" data-toggle="tab" href="#friends" role="tab" aria-controls="friends" aria-selected="false">好友 <span class="badge badge-pill badge-secondary"><%=friends.size()%></span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">编辑</a>
                 </li>
             </ul>
             <div class="tab-content">
-                <%
-                    //藏品信息
-                %>
                 <div class="tab-pane active" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
+                    <%
+                        for(Artwork artwork : favorite) {
+                    %>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="row">
                                 <figure class="col-3">
-                                    <img src="../img/019070.jpg" class="figure-img rounded" width="170" height="170" alt="" />
+                                    <img src="../img/<%=artwork.getImageFileName()%>" class="figure-img rounded" width="170" height="170" alt="img" />
                                 </figure>
                                 <div class="col-4 offset-1">
                                     <table class="table">
                                         <tr>
                                             <td>名称</td>
-                                            <td>玉马</td>
+                                            <td><%=artwork.getTitle()%></td>
                                         </tr>
                                         <tr>
-                                            <td>类别</td>
-                                            <td>玉石</td>
+                                            <td>年代</td>
+                                            <td><%=artwork.getAge()%></td>
                                         </tr>
                                         <tr>
                                             <td>尺寸</td>
-                                            <td>12cm*13cm</td>
+                                            <td><%=artwork.getSize()%></td>
                                         </tr>
                                     </table>
                                 </div>
                                 <div class="col-2 offset-2 align-self-center">
                                     <div class="justify-content-center">
-                                        <a class="btn btn-info favorite-detail" href="./detail.jsp?id=<%=1%>">查看详情</a>
+                                        <a class="btn btn-info favorite-detail" href="detail_page.jsp?id=<%=artwork.getArtID()%>">查看详情</a>
                                         <br><br>
-                                        <button class="btn btn-danger favorite-delete" data-target="<%=1%>">删除藏品</button>
+                                        <button class="btn btn-danger favorite-delete" data-target="<%=artwork.getArtID()%>">删除藏品</button>
                                     </div>
                                 </div>
                             </div>
                         </li>
                     </ul>
+                    <% } %>
                 </div>
 
                 <div class="tab-pane" id="friends" role="tabpanel" aria-labelledby="friends-tab">
+                    <%
+                        for(User friend : friends) {
+                    %>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="row">
@@ -91,19 +102,20 @@
                                     <img src="../img/019070.jpg" class="figure-img rounded" width="100" height="100" alt="" />
                                 </figure>
                                 <div class="col-4 offset-1 align-self-center">
-                                    <h4>Admin</h4>
-                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i>上海</p>
+                                    <h4><%=friend.getUsername()%></h4>
+                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i><%=friend.getAddress()%></p>
                                 </div>
                                 <div class="col-2 offset-2 align-self-center">
                                     <div class="justify-content-center">
-                                        <a class="btn btn-info friend-homepage" href="./detail.jsp?id=<%=1%>">查看主页</a>
+                                        <a class="btn btn-info friend-homepage" href="friend.jsp?id=<%=friend.getUserID()%>">查看主页</a>
                                         <br><br>
-                                        <button class="btn btn-danger friend-delete" data-target="<%=1%>">删除好友</button>
+                                        <button class="btn btn-danger friend-delete" data-target="<%=friend.getUserID()%>">删除好友</button>
                                     </div>
                                 </div>
                             </div>
                         </li>
                     </ul>
+                    <% } %>
                 </div>
 
                 <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">

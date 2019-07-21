@@ -17,7 +17,7 @@
     <!--不需要拦截的URL列表-->
     <context-param>
         <param-name>uncheckedUrls</param-name>
-        <param-value>/index.jsp,/jsp/login.jsp,/jsp/signup.jsp,/jsp/detail.jsp,/jsp/home.jsp,/jsp/search.jsp</param-value>
+        <param-value>/index.jsp,/jsp/login.jsp,/jsp/signup.jsp,/jsp/detail.jsp,/jsp/home_page.jsp,/jsp/home.jsp,/jsp/search.jsp</param-value>
     </context-param>
 
     <filter>
