@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "FavoriteServlet",value = "/jsp/favorite.jsp")
-public class FavoriteServlet extends HttpServlet {
+@WebServlet(name = "FavoritePageServlet",value = "/jsp/favorite.jsp")
+public class FavoritePageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }

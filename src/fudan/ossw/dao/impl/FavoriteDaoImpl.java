@@ -3,10 +3,7 @@ package fudan.ossw.dao.impl;
 import fudan.ossw.dao.BaseDao;
 import fudan.ossw.dao.FavoriteDao;
 import fudan.ossw.entity.Favorite;
-import org.apache.commons.dbcp2.DelegatingDatabaseMetaData;
-
 import java.sql.Date;
-import java.util.ArrayList;
 import java.util.List;
 
 public class FavoriteDaoImpl implements FavoriteDao {
@@ -57,10 +54,13 @@ public class FavoriteDaoImpl implements FavoriteDao {
         String sql = "INSERT INTO `OnlineMuseum`.`favorites`\n" +
                 "(`favoriteID`,\n" +
                 "`userID`,\n" +
-                "`artID`),\n" +
+                "`artID`,\n" +
                 "`addTime`)\n" +
                 "VALUES\n" +
-                "(NULL,?,?,?);\n";
+                "(NULL,\n" +
+                "?,\n" +
+                "?,\n" +
+                "?);\n";
         return dao.update(Favorite.class,sql,userID,artworkID,new Date(new java.util.Date().getTime()));
     }
 

@@ -139,13 +139,23 @@ public class ArtworkDaoImpl implements ArtworkDao {
 
     @Override
     public List<Artwork> getCriteriaArtworks(CriteriaArtwork ca, String sortWay) {
-        String sql = "SELECT * FROM arts WHERE title LIKE ? AND description LIKE ? AND location LIKE ? AND isDelete = ? ORDER BY ?";
-        return baseDao.getForList(Artwork.class, sql, ca.getTitle(), ca.getDescription(), ca.getLocation(), false, sortWay);
+        String sql = "SELECT * FROM arts WHERE title LIKE ? AND description LIKE ? AND location LIKE ? AND isDelete = ? ORDER BY view DESC";
+        return baseDao.getForList(Artwork.class, sql, ca.getTitle(), ca.getDescription(), ca.getLocation(), false);
     }
 
     @Override
     public List<Artwork> getPageCriteriaArtworks(CriteriaArtwork ca, String orderWay, int mark, int size) {
-        String sql = "SELECT * FROM arts WHERE title LIKE ? AND description LIKE ? AND location LIKE ? AND isDelete = ? ORDER BY ? LIMIT ? , ?";
-        return baseDao.getForList(Artwork.class, sql, ca.getTitle(), ca.getDescription(), ca.getLocation(), false, orderWay, mark, size);
+        String sql = getSql(orderWay);
+        return baseDao.getForList(Artwork.class, sql, ca.getTitle(), ca.getDescription(), ca.getLocation(), false, mark, size);
+    }
+
+    private String getSql(String sortWay) {
+        switch (sortWay) {
+            case "view" :
+                return "SELECT * FROM arts WHERE title LIKE ? AND description LIKE ? AND location LIKE ? AND isDelete = ? ORDER BY view DESC LIMIT ? , ?";
+            case "timeReleased":
+                return "SELECT * FROM arts WHERE title LIKE ? AND description LIKE ? AND location LIKE ? AND isDelete = ? ORDER BY timeReleased DESC LIMIT ? , ?";
+        }
+        return "SELECT * FROM arts WHERE title LIKE ? AND description LIKE ? AND location LIKE ? AND isDelete = ? ORDER BY view DESC LIMIT ? , ?";
     }
 }

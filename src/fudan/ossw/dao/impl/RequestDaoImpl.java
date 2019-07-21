@@ -54,7 +54,7 @@ public class RequestDaoImpl implements RequestDao {
                 "    `requests`.`agree`,\n" +
                 "    `requests`.`isRead`\n" +
                 "FROM `OnlineMuseum`.`requests`\n" +
-                "WHERE `receiverID`=?;\n";
+                "WHERE `receiverID`=? ORDER BY sendTime;\n";
         return dao.getForList(Request.class,sql,userID);
     }
 

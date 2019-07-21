@@ -4,7 +4,9 @@ import fudan.ossw.entity.Artwork;
 import fudan.ossw.entity.Favorite;
 import fudan.ossw.entity.User;
 import fudan.ossw.service.FavoriteService;
+import fudan.ossw.service.UserService;
 import fudan.ossw.service.impl.FavoriteServiceImpl;
+import fudan.ossw.service.impl.UserServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -31,9 +33,12 @@ public class FriendPageServlet extends HttpServlet {
                 friendID = 1;
             }
         }
+        UserService userService = new UserServiceImpl();
+        User friend = userService.getUser(friendID);
         FavoriteService favoriteService = new FavoriteServiceImpl();
         List<Artwork> recentFavorite = favoriteService.getRecentFavorite(friendID);
+        request.setAttribute("friend", friend);
         request.setAttribute("recentFavorite",recentFavorite);
-        request.getRequestDispatcher("./detail_page.jsp").forward(request,response);
+        request.getRequestDispatcher("./friend_page.jsp").forward(request,response);
     }
 }

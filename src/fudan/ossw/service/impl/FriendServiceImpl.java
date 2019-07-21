@@ -71,10 +71,11 @@ public class FriendServiceImpl implements FriendService {
     }
 
     @Override
-    public void readRequest(int senderID, int receiverID, boolean agree) {
+    public boolean readRequest(int senderID, int receiverID, boolean agree) {
         DaoFactory.getInstance().getRequestDao().readRequest(senderID, receiverID, agree);
         if(agree) {
-            addFriend(senderID, receiverID);
+           return addFriend(senderID, receiverID);
         }
+        return true;
     }
 }
