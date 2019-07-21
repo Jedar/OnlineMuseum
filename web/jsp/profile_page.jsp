@@ -107,7 +107,7 @@
                                 </div>
                                 <div class="col-2 offset-2 align-self-center">
                                     <div class="justify-content-center">
-                                        <a class="btn btn-info friend-homepage" href="friend.jsp?id=<%=friend.getUserID()%>">查看主页</a>
+                                        <a class="btn btn-info friend-homepage" href="friend_page.jsp?id=<%=friend.getUserID()%>">查看主页</a>
                                         <br><br>
                                         <button class="btn btn-danger friend-delete" data-target="<%=friend.getUserID()%>">删除好友</button>
                                     </div>

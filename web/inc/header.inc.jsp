@@ -55,7 +55,7 @@
                             <i class="fa fa-user-circle"></i> UserName
                         </a>
                         <div class="dropdown-menu bg-dark text-white" aria-labelledby="dropdownMenuButton">
-                            <a href="../jsp/message.jsp" class="a-white dropdown-item"><i class="fa fa-mail-forward"></i> Message</a>
+                            <a href="../jsp/message_page.jsp" class="a-white dropdown-item"><i class="fa fa-mail-forward"></i> Message</a>
                             <a href="../jsp/favorite.jsp" class="a-white dropdown-item"><i class="fa fa-star"></i> Favorite <span>0</span></a>
                             <div class="dropdown-divider"></div>
                             <a href="#" class="a-white dropdown-item"><i class="fa fa-sign-out"></i> Logout</a>

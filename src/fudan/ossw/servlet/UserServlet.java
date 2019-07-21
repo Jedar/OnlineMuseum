@@ -124,16 +124,21 @@ public class UserServlet extends HttpServlet {
     private void addFavorite(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User)request.getSession().getAttribute("user");
         if(user == null) {
-            /*登陆*/
+            json.put("success", false);
+            json.put("message", "请先登陆");
         }else {
             FavoriteService favoriteService = new FavoriteServiceImpl();
-            int artworkID = Integer.parseInt(request.getParameter("artworkID"));
-            if(DaoFactory.getInstance().getFavoriteDao().addFavorite(user.getUserID(), artworkID)) {
-                /*添加成功*/
+            int artworkID = Integer.parseInt(request.getParameter("artworkID").trim());
+
+            if(favoriteService.addFavorite(user.getUserID(), artworkID)) {
+                json.put("success", true);
             } else {
-                /*添加失败*/
+                json.put("success", false);
+                json.put("message", favoriteService.getErrorMessage());
             }
         }
+        System.out.println(json.toJSONString());
+        response.getWriter().println(json.toJSONString());
     }
 
     /*删除收藏夹*/

@@ -40,6 +40,16 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
+    public List<Artwork> getRecentFavorite(int userID) {
+        List<Favorite> recentFavorite = DaoFactory.getInstance().getFavoriteDao().getRecentFavorite(userID);
+        List<Artwork> artworks = new LinkedList<>();
+        for(Favorite favorite : recentFavorite) {
+            artworks.add(DaoFactory.getInstance().getArtworkDao().getArtwork(favorite.getArtID()));
+        }
+        return artworks;
+    }
+
+    @Override
     public boolean addFavorite(int userID, int artworkID) {
         Favorite favorite = DaoFactory.getInstance().getFavoriteDao().getFavorite(userID, artworkID);
         if(favorite != null) {

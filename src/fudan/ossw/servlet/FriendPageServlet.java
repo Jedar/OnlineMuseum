@@ -1,11 +1,10 @@
 package fudan.ossw.servlet;
 
 import fudan.ossw.entity.Artwork;
+import fudan.ossw.entity.Favorite;
 import fudan.ossw.entity.User;
 import fudan.ossw.service.FavoriteService;
-import fudan.ossw.service.FriendService;
 import fudan.ossw.service.impl.FavoriteServiceImpl;
-import fudan.ossw.service.impl.FriendServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,22 +14,26 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ProfileServlet", value = "/jsp/profile.jsp")
-public class ProfileServlet extends HttpServlet {
+@WebServlet(name = "FriendPageServlet", value = "/jsp/friend.jsp")
+public class FriendPageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        FriendService friendService = new FriendServiceImpl();
+        String idStr = request.getParameter("id");
+        int friendID = 1;
+        if(idStr != null){
+            try{
+                friendID = Integer.parseInt(idStr);
+            }
+            catch (Exception e){
+                friendID = 1;
+            }
+        }
         FavoriteService favoriteService = new FavoriteServiceImpl();
-        int userID = ((User)request.getSession().getAttribute("user")).getUserID();
-        List<User> friends = friendService.getFriendsList(userID);
-        List<Artwork> favorite = favoriteService.getFavoriteList(userID);
-        System.out.println(friends);
-        System.out.println(favorite);
-        request.setAttribute("friends", friends);
-        request.setAttribute("favorite", favorite);
-        request.getRequestDispatcher("./profile_page.jsp").forward(request, response);
+        List<Artwork> recentFavorite = favoriteService.getRecentFavorite(friendID);
+        request.setAttribute("recentFavorite",recentFavorite);
+        request.getRequestDispatcher("./detail_page.jsp").forward(request,response);
     }
 }
