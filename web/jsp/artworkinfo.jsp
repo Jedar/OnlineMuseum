@@ -30,8 +30,8 @@
             <ul class="nav nav-tabs nav-justified">
                 <li class="nav-item"><a href="#" class="a-black nav-link">首页</a></li>
                 <li class="nav-item"><a href="#" class="a-black nav-link">搜索</a></li>
-                <li class="nav-item"><a href="./detail.jsp" class="a-black nav-link active">详情</a></li>
-                <li class="nav-item"><a href="./favorite.jsp" class="a-black nav-link disabled">个人界面</a> </li>
+                <li class="nav-item"><a href="./detail.jsp" class="a-black nav-link">详情</a></li>
+                <li class="nav-item"><a href="./favorite.jsp" class="a-black nav-link">个人界面</a> </li>
             </ul>
         </div>
     </nav>

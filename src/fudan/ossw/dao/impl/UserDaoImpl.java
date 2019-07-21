@@ -25,8 +25,8 @@ public class UserDaoImpl implements UserDao {
                 "    `users`.`lastLogin`,\n" +
                 "    `users`.`signature`\n" +
                 "FROM `OnlineMuseum`.`users`\n" +
-                "WHERE userID=?";
-        return baseDao.get(User.class, SQL_SELECT_BY_ID,id);
+                "WHERE userID=? AND isDelete=?;";
+        return baseDao.get(User.class, SQL_SELECT_BY_ID,id,false);
     }
 
     @Override
@@ -43,16 +43,16 @@ public class UserDaoImpl implements UserDao {
                 "    `users`.`lastLogin`,\n" +
                 "    `users`.`signature`\n" +
                 "FROM `OnlineMuseum`.`users`\n" +
-                "WHERE `username`=?";
-        return baseDao.get(User.class, SQL_SELECT_BY_NAME,name);
+                "WHERE `username`=? AND isDelete=?";
+        return baseDao.get(User.class, SQL_SELECT_BY_NAME,name,false);
     }
 
     @Override
     public boolean deleteUser(int id) {
         String sql = "UPDATE `OnlineMuseum`.`users`\n" +
                 "SET\n" +
-                "`isDelete` = ?,\n" +
-                "WHERE `userID` = ?;\n";
+                "`isDelete` = ?\n" +
+                "WHERE `userID` = ? AND isDelete=?;\n";
         User user = getUserByID(id);
         if(user == null){
             return false;
@@ -61,7 +61,7 @@ public class UserDaoImpl implements UserDao {
             return false;
         }
         user.setIsDelete(true);
-        return baseDao.update(User.class,sql,false,id);
+        return baseDao.update(User.class,sql,true,id,false);
     }
 
     @Override

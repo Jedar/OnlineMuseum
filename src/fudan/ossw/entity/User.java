@@ -32,6 +32,20 @@ public class User {
         visible = false;
     }
 
+    public User(int userID, String username, String password, String email) {
+        this.userID = userID;
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.phone = "12345678987";
+        this.address = "China";
+        this.signature = "这个人很懒，什么都没有留下";
+        this.lastLogin = new Date(new java.util.Date().getTime());
+        isDelete = false;
+        isManager = false;
+        visible = false;
+    }
+
     public Date getLastLogin() {
         return lastLogin;
     }

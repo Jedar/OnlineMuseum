@@ -15,6 +15,7 @@
     <script type="text/javascript" rel="script" src="../js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/util.js"></script>
+    <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
     <script type="text/javascript" rel="script" src="../js/signup.js"></script>
 </head>
 <body>
@@ -55,12 +56,12 @@
                         <input class="form-control" type="tel" id="register-phone" name="phone" placeholder="电话">
                         <div class="conflictDiv invisible"><i class="fa fa-exclamation-circle fa-lg"></i> </div>
                     </div>
-                    <%--<div class="form-group">--%>
-                    <%--<label for="user-check">验证码：</label>--%>
-                    <%--<input class="form-control" type="text" id="user-check" name="user-check">--%>
-                    <%--<label class="check-number">1234</label>--%>
-                    <%--<div class="conflictDiv invisible"><i class="fa fa-exclamation-circle fa-lg"></i> </div>--%>
-                    <%--</div>--%>
+                    <div class="form-group">
+                        <label for="user-check">验证码：</label>
+                        <input class="form-control" type="text" id="user-check" name="user-check">
+                        <label class="alert alert-info check-number">1234</label>
+                        <div class="conflictDiv invisible"><i class="fa fa-exclamation-circle fa-lg"></i> </div>
+                    </div>
                 </form>
                 <div class="card-footer">
                     <button type="button" class="btn btn-primary float-right" id="btn-register">注册</button>
