@@ -10,7 +10,7 @@ import java.util.List;
  * @Date 2019/7/19 15:52
  * @Version 1.0
  **/
-public interface UserService  extends BaseService {
+public interface UserService extends BaseService {
     User login(String username, String password);
     User signup(User user);
     boolean update(User user);

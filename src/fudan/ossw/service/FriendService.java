@@ -18,6 +18,5 @@ public interface FriendService extends BaseService {
     boolean deleteFriend(int userID, int friendID);
     boolean addFriend(int userID, int friendID);
     boolean sendRequest(Request request);
-    void agreeRequest(int requestID);
-    void refuseRequest(int requestID);
+    void readRequest(int senderID, int receiverID, boolean agree);
 }

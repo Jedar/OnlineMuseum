@@ -7,6 +7,8 @@ import java.util.List;
 public interface RequestDao {
     public boolean readRequest(int requestID, boolean agree);
 
+    public boolean readRequest(int senderID, int receiverID, boolean agree);
+
     public boolean addRequest(Request request);
 
     public List<Request> getRequestList(int userID);

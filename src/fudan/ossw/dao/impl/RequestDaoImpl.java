@@ -20,6 +20,12 @@ public class RequestDaoImpl implements RequestDao {
     }
 
     @Override
+    public boolean readRequest(int senderID, int receiverID, boolean agree) {
+        String sql = "UPDATE request SET agree = ?, isRead = ? WHERE sendID = ? AND receiverID = ?";
+        return dao.update(Request.class, sql, agree, true, senderID, receiverID);
+    }
+
+    @Override
     public boolean addRequest(Request request) {
         String sql = "INSERT INTO `OnlineMuseum`.`requests`\n" +
                 "(`requestID`,\n" +

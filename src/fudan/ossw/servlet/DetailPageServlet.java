@@ -22,7 +22,7 @@ public class DetailPageServlet extends HttpServlet {
 //            id = Integer.parseInt(idStr);
 //        }
 //        Artwork artwork = artworkDao.getArtwork(id);
-        request.setAttribute("collection",artwork);
+//        request.setAttribute("collection",artwork);
 
         request.getRequestDispatcher("./detail_page.jsp") .forward(request,resp);
     }
