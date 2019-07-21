@@ -36,7 +36,7 @@
                 </small>
             </div>
             <ul class="col-md-3 offset-md-3 nav nav-justified">
-                <li class="nav-item"><a href="../jsp/search.jsp" class="a-white nav-link"><i class="fa fa-search"></i> Search</a></li>
+                <li class="nav-item"><a href="../jsp/search_page.jsp" class="a-white nav-link"><i class="fa fa-search"></i> Search</a></li>
                 <li class="nav-item"><a href="../jsp/login.jsp" class="a-white nav-link"><i class="fa fa-user-circle"></i> Login</a></li>
             </ul>
             <%}
@@ -47,7 +47,7 @@
             </div>
             <ul class="col-md-3 offset-md-3 nav nav-justified">
                 <li class="nav-item">
-                    <a href="../jsp/search.jsp" class="a-white nav-link"><i class="fa fa-search"></i> Search</a>
+                    <a href="../jsp/search_page.jsp" class="a-white nav-link"><i class="fa fa-search"></i> Search</a>
                 </li>
                 <li class="nav-item">
                     <div class="dropdown">
