@@ -39,15 +39,15 @@ public class LoginFilter implements Filter {
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
         String servletPath = httpRequest.getServletPath();
         List<String> urls = Arrays.asList(uncheckedUrls.split(","));
-        if (urls.contains(servletPath)) {
-            filterChain.doFilter(httpRequest, httpResponse);
-            return;
-        }
-        User user = (User)httpRequest.getSession().getAttribute(sessionKey);
-        if ((user == null)) {
-            httpResponse.sendRedirect(httpRequest.getContextPath() + redirectUrl);
-            return;
-        }
+//        if (urls.contains(servletPath)) {
+//            filterChain.doFilter(httpRequest, httpResponse);
+//            return;
+//        }
+//        User user = (User)httpRequest.getSession().getAttribute(sessionKey);
+//        if ((user == null)) {
+//            httpResponse.sendRedirect(httpRequest.getContextPath() + redirectUrl);
+//            return;
+//        }
         filterChain.doFilter(httpRequest, httpResponse);
     }
 

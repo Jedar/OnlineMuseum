@@ -54,27 +54,27 @@
     <!-- 轮播图片 -->
     <div class="carousel-inner">
         <div class="carousel-item active">
-            <img src="../img/201902.jpg" alt="Image">
+            <img src="../img/${requestScope.heat0.imageFileName}" alt="Image">
             <div class="carousel-caption">
-                <h3>Caption</h3>
-                <p>Deeply influenced the art of the twentieth Century.</p>
-                <button type="button" class="btn btn-light btn-lg" >Learn More</button>
+                <h3>${requestScope.heat0.title}</h3>
+                <p>${requestScope.heat0.description}</p>
+                <a href="./detail.jsp?id=${requestScope.heat0.artID}" type="button" class="btn btn-light btn-lg" >Learn More</a>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="../img/201903.jpg" alt="Image">
+            <img src="../img/${requestScope.heat1.imageFileName}" alt="Image">
             <div class="carousel-caption">
-                <h3>Caption</h3>
-                <p>Deeply influenced the art of the twentieth Century.</p>
-                <button type="button" class="btn btn-light btn-lg" >Learn More</button>
+                <h3>${requestScope.heat1.title}</h3>
+                <p>${requestScope.heat1.description}</p>
+                <a href="./detail.jsp?id=${requestScope.heat1.artID}" type="button" class="btn btn-light btn-lg" >Learn More</a>
             </div>
         </div>
         <div class="carousel-item">
-            <img src="../img/201904.jpg" alt="Image">
+            <img src="../img/${requestScope.heat2.imageFileName}" alt="Image">
             <div class="carousel-caption">
-                <h3>Caption</h3>
-                <p>Deeply influenced the art of the twentieth Century.</p>
-                <button type="button" class="btn btn-light btn-lg" >Learn More</button>
+                <h3>${requestScope.heat2.title}</h3>
+                <p>${requestScope.heat2.description}</p>
+                <a href="./detail.jsp?id=${requestScope.heat2.artID}" type="button" class="btn btn-light btn-lg" >Learn More</a>
             </div>
         </div>
     </div>
@@ -94,56 +94,50 @@
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurete-heading">
-                Portrait of Elenor Toloks
+                ${requestScope.newest0.title}
             </h2>
             <p class="lead">
-                Her books is organized into sections by epochs and ruling governments;at times,
-                the compression of such a long history into this short space make it hard to digest,
-                but Lancaster stops often to recount captivating legends and anecdotes. She seems to
-                have a quote from every writer or thinker who ever visited Naples or its surroundings.
+                ${requestScope.newest0.description}
             </p>
-            <button type="button" class="btn btn-primary">View Details</button>
+            <a href="./detail.jsp?id=${requestScope.newest0.artID}" type="button" class="btn btn-primary">View Details</a>
         </div>
         <div class="col-md-5">
-            <img src="../img/201902.jpg">
-        </div>
-    </div>
-    <hr>
-    <div class="row featurette">
-        <div class="col-md-7 order-2">
-            <h2 class="featurete-heading">
-                Portrait of Elenor Toloks
-            </h2>
-            <p class="lead">
-                Her books is organized into sections by epochs and ruling governments;at times,
-                the compression of such a long history into this short space make it hard to digest,
-                but Lancaster stops often to recount captivating legends and anecdotes. She seems to
-                have a quote from every writer or thinker who ever visited Naples or its surroundings.
-            </p>
-            <button type="button" class="btn btn-primary">View Details</button>
-        </div>
-        <div class="col-md-5 order-1">
-            <img src="../img/201903.jpg">
+            <img src="../img/${requestScope.newest0.imageFileName}" alt="">
         </div>
     </div>
     <hr>
     <div class="row featurette">
         <div class="col-md-7">
             <h2 class="featurete-heading">
-                Portrait of Elenor Toloks
+                ${requestScope.newest1.title}
             </h2>
             <p class="lead">
-                Her books is organized into sections by epochs and ruling governments;at times,
-                the compression of such a long history into this short space make it hard to digest,
-                but Lancaster stops often to recount captivating legends and anecdotes. She seems to
-                have a quote from every writer or thinker who ever visited Naples or its surroundings.
+                ${requestScope.newest1.description}
             </p>
-            <button type="button" class="btn btn-primary">View Details</button>
+            <a href="./detail.jsp?id=${requestScope.newest1.artID}" type="button" class="btn btn-primary">View Details</a>
         </div>
         <div class="col-md-5">
-            <img src="../img/201904.jpg">
+            <img src="../img/${requestScope.newest1.imageFileName}" alt="">
         </div>
     </div>
+    <hr>
+    <div class="row featurette">
+        <div class="col-md-7">
+            <h2 class="featurete-heading">
+                ${requestScope.newest2.title}
+            </h2>
+            <p class="lead">
+                ${requestScope.newest2.description}
+            </p>
+            <a href="./detail.jsp?id=${requestScope.newest2.artID}" type="button" class="btn btn-primary">View Details</a>
+        </div>
+        <div class="col-md-5">
+            <img src="../img/${requestScope.newest2.imageFileName}" alt="">
+        </div>
+    </div>
+
+</div>
+    <hr>
 </main>
 
 <jsp:include page="../inc/footer.inc.jsp"/>

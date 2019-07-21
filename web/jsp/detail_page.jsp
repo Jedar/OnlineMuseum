@@ -23,14 +23,14 @@
 <body>
 
 <%
-    ArtworkDao artworkDao = new ArtworkDaoImpl();
-    String idStr = request.getParameter("id");
-    int id = 1;
-    if(idStr != null){
-        id = Integer.parseInt(idStr);
-    }
-    Artwork artwork = artworkDao.getArtwork(id);
-    request.setAttribute("collection",artwork);
+    //ArtworkDao artworkDao = new ArtworkDaoImpl();
+    //String idStr = request.getParameter("id");
+    //int id = 1;
+    //if(idStr != null){
+    //    id = Integer.parseInt(idStr);
+    //}
+    //Artwork artwork = artworkDao.getArtwork(id);
+    //request.setAttribute("collection",artwork);
 %>
 <%--header--%>
 <jsp:include page="../inc/header.inc.jsp"/>

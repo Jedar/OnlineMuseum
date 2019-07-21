@@ -5,6 +5,7 @@ import fudan.ossw.dao.UserDao;
 import fudan.ossw.entity.User;
 import fudan.ossw.service.UserService;
 
+import java.sql.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -49,6 +50,8 @@ public class UserServiceImpl implements UserService {
             message = STR_ERROR;
             return null;
         }
+        user.setLastLogin(new Date(new java.util.Date().getTime()));
+        userDao.updateUser(user.getUserID(),user);
         return user;
     }
 
