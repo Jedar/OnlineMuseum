@@ -21,5 +21,11 @@ public class ArtworkServiceImplTest {
         for (Artwork artwork:list){
             System.out.println(artwork.getTitle());
         }
+        testSearchPage();
+    }
+
+    private static void testSearchPage() {
+        ArtworkService service = new ArtworkServiceImpl();
+        System.out.println(service.search("", "", "", ""));
     }
 }

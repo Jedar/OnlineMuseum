@@ -1,6 +1,7 @@
 package fudan.ossw.service.impl;
 
 import fudan.ossw.dao.DaoFactory;
+import fudan.ossw.dao.MessageDao;
 import fudan.ossw.entity.Message;
 import fudan.ossw.service.MessageService;
 
@@ -14,6 +15,7 @@ import java.util.List;
  * @Version 1.0
  **/
 public class MessageServiceImpl implements MessageService {
+    MessageDao messageDao = DaoFactory.getInstance().getMessageDao();
     @Override
     public int getErrorCode() {
         return 0;
@@ -26,31 +28,36 @@ public class MessageServiceImpl implements MessageService {
 
     @Override
     public List<Message> getReadMessageList(int userID) {
-        return DaoFactory.getInstance().getMessageDao().getReadMessage(userID);
+        return messageDao.getReadMessage(userID);
     }
 
     @Override
     public List<Message> getUnreadMessageList(int userID) {
-        return DaoFactory.getInstance().getMessageDao().getUnreadMessage(userID);
+        return messageDao.getUnreadMessage(userID);
     }
 
     @Override
     public List<Message> getReceivedMessage(int userID) {
-        return DaoFactory.getInstance().getMessageDao().getMessageByReceiver(userID);
+        return messageDao.getMessageByReceiver(userID);
+    }
+
+    @Override
+    public List<Message> getSendMessageList(int userID) {
+        return messageDao.getMessageBySender(userID);
     }
 
     @Override
     public boolean sendMessage(Message message) {
-        return DaoFactory.getInstance().getMessageDao().sendMessage(message);
+        return messageDao.sendMessage(message);
     }
 
     @Override
     public boolean readMessage(int messageID) {
-        return DaoFactory.getInstance().getMessageDao().readMessage(messageID);
+        return messageDao.readMessage(messageID);
     }
 
     @Override
     public boolean deleteMessage(int messageID) {
-        return DaoFactory.getInstance().getMessageDao().deleteMessage(messageID);
+        return messageDao.deleteMessage(messageID);
     }
 }

@@ -1,5 +1,8 @@
 package fudan.ossw.servlet;
 
+import com.alibaba.fastjson.JSONObject;
+import fudan.ossw.dao.ArtworkDao;
+import fudan.ossw.dao.impl.ArtworkDaoImpl;
 import fudan.ossw.entity.Artwork;
 import fudan.ossw.entity.User;
 import fudan.ossw.service.FavoriteService;
@@ -15,22 +18,17 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet(name = "ProfileServlet", value = "/jsp/profile.jsp")
-public class ProfileServlet extends HttpServlet {
+@WebServlet(name = "FavoritePageServlet",value = "/jsp/favorite.jsp")
+public class FavoritePageServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doGet(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        FriendService friendService = new FriendServiceImpl();
         FavoriteService favoriteService = new FavoriteServiceImpl();
         int userID = ((User)request.getSession().getAttribute("user")).getUserID();
-        List<User> friends = friendService.getFriendsList(userID);
         List<Artwork> favorite = favoriteService.getFavoriteList(userID);
-        System.out.println(friends);
-        System.out.println(favorite);
-        request.setAttribute("friends", friends);
         request.setAttribute("favorite", favorite);
-        request.getRequestDispatcher("./profile_page.jsp").forward(request, response);
+        request.getRequestDispatcher("./favorite_page.jsp").forward(request, response);
     }
 }

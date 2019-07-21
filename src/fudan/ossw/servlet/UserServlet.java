@@ -133,8 +133,41 @@ public class UserServlet extends HttpServlet {
     }
 
     /*更改用户信息*/
-    private void changeInfo(HttpServletRequest request, HttpServletResponse response) {
-
+    private void changeInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User user = (User)request.getSession().getAttribute("user");
+        String password = request.getParameter("password");
+        if(!password.equals(user.getPassword())) {
+            json.put("success", false);
+            json.put("message", "密码错误");
+        }else {
+            String username = request.getParameter("username");
+            String address = request.getParameter("address");
+            String phone = request.getParameter("phone");
+            String email = request.getParameter("email");
+            String signature = request.getParameter("signature");
+            username = "".equals(username.trim())? user.getUsername() : username;
+            address = "".equals(address.trim())? user.getAddress() : address;
+            phone = "".equals(phone.trim())? user.getPhone() : phone;
+            email = "".equals(email.trim())? user.getEmail() : email;
+            signature = "".equals(signature.trim())? user.getSignature() : signature;
+            User user1 = new User(user.getUserID(), username, password, email, phone, address);
+            user1.setSignature(signature);
+            UserService userService = new UserServiceImpl();
+            if(userService.update(user1)) { //检测用户名是否重复
+                json.put("success", true);
+                user = userService.getUser(user.getUserID());
+                request.getSession().setAttribute("user", user);
+                json.put("username", user.getUsername());
+                json.put("email", user.getEmail());
+                json.put("phone", user.getPhone());
+                json.put("address", user.getAddress());
+                json.put("signature", user.getSignature());
+            }else {
+                json.put("success", false);
+                json.put("message", "更新失败");
+            }
+        }
+        response.getWriter().println(json);
     }
 
     /*更改用户类型，管理员<-->普通用户*/
@@ -218,48 +251,84 @@ public class UserServlet extends HttpServlet {
     private void addFavorite(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User)request.getSession().getAttribute("user");
         if(user == null) {
-            /*登陆*/
+            json.put("success", false);
+            json.put("message", "请先登陆");
         }else {
             FavoriteService favoriteService = new FavoriteServiceImpl();
-            int artworkID = Integer.parseInt(request.getParameter("artworkID"));
-            if(DaoFactory.getInstance().getFavoriteDao().addFavorite(user.getUserID(), artworkID)) {
-                /*添加成功*/
+            int artworkID = Integer.parseInt(request.getParameter("artworkID").trim());
+            System.out.println("artworkID" + artworkID);
+            if(favoriteService.addFavorite(user.getUserID(), artworkID)) {
+                json.put("success", true);
             } else {
-                /*添加失败*/
+                json.put("success", false);
+                json.put("message", favoriteService.getErrorMessage());
             }
         }
+        System.out.println(json.toJSONString());
+        response.getWriter().println(json.toJSONString());
     }
 
     /*删除收藏夹*/
-    private void deleteFavorite(HttpServletRequest request, HttpServletResponse response) {
+    private void deleteFavorite(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int artworkID = Integer.parseInt(request.getParameter("artworkID"));
         int userID = ((User)request.getSession().getAttribute("user")).getUserID();
         FavoriteService favoriteService = new FavoriteServiceImpl();
-        favoriteService.deleteFavorite(userID, artworkID);
+        if(favoriteService.deleteFavorite(userID, artworkID)){
+            json.put("success", true);
+        }else {
+            json.put("success", false);
+            json.put("message", "删除失败");
+        }
+        response.getWriter().println(json.toJSONString());
     }
 
-    private void sendRequest(HttpServletRequest request, HttpServletResponse response) {
+    private void sendRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int senderID = ((User)request.getSession().getAttribute("user")).getUserID();
-        int receiverID = Integer.parseInt(request.getParameter("receiverID"));
+        String receiverName = request.getParameter("username");
         String content = request.getParameter("content");
-        Request addRequest = new Request(-1, senderID, receiverID, content, new Date(new java.util.Date().getTime()), false, false);
-        FriendService friendService = new FriendServiceImpl();
-        friendService.sendRequest(addRequest);
+        System.out.println("username:" + receiverName);
+        User receiver = userService.getUserByName(receiverName.trim());
+        if(receiver == null) {
+            json.put("success", false);
+            json.put("message", "用户不存在");
+        }else{
+            Request addRequest = new Request(-1, senderID, receiver.getUserID(), content, new Date(new java.util.Date().getTime()), false, false);
+            FriendService friendService = new FriendServiceImpl();
+            if(friendService.sendRequest(addRequest)) {
+                json.put("success", true);
+            }else {
+                json.put("success", false);
+                json.put("message", "发送失败");
+            }
+        }
+        response.getWriter().println(json.toJSONString());
     }
 
-    private void readRequest(HttpServletRequest request, HttpServletResponse response) {
+    private void readRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int receiverID = ((User)request.getSession().getAttribute("user")).getUserID();
-        int senderID  = Integer.parseInt(request.getParameter("receiverID"));
+        int senderID  = Integer.parseInt(request.getParameter("senderID").trim());
         boolean agree = Boolean.parseBoolean(request.getParameter("agree"));
         FriendService friendService = new FriendServiceImpl();
-        friendService.readRequest(senderID, receiverID, agree);
+        if(friendService.readRequest(senderID, receiverID, agree)){
+            json.put("success", true);
+        }else {
+            json.put("success", false);
+            json.put("message", "操作失败");
+        }
+        response.getWriter().println(json.toJSONString());
     }
 
-    private void deleteFriend(HttpServletRequest request, HttpServletResponse response) {
+    private void deleteFriend(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int userID = ((User)request.getSession().getAttribute("user")).getUserID();
         int friendID = Integer.parseInt(request.getParameter("friendID"));
         FriendService friendService = new FriendServiceImpl();
-        friendService.deleteFriend(userID,friendID);
+        if(friendService.deleteFriend(userID,friendID)) {
+            json.put("success", true);
+        }else {
+            json.put("success", false);
+            json.put("message", "删除失败");
+        }
+        response.getWriter().println(json.toJSONString());
     }
 
     private void sendMessage(HttpServletRequest request, HttpServletResponse response) {

@@ -21,6 +21,7 @@
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/profile.js"></script>
     <script type="text/javascript" rel="script" src="../js/util.js"></script>
+    <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
 </head>
 <body>
 <jsp:include page="../inc/header.inc.jsp"/>
@@ -35,10 +36,11 @@
             <figure class="img-thumbnail">
                 <img class="figure-img rounded" width="212" height="212" src="../img/019070.jpg" alt="">
             </figure>
-            <h3>${sessionScope.user.username}</h3>
-            <p><i class="fa fa-phone-square" aria-hidden="true"></i> 电话：${sessionScope.user.phone}</p>
-            <p><i class="fa fa-envelope-o" aria-hidden="true"></i> 邮箱：${sessionScope.user.email}</p>
-            <p><i class="fa fa-map-marker" aria-hidden="true"></i> 地址：${sessionScope.user.address}</p>
+            <h3 id="username">${sessionScope.user.username}</h3>
+            <h5 id="signature">${sessionScope.user.signature}</h5>
+            <p><i class="fa fa-phone-square" aria-hidden="true"></i> 电话：<span id = "userPhone">${sessionScope.user.phone}</span></p>
+            <p><i class="fa fa-envelope-o" aria-hidden="true"></i> 邮箱：<span id="userEmail">${sessionScope.user.email}</span></p>
+            <p><i class="fa fa-map-marker" aria-hidden="true"></i> 地址：<span id="userAddress">${sessionScope.user.address}</span></p>
         </div>
         <div class = "offset-1 col-8">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -124,27 +126,37 @@
                         <div class="form-group">
                             <label for="inputUsername">Username</label>
                             <input type="text" class="form-control" id="inputUsername" aria-describedby="usernameHelp" placeholder="Username">
-                            <small id="usernameHelp" class="form-text text-muted">Your name </small>
+                            <small id="usernameHelp" class="form-text text-muted">Your new username </small>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputSignature">Address</label>
+                            <input type="text" class="form-control" id="inputSignature" aria-describedby="signatureHelp" placeholder="Signature">
+                            <small id="signatureHelp" class="form-text text-muted">Your new signature</small>
                         </div>
                         <div class="form-group">
                             <label for="inputOldPassword">Password</label>
-                            <input type="password" class="form-control" id="inputOldPassword" placeholder="Old Password">
+                            <input type="password" class="form-control" id="inputOldPassword" aria-describedby="passwordHelp" placeholder="Password">
+                            <small id="passwordHelp" class="form-text text-muted">Your password, must input</small>
                         </div>
                         <div class="form-group">
-                            <label for="inputNewPassword">Password</label>
-                            <input type="password" class="form-control" id="inputNewPassword" placeholder="New Password">
-                        </div>
-                        <div class="form-group">
-                            <label for="inputEmail1">Email address</label>
-                            <input type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                            <label for="inputEmail">Email address</label>
+                            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
                             <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" placeholder="Address">
+                            <input type="text" class="form-control" id="inputAddress" aria-describedby="addressHelp" placeholder="Address">
+                            <small id="addressHelp" class="form-text text-muted">Your new address</small>
                         </div>
-                        <button id="changeInfo" class="btn btn-primary">Submit</button>
+                        <div class="form-group">
+                            <label for="inputPhone">Address</label>
+                            <input type="text" class="form-control" id="inputPhone" aria-describedby="phoneHelp" placeholder="Address">
+                            <small id="phoneHelp" class="form-text text-muted">Your new phone</small>
+                        </div>
                     </form>
+                    <div>
+                        <button type="button" class="btn btn-primary" id="changeInfo">提交</button>
+                    </div>
                 </div>
             </div>
         </div>

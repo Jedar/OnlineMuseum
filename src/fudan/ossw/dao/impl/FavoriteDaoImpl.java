@@ -3,8 +3,7 @@ package fudan.ossw.dao.impl;
 import fudan.ossw.dao.BaseDao;
 import fudan.ossw.dao.FavoriteDao;
 import fudan.ossw.entity.Favorite;
-
-import java.util.ArrayList;
+import java.sql.Date;
 import java.util.List;
 
 public class FavoriteDaoImpl implements FavoriteDao {
@@ -20,7 +19,8 @@ public class FavoriteDaoImpl implements FavoriteDao {
     public List<Favorite> getFavoriteList(int userID) {
         String sql = "SELECT `favorites`.`favoriteID`,\n" +
                 "    `favorites`.`userID`,\n" +
-                "    `favorites`.`artID`\n" +
+                "    `favorites`.`artID`,\n" +
+                "    `favorites`.`addTime`\n" +
                 "FROM `OnlineMuseum`.`favorites`\n" +
                 "WHERE userID=?;";
 
@@ -30,10 +30,17 @@ public class FavoriteDaoImpl implements FavoriteDao {
     }
 
     @Override
+    public List<Favorite> getRecentFavorite(int userID) {
+        String sql = "SELECT * FROM favorites WHERE userID = ? ORDER BY ? LIMIT ?, ?";
+        return dao.getForList(Favorite.class,sql,userID, "addTime", 0, 5);
+    }
+
+    @Override
     public List<Favorite> getWhoFavorite(int artworkID) {
         String sql = "SELECT `favorites`.`favoriteID`,\n" +
                 "    `favorites`.`userID`,\n" +
-                "    `favorites`.`artID`\n" +
+                "    `favorites`.`artID`,\n" +
+                "    `favorites`.`addTime`\n" +
                 "FROM `OnlineMuseum`.`favorites`;\n" +
                 "WHERE artID=?;";
 
@@ -47,10 +54,14 @@ public class FavoriteDaoImpl implements FavoriteDao {
         String sql = "INSERT INTO `OnlineMuseum`.`favorites`\n" +
                 "(`favoriteID`,\n" +
                 "`userID`,\n" +
-                "`artID`)\n" +
+                "`artID`,\n" +
+                "`addTime`)\n" +
                 "VALUES\n" +
-                "(NULL,?,?);\n";
-        return dao.update(Favorite.class,sql,userID,artworkID);
+                "(NULL,\n" +
+                "?,\n" +
+                "?,\n" +
+                "?);\n";
+        return dao.update(Favorite.class,sql,userID,artworkID,new Date(new java.util.Date().getTime()));
     }
 
     @Override
