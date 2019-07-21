@@ -37,7 +37,7 @@ public class UserServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String servletPath = request.getServletPath();
         String methodName = servletPath.substring(5, servletPath.length() - 3);
-        System.out.println(methodName);
+
         try {
             /*利用反射得到对应的方法*/
             Method method = getClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
@@ -75,8 +75,11 @@ public class UserServlet extends HttpServlet {
     }
 
     /*用户登出*/
-    private void logout(HttpServletRequest request, HttpServletResponse response) {
-
+    private void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.getSession().removeAttribute("user");
+        json.put("success", true);
+        json.put("link",request.getContextPath()+"/jsp/home.jsp");
+        response.getWriter().println(json.toJSONString());
     }
 
     /*用户注册*/
@@ -104,6 +107,31 @@ public class UserServlet extends HttpServlet {
         }
     }
 
+    private void insertUser(HttpServletRequest request, HttpServletResponse response)throws IOException{
+        String name = request.getParameter("username");
+        String pwd = request.getParameter("password");
+        String address = request.getParameter("address");
+        String phone = request.getParameter("phone");
+        String email = request.getParameter("email");
+        String manage = request.getParameter("manage");
+        boolean isM = "true".equals(manage);
+        User u = new User(-1, name, pwd, email, phone, address);
+        u.setIsManager(isM);
+        boolean flag = userService.insert(u);
+        if(!flag) {
+            json.put("success", false);
+            json.put("message", userService.getErrorMessage());
+            json.put("code",userService.getErrorCode());
+            json.put("link",request.getContextPath()+"/jsp/peoplemanagement.jsp");
+            response.getWriter().println(json);
+        }else {
+            json.put("success", true);
+            json.put("message", userService.getErrorMessage());
+            json.put("code",userService.getErrorCode());
+            response.getWriter().println(json);
+        }
+    }
+
     /*更改用户信息*/
     private void changeInfo(HttpServletRequest request, HttpServletResponse response) {
 
@@ -111,13 +139,79 @@ public class UserServlet extends HttpServlet {
 
     /*更改用户类型，管理员<-->普通用户*/
     private void changeType(HttpServletRequest request, HttpServletResponse response) {
+        UserService service = new UserServiceImpl();
+        User user = (User)request.getSession().getAttribute("user");
+        if (!user.getIsManager()){
+            JSONObject object = new JSONObject();
+            object.put("success",false);
+            object.put("message","非法操作");
+            try {
+                response.getWriter().println(object.toJSONString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
         int userID = Integer.parseInt(request.getParameter("userID"));
+        User target = userService.getUserByID(userID);
+        if (target == null){
+            JSONObject object = new JSONObject();
+            object.put("success",false);
+            object.put("message","用户不存在");
+            try {
+                response.getWriter().println(object.toJSONString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return;
+        }
+        target.setIsManager(!target.getIsManager());
+        boolean flag = userService.update(target);
+        if (flag){
+            JSONObject object = new JSONObject();
+            object.put("success",true);
+            object.put("message","更改权限成功");
+            try {
+                response.getWriter().println(object.toJSONString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            JSONObject object = new JSONObject();
+            object.put("success",false);
+            object.put("message",userService.getErrorMessage());
+            try {
+                response.getWriter().println(object.toJSONString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /*删除用户*/
     private void delete(HttpServletRequest request, HttpServletResponse response) {
         int userID = Integer.parseInt(request.getParameter("userID"));
-        userService.delete(userID);
+        boolean flag = userService.delete(userID);
+        if (flag){
+            JSONObject object = new JSONObject();
+            object.put("success",true);
+            object.put("message","删除用户成功");
+            try {
+                response.getWriter().println(object.toJSONString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        else{
+            JSONObject object = new JSONObject();
+            object.put("success",false);
+            object.put("message","删除用户失败");
+            try {
+                response.getWriter().println(object.toJSONString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /*添加收藏夹*/

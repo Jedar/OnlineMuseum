@@ -5,6 +5,7 @@ import fudan.ossw.entity.Artwork;
 import java.util.List;
 
 public interface ArtworkService extends BaseService {
+    boolean insert(Artwork artwork);
     boolean update(Artwork artwork);
     boolean delete(Artwork artwork);
     List<Artwork> getHeatList();

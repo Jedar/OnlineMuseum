@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="fudan.ossw.entity.User" %><%--
   Created by IntelliJ IDEA.
   User: 38403
   Date: 2019/7/18
@@ -17,6 +18,7 @@
     <script type="text/javascript" rel="script" src="../js/popper.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/util.js"></script>
+    <script type="text/javascript" rel="script" src="../js/peoplepage.js"></script>
 </head>
 <body>
 <%--header--%>
@@ -44,29 +46,41 @@
         </div>
         <div class="card-body">
             <ul class="list-group">
+
+                <%
+                    List users = (List) request.getAttribute("users");
+                    User user = (User) request.getAttribute("user");
+                    for (Object u:users){
+                        if(((User)u).getUserID() == user.getUserID()){
+                            continue;
+                        }
+                        request.setAttribute("cur",u);
+                        String btnUp = ((User)u).getIsManager()?"disabled":"";
+                        String btnDown = ((User)u).getIsManager()?"":"disabled";
+                %>
                 <li class="list-group-item">
                     <div class="row">
                         <div class="col-3 offset-1">
                             <table class="table">
                                 <tr>
                                     <td>用户ID</td>
-                                    <td>10326</td>
+                                    <td>${requestScope.cur.userID}</td>
                                 </tr>
                                 <tr>
                                     <td>用户名</td>
-                                    <td>Mike</td>
+                                    <td>${requestScope.cur.username}</td>
                                 </tr>
                                 <tr>
                                     <td>邮箱</td>
-                                    <td>you@163.com</td>
+                                    <td>${requestScope.cur.email}</td>
                                 </tr>
                                 <tr>
                                     <td>最近登陆</td>
-                                    <td>2019-07-17</td>
+                                    <td>${requestScope.cur.lastLogin}</td>
                                 </tr>
                                 <tr>
                                     <td>是否管理员</td>
-                                    <td>是</td>
+                                    <td>${requestScope.cur.isManager}</td>
                                 </tr>
                             </table>
                         </div>
@@ -74,8 +88,8 @@
                             <h6>管理员权限管理</h6>
                             <hr>
                             <div class="btn-group-vertical">
-                                <button class="btn btn-primary disabled"><i class="fa fa-arrow-up"></i> 提升为管理员</button>
-                                <button class="btn btn-primary"><i class="fa fa-arrow-down"></i>降级为普通用户</button>
+                                <button data-target="${requestScope.cur.userID}" class="change-type btn btn-primary <%=btnUp%>"><i class="fa fa-arrow-up"></i> 提升为管理员</button>
+                                <button data-target="${requestScope.cur.userID}" class="change-type btn btn-primary <%=btnDown%>"><i class="fa fa-arrow-down"></i>降级为普通用户</button>
                             </div>
                             <hr>
                         </div>
@@ -83,24 +97,28 @@
                             <h6>用户信息管理</h6>
                             <hr>
                             <div class="btn-group-vertical">
-                                <button class="btn btn-info">查看用户</button>
-                                <button class="btn btn-info">更改用户信息</button>
-                                <button class="btn btn-danger">删除用户</button>
+                                <a class="btn btn-info" href="./friend.jsp?id=${requestScope.cur.userID}">查看用户</a>
+                                <button data-target="${requestScope.cur.userID}" class="delete-user btn btn-danger">删除用户</button>
                             </div>
                             <hr>
                         </div>
                     </div>
                 </li>
+                <%
+                    }
+                %>
+
             </ul>
         </div>
         <div class="card-footer">
             <div class="row">
                 <div class="offset-9 col-3">
-                    <button class="btn btn-primary"><i class="fa fa-plus"></i>添加新用户</button>
+                    <a href="peopleinfo_page.jsp" class="btn btn-primary"><i class="fa fa-plus"></i>添加新用户</a>
                 </div>
             </div>
         </div>
     </div>
+    <br><br>
 
 </main>
 

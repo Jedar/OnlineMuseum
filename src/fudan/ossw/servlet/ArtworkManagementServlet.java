@@ -1,7 +1,5 @@
 package fudan.ossw.servlet;
 
-import fudan.ossw.dao.ArtworkDao;
-import fudan.ossw.dao.impl.ArtworkDaoImpl;
 import fudan.ossw.entity.Artwork;
 import fudan.ossw.service.ArtworkService;
 import fudan.ossw.service.impl.ArtworkServiceImpl;
@@ -12,29 +10,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
-@WebServlet(name = "DetailPageServlet", value = "/jsp/detail.jsp")
-public class DetailPageServlet extends HttpServlet {
+@WebServlet(name = "ArtworkManagementServlet", value = "/jsp/artworkmanagement.jsp")
+public class ArtworkManagementServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
+
         ArtworkService service = new ArtworkServiceImpl();
-        String idStr = request.getParameter("id");
-        int id = 1;
-        if(idStr != null){
-            try{
-                id = Integer.parseInt(idStr);
-                /* view count++ */
-                service.view(id);
-            }
-            catch (Exception e){
-                id = 1;
-            }
-        }
 
-        Artwork artwork = service.getArtworkByID(id);
-        request.setAttribute("collection",artwork);
+        List<Artwork> artworks = service.search("","","","view");
 
-        request.getRequestDispatcher("./detail_page.jsp").forward(request,resp);
+        request.setAttribute("artworkList",artworks);
+
+        request.getRequestDispatcher("./artworkmanagement_page.jsp").forward(request,resp);
     }
 
     @Override

@@ -6,6 +6,7 @@ import fudan.ossw.entity.User;
 import fudan.ossw.service.UserService;
 
 import java.sql.Date;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -80,6 +81,21 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByName(String name) {
+        return userDao.getUserByName(name);
+    }
+
+    @Override
+    public User getUserByID(int userID) {
+        return userDao.getUserByID(userID);
+    }
+
+    @Override
+    public List<User> getAllUser() {
+        return userDao.getAllUser();
+    }
+
+    @Override
     public boolean update(User user) {
         if (isWrongUser(user)){
             return false;
@@ -91,6 +107,29 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean delete(int userID) {
         return userDao.deleteUser(userID);
+    }
+
+    @Override
+    public boolean insert(User user) {
+        if (isWrongUser(user)){
+            return false;
+        }
+        User check = userDao.getUserByName(user.getUsername());
+        if (check != null){
+            code = 17;
+            message = "用户名重复";
+            return false;
+        }
+
+        boolean flag = userDao.addUser(user);
+        if (flag){
+            return true;
+        }
+        else{
+            code = 18;
+            message = "添加数据异常";
+        }
+        return false;
     }
 
     private boolean isEmail(String string) {

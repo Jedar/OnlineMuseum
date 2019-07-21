@@ -29,6 +29,11 @@ public class ArtworkServiceImpl implements ArtworkService{
         return errorMessage;
     }
 
+    @Override
+    public boolean insert(Artwork artwork) {
+        return dao.addArtwork(artwork);
+    }
+
     public boolean update(Artwork artwork) {
         return DaoFactory.getInstance().getArtworkDao().updateArtwork(artwork.getArtID(), artwork);
     }

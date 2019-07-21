@@ -18,4 +18,6 @@ public interface UserDao {
     public boolean updateUser(int id, User user);
 
     public List<User> getCriteriaUsers(CriteriaUser cu);
+
+    List<User> getAllUser();
 }
