@@ -3,6 +3,8 @@ package fudan.ossw.servlet;
 import fudan.ossw.dao.DaoFactory;
 import fudan.ossw.entity.Artwork;
 import fudan.ossw.entity.CriteriaArtwork;
+import fudan.ossw.service.ArtworkService;
+import fudan.ossw.service.impl.ArtworkServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -37,8 +39,8 @@ public class ArtworkServlet extends HttpServlet {
         String sortWay = request.getParameter("sortWay");
         int mark = Integer.parseInt(request.getParameter("mark"));
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
-        CriteriaArtwork ca = new CriteriaArtwork(title, description, location);
-        List<Artwork> artworks = DaoFactory.getInstance().getArtworkDao().getPageCriteriaArtworks(ca, sortWay, mark, pageSize);
+        ArtworkService artworkService = new ArtworkServiceImpl();
+        List<Artwork> artworks = artworkService.searchPage(title, description, location, sortWay, mark, pageSize);
     }
 
     private void artworkDetail(HttpServletRequest request, HttpServletResponse response) {

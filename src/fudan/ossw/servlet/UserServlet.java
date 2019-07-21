@@ -168,15 +168,23 @@ public class UserServlet extends HttpServlet {
     }
 
     private void sendMessage(HttpServletRequest request, HttpServletResponse response) {
-
+        int userID = ((User)request.getSession().getAttribute("user")).getUserID();
+        int friendID = Integer.parseInt(request.getParameter("friendID"));
+        String content = request.getParameter("content");
+        Message message = new Message(-1, userID, friendID, content, new Date(new java.util.Date().getTime()), false);
+        MessageService messageService = new MessageServiceImpl();
+        messageService.sendMessage(message);
     }
 
     private void readMessage(HttpServletRequest request, HttpServletResponse response) {
-
+        int messageID = Integer.parseInt(request.getParameter("messageID"));
+        MessageService messageService = new MessageServiceImpl();
+        messageService.readMessage(messageID);
     }
 
     private void deleteMessage(HttpServletRequest request, HttpServletResponse response) {
-
+        int messageID = Integer.parseInt(request.getParameter("messageID"));
+        MessageService messageService = new MessageServiceImpl();
+        messageService.deleteMessage(messageID);
     }
-
 }

@@ -3,6 +3,7 @@ package fudan.ossw.service.impl;
 import fudan.ossw.dao.ArtworkDao;
 import fudan.ossw.dao.DaoFactory;
 import fudan.ossw.entity.Artwork;
+import fudan.ossw.entity.CriteriaArtwork;
 import fudan.ossw.service.ArtworkService;
 
 import java.util.List;
@@ -34,7 +35,13 @@ public class ArtworkServiceImpl implements ArtworkService{
         return DaoFactory.getInstance().getArtworkDao().deleteArtwork(artwork.getArtID());
     }
 
-    public List<Artwork> search(String title, String description, String location) {
-        return null;
+    public List<Artwork> search(String title, String description, String location, String sortWay) {
+        CriteriaArtwork ca = new CriteriaArtwork(title, description, location);
+        return DaoFactory.getInstance().getArtworkDao().getCriteriaArtworks(ca, sortWay);
+    }
+
+    public List<Artwork> searchPage(String title, String description, String location, String sortWay, int mark, int pageSize) {
+        CriteriaArtwork ca = new CriteriaArtwork(title, description, location);
+        return DaoFactory.getInstance().getArtworkDao().getPageCriteriaArtworks(ca, sortWay, mark, pageSize);
     }
 }

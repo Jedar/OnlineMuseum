@@ -98,9 +98,9 @@ public class ArtworkDaoImpl implements ArtworkDao {
     }
 
     @Override
-    public List<Artwork> getCriteriaArtworks(CriteriaArtwork ca) {
-        String sql = "SELECT * FROM arts WHERE title LIKE ? AND description LIKE ? AND location LIKE ? AND isDelete = ?";
-        return baseDao.getForList(Artwork.class, sql, ca.getTitle(), ca.getDescription(), ca.getLocation(), false);
+    public List<Artwork> getCriteriaArtworks(CriteriaArtwork ca, String sortWay) {
+        String sql = "SELECT * FROM arts WHERE title LIKE ? AND description LIKE ? AND location LIKE ? AND isDelete = ? ORDER BY ?";
+        return baseDao.getForList(Artwork.class, sql, ca.getTitle(), ca.getDescription(), ca.getLocation(), false, sortWay);
     }
 
     @Override

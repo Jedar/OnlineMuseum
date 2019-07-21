@@ -16,50 +16,41 @@
     <script type="text/javascript" rel="script" src="../js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/util.js"></script>
-    <script type="text/javascript" rel="script" src="../js/message.js"></script>
 </head>
 <body>
+<jsp:include page="../inc/header.inc.jsp"/>
+<jsp:include page="../inc/search.inc.jsp"/>
 <main class="container">
     <div class="row">
         <div class="col-3">
-            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">收件箱 <span class="badge badge-pill badge-secondary">4</span></a>
-                <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">发件箱 <span class="badge badge-pill badge-secondary">4</span></a>
-                <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">写信息</a>
-                <a class="nav-link" id="v-pills-addFriend-tab" data-toggle="pill" href="#v-pills-addFriend" role="tab" aria-controls="v-pills-addFriend" aria-selected="false">添加好友</a>
-                <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">申请信息 <span class="badge badge-pill badge-secondary">4</span></a>
-            </div>
+            <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <li>
+                    <a class="nav-link active " id="v-pills-receivedMessage-tab" data-toggle="pill" href="#v-pills-receivedMessage" role="tab" aria-controls="v-pills-receivedMessage" aria-selected="true">收件箱</a>
+                </li>
+                <li class="mx-auto">
+                    <a class="nav-link" id="v-pills-readMessage-tab" data-toggle="pill" href="#v-pills-readMessage" role="tab" aria-controls="v-pills-readMessage" aria-selected="false">已读 <span class="badge badge-pill badge-secondary">4</span></a>
+                </li>
+                <li class="mx-auto">
+                    <a class="nav-link" id="v-pills-unreadMessage-tab" data-toggle="pill" href="#v-pills-unreadMessage" role="tab" aria-controls="v-pills-unreadMessage" aria-selected="false">未读 <span class="badge badge-pill badge-secondary">4</span></a>
+                </li>
+                <li>
+                    <a class="nav-link" id="v-pills-sendMessage-tab" data-toggle="pill" href="#v-pills-sendMessage" role="tab" aria-controls="v-pills-sendMessage" aria-selected="false">发件箱 <span class="badge badge-pill badge-secondary">4</span></a>
+                </li>
+                <li>
+                    <a class="nav-link" id="v-pills-writeMessage-tab" data-toggle="pill" href="#v-pills-writeMessage" role="tab" aria-controls="v-pills-writeMessage" aria-selected="false">写信息</a>
+                </li>
+                <li>
+                    <a class="nav-link" id="v-pills-addFriend-tab" data-toggle="pill" href="#v-pills-addFriend" role="tab" aria-controls="v-pills-addFriend" aria-selected="false">添加好友</a>
+                </li>
+                <li>
+                    <a class="nav-link" id="v-pills-request-tab" data-toggle="pill" href="#v-pills-request" role="tab" aria-controls="v-pills-request" aria-selected="false">申请信息 <span class="badge badge-pill badge-secondary">4</span></a>
+                </li>
+            </ul>
         </div>
         <div class="col-9">
             <div class="tab-content" id="v-pills-tabContent">
-                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                <div class="tab-pane fade show active" id="v-pills-readMessage" role="tabpanel" aria-labelledby="v-pills-home-tab">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="card">
-                                <div class="card-header">
-                                    From: username
-                                </div>
-                                <div class="card-body">
-                                    <blockquote class="blockquote mb-0">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                                    </blockquote>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="card">
-                                <div class="card-header">
-                                    From: username
-                                </div>
-                                <div class="card-body">
-                                    <blockquote class="blockquote mb-0">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
-                                        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                                    </blockquote>
-                                </div>
-                            </div>
-                        </li>
                         <li class="list-group-item">
                             <div class="card">
                                 <div class="card-header">
@@ -75,8 +66,65 @@
                         </li>
                     </ul>
                 </div>
-                <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                <div class="tab-pane fade" id="v-pills-unreadMessage" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                    <div class="unreadMessage" id="unreadMessage">
+                        <div class="card">
+                            <div class="card-header" id="heading1">
+                                <div class="row">
+                                    <figure class="col-2">
+                                        <img src="../resource/019010.jpg" class="figure-img rounded" width="50" height="50" alt="" />
+                                    </figure>
+                                    <div class="col-4 offset-1 align-self-center">
+                                        <h4>From: Admin</h4>
+                                    </div>
+                                    <div class="col-2 offset-2 align-self-center">
+                                        <div class="justify-content-center">
+                                            <button class="btn btn-info" type="button" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">阅读</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="collapse1" class="collapse show" aria-labelledby="heading1" data-parent="#unreadMessage">
+                                <div class="card-body">
+                                    <form>
+                                        <div class="form-group">
+                                            <label for="message">Content</label>
+                                            <textarea class="form-control" readonly id="message" rows="3"></textarea>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="v-pills-sendMessage" role="tabpanel" aria-labelledby="v-pills-sendMessage-tab">
                     <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <div class="card">
+                                <div class="card-header">
+                                    To: username
+                                </div>
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <div class="card">
+                                <div class="card-header">
+                                    To: username
+                                </div>
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante.</p>
+                                        <footer class="blockquote-footer">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </li>
                         <li class="list-group-item">
                             <div class="card">
                                 <div class="card-header">
@@ -92,7 +140,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+                <div class="tab-pane fade" id="v-pills-writeMessage" role="tabpanel" aria-labelledby="v-pills-writeMessage-tab">
                     <div class="accordion" id="accordionExample">
                         <div class="card">
                             <div class="card-header" id="headingOne">
@@ -111,6 +159,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
                                 <div class="card-body">
                                     <form>
@@ -138,7 +187,7 @@
                         <button class="btn btn-primary">Send</button>
                     </form>
                 </div>
-                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+                <div class="tab-pane fade" id="v-pills-request" role="tabpanel" aria-labelledby="v-pills-request-tab">
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="row">
@@ -162,5 +211,7 @@
         </div>
     </div>
 </main>
+
+<jsp:include page="../inc/footer.inc.jsp"/>
 </body>
 </html>
