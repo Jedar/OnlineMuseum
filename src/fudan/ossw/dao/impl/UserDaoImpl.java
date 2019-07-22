@@ -127,4 +127,21 @@ public class UserDaoImpl implements UserDao {
         String sql = "SELECT * FROM users WHERE username LIKE ? AND address LIKE ? AND isDelete = ?";
         return baseDao.getForList(User.class, sql, cu.getUsername(), cu.getAddress(), false);
     }
+
+    @Override
+    public List<User> getAllUser() {
+        String sql= "SELECT `users`.`userID`,\n" +
+                "    `users`.`username`,\n" +
+                "    `users`.`password`,\n" +
+                "    `users`.`email`,\n" +
+                "    `users`.`phone`,\n" +
+                "    `users`.`address`,\n" +
+                "    `users`.`isManager`,\n" +
+                "    `users`.`visible`,\n" +
+                "    `users`.`isDelete`,\n" +
+                "    `users`.`lastLogin`,\n" +
+                "    `users`.`signature`\n" +
+                "FROM `OnlineMuseum`.`users` WHERE isDelete=?;\n";
+        return baseDao.getForList(User.class,sql,false);
+    }
 }

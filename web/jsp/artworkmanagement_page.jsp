@@ -1,4 +1,4 @@
-<%--
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: 38403
   Date: 2019/7/18
@@ -17,6 +17,7 @@
     <script type="text/javascript" rel="script" src="../js/popper.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/util.js"></script>
+    <script type="text/javascript" rel="script" src="../js/artworkinfo.js"></script>
 </head>
 <body>
 <%--header--%>
@@ -30,7 +31,7 @@
                 <li class="nav-item"><a href="#" class="a-black nav-link">首页</a></li>
                 <li class="nav-item"><a href="#" class="a-black nav-link">搜索</a></li>
                 <li class="nav-item"><a href="./detail.jsp" class="a-black nav-link">详情</a></li>
-                <li class="nav-item"><a href="favorite_page.jsp" class="a-black nav-link">个人界面</a> </li>
+                <li class="nav-item"><a href="favorite.jsp" class="a-black nav-link">个人界面</a> </li>
             </ul>
         </div>
     </nav>
@@ -43,46 +44,56 @@
                 藏品列表
             </div>
             <ul class="list-group">
+                <%
+                    List list = (List)request.getAttribute("artworkList");
+                    for (Object artwork:list){
+                        request.setAttribute("artwork",artwork);
+                %>
                 <li class="list-group-item">
                     <div class="row">
                         <figure class="img-thumbnail col-2 offset-1">
-                            <img src="../img/Test.jpg" width="150" height=150 alt="" />
+                            <img src="../img/${requestScope.artwork.imageFileName}" width="150" height=150 alt="" />
                         </figure>
                         <div class="col-3 offset-1">
                             <table class="table">
                                 <tr>
                                     <td>名称</td>
-                                    <td>玉马</td>
+                                    <td>${requestScope.artwork.title}</td>
                                 </tr>
                                 <tr>
                                     <td>上传日期</td>
-                                    <td>2019-07-19</td>
+                                    <td>${requestScope.artwork.timeReleased}</td>
                                 </tr>
                                 <tr>
                                     <td>尺寸</td>
-                                    <td>12cm*13cm</td>
+                                    <td>${requestScope.artwork.size}</td>
                                 </tr>
                             </table>
                         </div>
                         <div class="col-2 offset-2 align-self-center">
                             <div class="btn-group-vertical justify-content-center">
-                                <button class="btn btn-info"><i class="fa fa-info"></i> 查看详情</button>
-                                <button class="btn btn-info"><i class="fa fa-cogs"></i> 修改信息</button>
-                                <button class="btn btn-danger"><i class="fa fa-close"></i> 删除藏品</button>
+                                <a href="./detail.jsp?id=${requestScope.artwork.artID} " class="btn btn-info"><i class="fa fa-info"></i> 查看详情</a>
+                                <a href="./artworkinfo.jsp?id=${requestScope.artwork.artID}&method=change " class="btn btn-info"><i class="fa fa-cogs"></i> 修改信息</a>
+                                <button class="btn btn-danger delete-artwork" data-target="${requestScope.artwork.artID} "><i class="fa fa-close"></i> 删除藏品</button>
                             </div>
                         </div>
                     </div>
                 </li>
+
+                <%
+                    }
+                %>
             </ul>
             <div class="card-footer">
                 <div class="row">
                     <div class="offset-9 col-3">
-                        <button class="btn btn-primary"><i class="fa fa-plus"></i>添加藏品</button>
+                        <a href="./artworkinfo.jsp?method=upload" class="btn btn-primary"><i class="fa fa-plus"></i>添加藏品</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <br><br>
 </main>
 
 <%--footer--%>

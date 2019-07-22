@@ -17,5 +17,19 @@ function showError(message) {
 }
 
 $(function () {
+    $("#btn-logout").on("click",function () {
+        $.post("./logout.us",{
+
+        },function (result) {
+            result = JSON.parse(result);
+            if (result.success) {
+                showTip("退出成功");
+                window.location.href = result.link;
+            }
+            else {
+                showError("系统繁忙，请稍后再试");
+            }
+        });
+    });
 
 });

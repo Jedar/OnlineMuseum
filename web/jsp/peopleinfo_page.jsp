@@ -17,6 +17,8 @@
     <script type="text/javascript" rel="script" src="../js/popper.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/util.js"></script>
+    <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
+    <script type="text/javascript" rel="script" src="../js/peoplepage.js"></script>
 </head>
 <body>
 <%--header--%>
@@ -30,7 +32,7 @@
                 <li class="nav-item"><a href="#" class="a-black nav-link">首页</a></li>
                 <li class="nav-item"><a href="#" class="a-black nav-link">搜索</a></li>
                 <li class="nav-item"><a href="./detail.jsp" class="a-black nav-link">详情</a></li>
-                <li class="nav-item"><a href="favorite_page.jsp" class="a-black nav-link">个人界面</a> </li>
+                <li class="nav-item"><a href="favorite.jsp" class="a-black nav-link">个人界面</a> </li>
             </ul>
         </div>
     </nav>
@@ -55,35 +57,35 @@
                     <label for="info-password">
                         密码
                     </label>
-                    <input class="form-control" type="password" name="info-name" id="info-password" placeholder="password">
+                    <input class="form-control" type="password" name="info-password" id="info-password" placeholder="password">
                     <small class="form-text text-muted invisible">密码至少大于6个字符</small>
                 </div>
                 <div class="form-group col-12">
                     <label for="info-address">
                         地址
                     </label>
-                    <input class="form-control" type="text" name="info-name" id="info-address" placeholder="address">
+                    <input class="form-control" type="text" name="info-address" id="info-address" placeholder="address">
                     <small class="form-text text-muted invisible">地址不能为空</small>
                 </div>
                 <div class="form-group col-12">
                     <label for="info-phone">
                         手机号码
                     </label>
-                    <input class="form-control" type="text" name="info-name" id="info-phone" placeholder="phone">
+                    <input class="form-control" type="text" name="info-phone" id="info-phone" placeholder="phone">
                     <small class="form-text text-muted invisible">手机号码不能为空</small>
                 </div>
                 <div class="form-group col-12">
                     <label for="info-email">
                         邮箱地址
                     </label>
-                    <input class="form-control has-error" type="text" name="info-name" id="info-email" placeholder="email">
+                    <input class="form-control has-error" type="text" name="info-email" id="info-email" placeholder="email">
                     <small class="form-text text-muted invisible">邮箱不能为空</small>
                 </div>
                 <div class="form-group col-6">
                     <label for="info-right">用户类型</label>
                     <select class="form-control" name="info-right" id="info-right">
-                        <option>普通用户</option>
-                        <option>管理员用户</option>
+                        <option value="false">普通用户</option>
+                        <option value="true">管理员用户</option>
                     </select>
                 </div>
             </form>
@@ -91,7 +93,7 @@
         <div class="card-footer">
             <div class="row">
                 <div class="offset-9 col-3">
-                    <button class="btn btn-primary"><i class="fa fa-plus"></i>添加新用户</button>
+                    <button class="btn btn-primary btn-insert-user"><i class="fa fa-plus"></i>添加新用户</button>
                 </div>
             </div>
         </div>

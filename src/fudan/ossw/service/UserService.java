@@ -15,6 +15,10 @@ public interface UserService extends BaseService {
     User getUser(int userID);
     User getUserByName(String username);
     User signup(User user);
+    User getUserByName(String name);
+    User getUserByID(int userID);
+    List<User> getAllUser();
     boolean update(User user);
     boolean delete(int userID);
+    boolean insert(User user);
 }

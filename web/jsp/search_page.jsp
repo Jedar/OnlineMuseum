@@ -17,11 +17,26 @@
     <link rel="stylesheet" href="../css/util.css"/>
     <link rel="stylesheet" href="../css/search.css"/>
     <script type="text/javascript" rel="script" src="../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" rel="script" src="../js/popper.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/search.js"></script>
 </head>
 <body>
 <jsp:include page="../inc/header.inc.jsp"/>
+
+<%--nav--%>
+<div class="container-fluid">
+    <nav class="row bg-light" id="header-nav">
+        <div class="col-md-5 offset-md-1">
+            <ul class="nav nav-tabs nav-justified">
+                <li class="nav-item"><a href="./home.jsp" class="a-black nav-link">首页</a></li>
+                <li class="nav-item"><a href="search_page.jsp" class="a-black nav-link active">搜索</a></li>
+                <li class="nav-item"><a href="./detail.jsp" class="a-black nav-link active">详情</a></li>
+                <li class="nav-item"><a href="favorite_page.jsp" class="a-black nav-link">个人界面</a> </li>
+            </ul>
+        </div>
+    </nav>
+</div>
 
 <main class="container">
     <div class="row-fix">
