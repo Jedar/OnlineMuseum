@@ -9,6 +9,7 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -25,10 +26,12 @@
 <body>
 <jsp:include page="../inc/header.inc.jsp"/>
 <jsp:include page="../inc/search.inc.jsp"/>
-<%
-    List<User> friends = (List<User>)request.getAttribute("friends");
-    List<Artwork> favorite = (List<Artwork>)request.getAttribute("favorite");
-%>
+<%--<%--%>
+    <%--List<User> friends = (List<User>)request.getAttribute("friends");--%>
+    <%--List<Artwork> favorite = (List<Artwork>)request.getAttribute("favorite");--%>
+<%--%>--%>
+<jsp:useBean id="friends" type="java.util.List<fudan.ossw.entity.User>" scope="request"/>
+<jsp:useBean id="favorite" type="java.util.List<fudan.ossw.entity.Artwork>" scope="request"/>
 <main class="container-fluid">
     <div class="row">
         <div class="offset-1 col-2">
@@ -44,10 +47,10 @@
         <div class = "offset-1 col-8">
             <ul class="nav nav-tabs" id="myTab" role="tablist">
                 <li class="nav-item">
-                    <a class="nav-link active" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="true">收藏夹 <span class="badge badge-pill badge-secondary"><%=favorite.size()%></span></a>
+                    <a class="nav-link active" id="favorite-tab" data-toggle="tab" href="#favorite" role="tab" aria-controls="favorite" aria-selected="true">收藏夹 <span class="badge badge-pill badge-secondary">${favorite.size()}</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="friends-tab" data-toggle="tab" href="#friends" role="tab" aria-controls="friends" aria-selected="false">好友 <span class="badge badge-pill badge-secondary"><%=friends.size()%></span></a>
+                    <a class="nav-link" id="friends-tab" data-toggle="tab" href="#friends" role="tab" aria-controls="friends" aria-selected="false">好友 <span class="badge badge-pill badge-secondary">${friends.size()}</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" id="settings-tab" data-toggle="tab" href="#settings" role="tab" aria-controls="settings" aria-selected="false">编辑</a>
@@ -55,42 +58,40 @@
             </ul>
             <div class="tab-content">
                 <div class="tab-pane active" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
-                    <%
-                        for(Artwork artwork : favorite) {
-                    %>
                     <ul class="list-group list-group-flush">
+                        <c:forEach items="${favorite}" var="artwork">
                         <li class="list-group-item">
                             <div class="row">
                                 <figure class="col-3">
-                                    <img src="../img/<%=artwork.getImageFileName()%>" class="figure-img rounded" width="170" height="170" alt="img" />
+                                    <img src="../img/${artwork.imageFileName}" class="figure-img rounded" width="170" height="170" alt="img" />
                                 </figure>
                                 <div class="col-4 offset-1">
                                     <table class="table">
                                         <tr>
                                             <td>名称</td>
-                                            <td><%=artwork.getTitle()%></td>
+                                            <td>${artwork.title}</td>
                                         </tr>
                                         <tr>
                                             <td>年代</td>
-                                            <td><%=artwork.getAge()%></td>
+                                            <td>${artwork.age}</td>
                                         </tr>
                                         <tr>
                                             <td>尺寸</td>
-                                            <td><%=artwork.getSize()%></td>
+                                            <td>${artwork.size}</td>
                                         </tr>
                                     </table>
                                 </div>
                                 <div class="col-2 offset-2 align-self-center">
                                     <div class="justify-content-center">
-                                        <a class="btn btn-info favorite-detail" href="detail_page.jsp?id=<%=artwork.getArtID()%>">查看详情</a>
+                                        <a class="btn btn-info favorite-detail" href="detail_page.jsp?id=${artwork.artID}">查看详情</a>
                                         <br><br>
-                                        <button class="btn btn-danger favorite-delete" data-target="<%=artwork.getArtID()%>">删除藏品</button>
+                                        <button class="btn btn-danger favorite-delete" data-target="${artwork.artID}">删除藏品</button>
                                     </div>
                                 </div>
                             </div>
                         </li>
+                        </c:forEach>
                     </ul>
-                    <% } %>
                 </div>
 
                 <div class="tab-pane" id="friends" role="tabpanel" aria-labelledby="friends-tab">

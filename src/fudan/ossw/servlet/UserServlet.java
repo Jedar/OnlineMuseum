@@ -243,7 +243,12 @@ public class UserServlet extends HttpServlet {
         String content = request.getParameter("content");
         Message message = new Message(-1, userID, friendID, content, new Date(new java.util.Date().getTime()), false);
         MessageService messageService = new MessageServiceImpl();
-        messageService.sendMessage(message);
+        if(messageService.sendMessage(message)){
+            json.put("success", true);
+        }else {
+            json.put("success", false);
+            json.put("message", "发送失败");
+        }
     }
 
     private void readMessage(HttpServletRequest request, HttpServletResponse response) {
