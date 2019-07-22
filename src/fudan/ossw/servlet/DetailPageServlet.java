@@ -15,8 +15,10 @@ import java.io.IOException;
 
 @WebServlet(name = "DetailPageServlet", value = "/jsp/detail.jsp")
 public class DetailPageServlet extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
+        request.setAttribute("navItemDetail","active");
         ArtworkService service = new ArtworkServiceImpl();
         String idStr = request.getParameter("id");
         int id = 1;

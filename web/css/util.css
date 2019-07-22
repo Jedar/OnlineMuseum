@@ -20,6 +20,10 @@
 .a-black:visited { text-decoration: none;color: #000000
 }
 
+.dropdown-item:hover{
+    background: #8795a2;
+}
+
 .row-fix{
     padding-top: 1em;
 }

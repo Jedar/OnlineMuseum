@@ -28,7 +28,7 @@
         </div>
         <div class="nav col-md-4 offset-md-2">
             <a href="#" class="nav-link">首页</a>
-            <a href="search_page.jsp" class="nav-link">搜索</a>
+            <a href="search.jsp" class="nav-link">搜索</a>
             <a href="./detail.jsp" class="nav-link">详情</a>
             <%
                 if (session.getAttribute("user") == null){

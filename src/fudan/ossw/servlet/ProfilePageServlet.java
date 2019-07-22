@@ -22,6 +22,7 @@ public class ProfilePageServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.setAttribute("navItemPerson","active");
         FriendService friendService = new FriendServiceImpl();
         FavoriteService favoriteService = new FavoriteServiceImpl();
         int userID = ((User)request.getSession().getAttribute("user")).getUserID();

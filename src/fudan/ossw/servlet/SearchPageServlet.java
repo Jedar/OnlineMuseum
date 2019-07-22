@@ -17,6 +17,8 @@ import java.util.List;
 public class SearchPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setAttribute("navItemSearch","active");
+
         String title;
         String description;
         String location;
