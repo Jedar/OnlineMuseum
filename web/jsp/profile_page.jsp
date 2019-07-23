@@ -27,10 +27,6 @@
 <body>
 <jsp:include page="../inc/header.inc.jsp"/>
 <jsp:include page="../inc/search.inc.jsp"/>
-<%--<%--%>
-    <%--List<User> friends = (List<User>)request.getAttribute("friends");--%>
-    <%--List<Artwork> favorite = (List<Artwork>)request.getAttribute("favorite");--%>
-<%--%>--%>
 <jsp:useBean id="friends" type="java.util.List<fudan.ossw.entity.User>" scope="request"/>
 <jsp:useBean id="favorite" type="java.util.List<fudan.ossw.entity.Artwork>" scope="request"/>
 <main class="container-fluid">
@@ -39,7 +35,7 @@
             <figure class="img-thumbnail">
                 <img class="figure-img rounded" width="212" height="212" src="../img/019070.jpg" alt="">
             </figure>
-            <h3 id="username">${sessionScope.user.username}</h3>
+            <h3 id="username" class = "align-self-center">${sessionScope.user.username}</h3>
             <h5 id="signature">${sessionScope.user.signature}</h5>
             <p><i class="fa fa-phone-square" aria-hidden="true"></i> 电话：<span id = "userPhone">${sessionScope.user.phone}</span></p>
             <p><i class="fa fa-envelope-o" aria-hidden="true"></i> 邮箱：<span id="userEmail">${sessionScope.user.email}</span></p>
@@ -58,6 +54,7 @@
                 </li>
             </ul>
             <div class="tab-content">
+
                 <div class="tab-pane active" id="favorite" role="tabpanel" aria-labelledby="favorite-tab">
                     <ul class="list-group list-group-flush">
                         <c:forEach items="${favorite}" var="artwork">
@@ -96,30 +93,28 @@
                 </div>
 
                 <div class="tab-pane" id="friends" role="tabpanel" aria-labelledby="friends-tab">
-                    <%
-                        for(User friend : friends) {
-                    %>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="row">
-                                <figure class="col-2">
-                                    <img src="../img/019070.jpg" class="figure-img rounded" width="100" height="100" alt="" />
-                                </figure>
-                                <div class="col-4 offset-1 align-self-center">
-                                    <h4><%=friend.getUsername()%></h4>
-                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i><%=friend.getAddress()%></p>
-                                </div>
-                                <div class="col-2 offset-2 align-self-center">
-                                    <div class="justify-content-center">
-                                        <a class="btn btn-info friend-homepage" href="friend.jsp?id=<%=friend.getUserID()%>">查看主页</a>
-                                        <br><br>
-                                        <button class="btn btn-danger friend-delete" data-target="<%=friend.getUserID()%>">删除好友</button>
+                        <c:forEach items="${friends}" var="friend">
+                            <li class="list-group-item">
+                                <div class="row">
+                                    <figure class="col-2">
+                                        <img src="../img/019070.jpg" class="figure-img rounded" width="100" height="100" alt="" />
+                                    </figure>
+                                    <div class="col-4 offset-1 align-self-center">
+                                        <h4>${friend.username}</h4>
+                                        <p><i class="fa fa-map-marker" aria-hidden="true"></i>${friend.address}</p>
+                                    </div>
+                                    <div class="col-2 offset-2 align-self-center">
+                                        <div class="justify-content-center">
+                                            <a class="btn btn-info friend-homepage" href="friend.jsp?id=${friend.userID}">查看主页</a>
+                                            <br><br>
+                                            <button class="btn btn-danger friend-delete" data-target="${friend.userID}">删除好友</button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </li>
+                            </li>
+                        </c:forEach>
                     </ul>
-                    <% } %>
                 </div>
 
                 <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
@@ -130,7 +125,7 @@
                             <small id="usernameHelp" class="form-text text-muted">Your new username </small>
                         </div>
                         <div class="form-group">
-                            <label for="inputSignature">Address</label>
+                            <label for="inputSignature">Signature</label>
                             <input type="text" class="form-control" id="inputSignature" aria-describedby="signatureHelp" placeholder="Signature">
                             <small id="signatureHelp" class="form-text text-muted">Your new signature</small>
                         </div>
@@ -150,7 +145,7 @@
                             <small id="addressHelp" class="form-text text-muted">Your new address</small>
                         </div>
                         <div class="form-group">
-                            <label for="inputPhone">Address</label>
+                            <label for="inputPhone">Phone</label>
                             <input type="text" class="form-control" id="inputPhone" aria-describedby="phoneHelp" placeholder="Address">
                             <small id="phoneHelp" class="form-text text-muted">Your new phone</small>
                         </div>
@@ -159,6 +154,7 @@
                         <button type="button" class="btn btn-primary" id="changeInfo">提交</button>
                     </div>
                 </div>
+
             </div>
         </div>
     </div>

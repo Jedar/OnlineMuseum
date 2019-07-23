@@ -9,6 +9,9 @@ $(function () {
             if (result.success){
                 showTip("删除成功");
                 node.slideUp("slow");
+                var favoriteNum = $("#favorite-tab").children("span").html();
+                favoriteNum--;
+                $("#favorite-tab").children("span").html(favoriteNum);
             }
             else{
                 showError(result.message);
@@ -20,12 +23,15 @@ $(function () {
         var target = $(this).attr("data-target");
         var node = $(this).parents(".list-group-item");
         $.post( "./deleteFriend.us", {
-            artworkID:target
+            friendID:target
         },function (result) {
             result = JSON.parse(result);
             if (result.success){
                 showTip("删除成功");
                 node.slideUp("slow");
+                var friendNum = $("#friends-tab").children("span").html();
+                friendNum--;
+                $("#friends-tab").children("span").html(friendNum);
             }
             else{
                 showError(result.message);
@@ -40,7 +46,6 @@ $(function () {
         var address = $("#inputAddress").val();
         var phone = $("#inputPhone").val();
         var signature = $("#inputSignature").val();
-        alert(username);
         if(username !== "" || phone !== "" || email !== "" || address !== "" || signature !== "") {
             if(password === "") {
                 $("#passwordHelp").html("<i class=\"fa fa-exclamation-circle fa-lg\"></i>Must input password");

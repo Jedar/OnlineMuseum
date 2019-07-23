@@ -13,9 +13,9 @@ import java.util.List;
 public interface UserService extends BaseService {
     User login(String username, String password);
     User getUser(int userID);
-    User getUserByName(String username);
     User signup(User user);
     User getUserByID(int userID);
+    User getUserByName(String username);
     List<User> getAllUser();
     boolean update(User user);
     boolean delete(int userID);

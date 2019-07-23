@@ -106,7 +106,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean update(User user) {
         if (isWrongUser(user)){
-            System.out.println("");
             return false;
         }
         logger.info("Update: id-{},name-{},admin-{}",user.getUserID(),user.getUsername(),user.getIsManager());
@@ -195,5 +194,4 @@ public class UserServiceImpl implements UserService {
     public User getUser(int userID) {
         return userDao.getUserByID(userID);
     }
-
 }

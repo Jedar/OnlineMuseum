@@ -49,18 +49,19 @@ $(function () {
     $(".sendMessage").on("click", function () {
         var btn = $(this);
         var friendID = $(this).attr("data-target");
-        var content;
-        $.post( "./sendMessage.us", {
-            friendID:friendID,
-            content:content
-        },function (result) {
-            result = JSON.parse(result);
-            if(result.success){
-                showTip("发送成功");
-            }else{
-                showError(result.message);
-            }
-        });
+        var content = btn.siblings("form").children("textarea").val();
+        alert(content);
+        // $.post( "./sendMessage.us", {
+        //     friendID:friendID,
+        //     content:content
+        // },function (result) {
+        //     result = JSON.parse(result);
+        //     if(result.success){
+        //         showTip("发送成功");
+        //     }else{
+        //         showError(result.message);
+        //     }
+        // });
     });
     $(".readMessage").on("click", function() {
 

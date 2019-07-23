@@ -21,7 +21,7 @@ public class RequestDaoImpl implements RequestDao {
 
     @Override
     public boolean readRequest(int senderID, int receiverID, boolean agree) {
-        String sql = "UPDATE request SET agree = ?, isRead = ? WHERE sendID = ? AND receiverID = ?";
+        String sql = "UPDATE requests SET agree = ?, isRead = ? WHERE senderID = ? AND receiverID = ?";
         return dao.update(Request.class, sql, agree, true, senderID, receiverID);
     }
 
