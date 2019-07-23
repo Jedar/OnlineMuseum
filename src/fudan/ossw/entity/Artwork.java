@@ -5,7 +5,7 @@ import com.alibaba.fastjson.annotation.JSONField;
 import java.sql.Date;
 
 public class Artwork {
-    @JSONField(name="artworkID")
+    @JSONField(name="artID")
     private int artID;
 
     @JSONField(name="title")

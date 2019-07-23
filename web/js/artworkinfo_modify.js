@@ -1,6 +1,6 @@
 $.validator.setDefaults({
     submitHandler: function(form) {
-        alert("提交事件!");
+        // alert("提交事件!");
         form.submit();
     }
 });

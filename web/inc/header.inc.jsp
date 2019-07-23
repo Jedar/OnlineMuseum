@@ -35,7 +35,7 @@
             <div class="offset-1 col-md-4">
                 <h5><a href="../jsp/home.jsp" class="a-white">Online Museum</a></h5>
             </div>
-            <ul class="col-md-3 offset-md-3 nav nav-justified">
+            <ul class="col-md-4 offset-md-3 nav nav-justified">
                 <li class="nav-item">
                     <a href="../jsp/home.jsp" class="btn btn-link text-white"><i class="fa fa-home"></i> Home</a>
                 </li>
@@ -51,21 +51,29 @@
                             <a href="../jsp/profile.jsp" class="text-white dropdown-item"><i class="fa fa-user"></i> 个人中心</a>
                             <a href="../jsp/message.jsp" class="text-white dropdown-item"><i class="fa fa-mail-reply"></i> 信息</a>
                             <a href="../jsp/favorite.jsp" class="text-white dropdown-item"><i class="fa fa-star"></i> 收藏夹</a>
-                            <%
-                                if (user.getIsManager()){
-                            %>
-                            <div class="dropdown-divider"></div>
-                            <a href="../jsp/peoplemanagement.jsp" class="text-white dropdown-item"><i class="fa fa-cogs"></i>管理用户</a>
-                            <a href="../jsp/artworkmanagement.jsp" class="text-white dropdown-item"><i class="fa fa-cogs"></i>管理艺术品</a>
-
-                            <%
-                                }
-                            %>
                             <div class="dropdown-divider"></div>
                             <a id="btn-logout" href="#" class="dropdown-item text-white "><i class="fa fa-sign-out"></i> 退出登陆</a>
                         </div>
                     </div>
                 </li>
+
+                <%
+                    if (user.getIsManager()){
+                %>
+                <li class="nav-item">
+                    <div class="dropdown">
+                        <button class="dropdown-toggle btn btn-link text-white" type="link" id="manageDropdownMenuButton" data-toggle="dropdown">
+                            <i class="fa fa-cog"></i> 管理
+                        </button>
+                        <div class="dropdown-menu bg-dark" aria-labelledby="manageDropdownMenuButton">
+                            <a href="../jsp/peoplemanagement.jsp" class="text-white dropdown-item"><i class="fa fa-cogs"></i>管理用户</a>
+                            <a href="../jsp/artworkmanagement.jsp" class="text-white dropdown-item"><i class="fa fa-cogs"></i>管理艺术品</a>
+                        </div>
+                    </div>
+                </li>
+                <%
+                    }
+                %>
             </ul>
             <%
             }%>

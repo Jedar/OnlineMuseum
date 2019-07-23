@@ -18,6 +18,10 @@
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/util.js"></script>
     <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
+    <%--下面的库用域验证表单信息--%>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
     <script type="text/javascript" rel="script" src="../js/peoplepage.js"></script>
 </head>
 <body>
@@ -34,20 +38,20 @@
             新建用户信息
         </div>
         <div class="card-body">
-            <form class="form row">
+            <form class="form row" id="insert-user-form">
                 <div class="form-group col-12">
                     <label for="info-name">
                         名称
                     </label>
                     <input class="form-control" type="text" name="info-name" id="info-name" placeholder="username" aria-describedby="helpBlock-name">
-                    <small class="form-text text-muted invisible" id="helpBlock-name">用户名至少大于6个字符</small>
+                    <small class="form-text error invisible" id="helpBlock-name">用户名至少大于6个字符</small>
                 </div>
                 <div class="form-group col-12">
                     <label for="info-password">
                         密码
                     </label>
                     <input class="form-control" type="password" name="info-password" id="info-password" placeholder="password">
-                    <small class="form-text text-muted invisible">密码至少大于6个字符</small>
+                    <small class="form-text error invisible">密码至少大于6个字符</small>
                 </div>
                 <div class="form-group col-12">
                     <label for="info-address">

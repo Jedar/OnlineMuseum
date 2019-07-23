@@ -13,16 +13,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Profile</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
     <link rel="stylesheet" href="../font/font-awesome-4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="../css/util.css"/>
     <script type="text/javascript" rel="script" src="../js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/popper.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
-    <script type="text/javascript" rel="script" src="../js/profile.js"></script>
+
     <script type="text/javascript" rel="script" src="../js/util.js"></script>
     <script src="http://cdn.bootcss.com/blueimp-md5/1.1.0/js/md5.js"></script>
+    <%--下面的库用域验证表单信息--%>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <script type="text/javascript" rel="script" src="../js/profile.js"></script>
 </head>
 <body>
 <jsp:include page="../inc/header.inc.jsp"/>
@@ -118,36 +122,38 @@
                 </div>
 
                 <div class="tab-pane" id="settings" role="tabpanel" aria-labelledby="settings-tab">
-                    <form>
+                    <form id="settings-form">
                         <div class="form-group">
                             <label for="inputUsername">Username</label>
-                            <input type="text" class="form-control" id="inputUsername" aria-describedby="usernameHelp" placeholder="Username">
+                            <input name="inputUsername" type="text" class="form-control" id="inputUsername" aria-describedby="usernameHelp" placeholder="Username">
                             <small id="usernameHelp" class="form-text text-muted">Your new username </small>
                         </div>
                         <div class="form-group">
                             <label for="inputSignature">Signature</label>
-                            <input type="text" class="form-control" id="inputSignature" aria-describedby="signatureHelp" placeholder="Signature">
+                            <input name="inputSignature" type="text" class="form-control" id="inputSignature" aria-describedby="signatureHelp" placeholder="Signature">
                             <small id="signatureHelp" class="form-text text-muted">Your new signature</small>
                         </div>
                         <div class="form-group">
-                            <label for="inputOldPassword">Password</label>
-                            <input type="password" class="form-control" id="inputOldPassword" aria-describedby="passwordHelp" placeholder="Password">
-                            <small id="passwordHelp" class="form-text text-muted">Your password, must input</small>
-                        </div>
-                        <div class="form-group">
                             <label for="inputEmail">Email address</label>
-                            <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
+                            <input name="inputEmail" type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email">
                             <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
                         </div>
                         <div class="form-group">
                             <label for="inputAddress">Address</label>
-                            <input type="text" class="form-control" id="inputAddress" aria-describedby="addressHelp" placeholder="Address">
+                            <input name="inputAddress" type="text" class="form-control" id="inputAddress" aria-describedby="addressHelp" placeholder="Address">
                             <small id="addressHelp" class="form-text text-muted">Your new address</small>
                         </div>
                         <div class="form-group">
                             <label for="inputPhone">Phone</label>
-                            <input type="text" class="form-control" id="inputPhone" aria-describedby="phoneHelp" placeholder="Address">
+                            <input name="inputPhone" type="text" class="form-control" id="inputPhone" aria-describedby="phoneHelp" placeholder="Address">
                             <small id="phoneHelp" class="form-text text-muted">Your new phone</small>
+                        </div>
+
+                        <hr>
+                        <div class="form-group">
+                            <label for="inputOldPassword">输入密码验证:</label>
+                            <input name="inputOldPassword" type="password" class="form-control" id="inputOldPassword" aria-describedby="passwordHelp" placeholder="Password">
+                            <small id="passwordHelp" class="form-text text-muted">Your password, must input</small>
                         </div>
                     </form>
                     <div>
@@ -158,6 +164,7 @@
             </div>
         </div>
     </div>
+    <br><br>
 </main>
 
 <jsp:include page="../inc/footer.inc.jsp"/>

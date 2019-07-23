@@ -22,11 +22,6 @@ $(function () {
         img.attr("src",address);
     });
 
-    function setCheckNum() {
-        checkNumber = Math.floor(Math.random()*9000+1000);
-        $(".check-number").text(checkNumber);
-    }
-
     $("#btn-register").on("click",function () {
         checkName();
         checkPsw();
@@ -35,7 +30,6 @@ $(function () {
         checkPhone();
         checkAddress();
         check();
-        alert("sign up");
         if (registerArr[0]&&registerArr[1]&&registerArr[2]&&registerArr[3]&&registerArr[4]&&registerArr[5]&&registerArr[6]){
             var pwd = md5($("#register-psw").val());
             $.post("./signup.us",{
@@ -89,7 +83,9 @@ $(function () {
 
     function checkPsw() {
         registerArr[1]=false;
-        var  objRegExp= /^(?:(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])).{8,20}$/;
+        var numObj = /[0-9]+/;
+        var upperObj = /[A-Z]+/;
+        var lowerObj = /[a-z]+/;
         if (rgstPsw.val()===""){
             rgstPsw.next().html(getInfo("密码不能为空"));
             rgstPsw.next().removeClass("invisible");
@@ -102,7 +98,7 @@ $(function () {
             rgstPsw.next().html(getInfo("密码长度不能大于10"));
             rgstPsw.next().removeClass("invisible");
         }
-        else if(!objRegExp.test(rgstPsw.val())){
+        else if(!(numObj.test(rgstPsw.val())&&upperObj.test(rgstPsw.val())&&lowerObj.test(rgstPsw.val()))){
             rgstPsw.next().html(getInfo("密码必须包含数字和大小写字母"));
             rgstPsw.next().removeClass("invisible");
         }

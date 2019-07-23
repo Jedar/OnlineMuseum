@@ -52,7 +52,7 @@
                 </select>
             </div>
             <div class="form-group col-6">
-                <input  type="submit" class="btn btn-primary">
+                <input id="search-page-btn" type="button" class="btn btn-primary" value="搜索">
             </div>
         </form>
     </div>
@@ -114,7 +114,7 @@
                             </label>
                         </li>
 
-                        <li class="page-item"><h4>/${requestScope.totalNumber}</h4></li>
+                        <li class="page-item"><h4 id="totalPageNumber">/${requestScope.totalNumber}</h4></li>
                         <li class="page-item">
                             <a class="page-link page-next ${requestScope.previousOption}" href="#">Next</a>
                         </li>

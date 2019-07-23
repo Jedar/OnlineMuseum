@@ -24,10 +24,10 @@ public class SearchPageServlet extends HttpServlet {
         String location;
         String sort;
 
-        title = (String)req.getAttribute("title");
-        description = (String)req.getAttribute("description");
-        location = (String)req.getAttribute("location");
-        sort = (String)req.getAttribute("sort");
+        title = (String)req.getParameter("title");
+        description = (String)req.getParameter("description");
+        location = (String)req.getParameter("location");
+        sort = (String)req.getParameter("sort");
 
         if (title == null){
             title = "";

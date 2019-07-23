@@ -138,13 +138,19 @@ public class ArtworkServlet extends HttpServlet {
         int pageIndex = ((mark-1) * 6);
 
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
+
         ArtworkService artworkService = new ArtworkServiceImpl();
         List<Artwork> artworks = artworkService.searchPage(title, description, location, sortWay, pageIndex, pageSize);
+
+        int totalNumber = artworkService.search(title, description, location, sortWay).size();
+
+        int pageNumber = totalNumber%6==0?totalNumber/6:totalNumber/6+1;
 
         JSONObject object = new JSONObject();
         object.put("success",true);
         object.put("index",mark);
         object.put("artworkList",artworks);
+        object.put("totalNumber",pageNumber);
 
         try {
             response.getWriter().println(object.toJSONString());

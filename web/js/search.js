@@ -1,4 +1,9 @@
 $(function () {
+    $("#search-page-btn").on("click",function () {
+        var page = 1;
+        getPage(page);
+    });
+
     $("#page-input").on('keypress',function(e) {
         //pressed enter
         if(e.which === 13) {
@@ -10,6 +15,7 @@ $(function () {
             getPage(page);
         }
     });
+
     $(".page-previous").on('click',function (e) {
         var page = parseInt($("#page-input").val());
         if (isNaN(page)) {
@@ -37,7 +43,7 @@ $(function () {
             page = max;
         }
         getPage(page);
-    })
+    });
 
     function getPage(pageIndex) {
         $.post("./searchArtwork.aws",
@@ -51,7 +57,7 @@ $(function () {
             },function (result) {
                 result = JSON.parse(result);
                 if (result.success){
-                    setPage(result.index,result.artworkList);
+                    setPage(result.index,result.totalNumber,result.artworkList);
                 }
                 else{
                     showError("请求出错");
@@ -61,14 +67,15 @@ $(function () {
         )
     }
 
-    function setPage(idx,list){
+    function setPage(idx,totalNumber,list){
         $("#page-input").val(idx);
+        $("#totalPageNumber").html("/"+totalNumber);
         var i;
         var str = "";
         for(i in list){
             str += "<div class=\"item\">\n" +
                 "                    <figure>\n" +
-                "                        <a href=\"detail.jsp?id="+list[i].artwordID+"\">\n" +
+                "                        <a href=\"detail.jsp?id="+list[i].artID+"\" >\n" +
                 "                            <img src=\"../img/"+list[i].imageFileName+"\" alt=\"\">\n" +
                 "                        </a>\n" +
                 "                    </figure>\n" +
@@ -78,7 +85,7 @@ $(function () {
                 "                    </div>\n" +
                 "                    <p>"+list[i].description+"</p>\n" +
                 "                    <div>\n" +
-                "                        <a class=\"item-button\"  href=\"detail.jsp?id="+list[i].artwordID+" \">查看</a>\n" +
+                "                        <a class=\"item-button\"  href=\"detail.jsp?id="+list[i].artID+" \">查看</a>\n" +
                 "                        <a class=\"item-button\" href=\"#\">热度<span class=\"heat-number\">"+list[i].view+"</span> </a>\n" +
                 "                    </div>\n" +
                 "                </div>"
