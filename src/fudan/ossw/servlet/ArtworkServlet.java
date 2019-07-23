@@ -51,27 +51,15 @@ public class ArtworkServlet extends HttpServlet {
         }
 
         response.setContentType("text/html;charset=UTF-8");
-
-        //检测form是否是multipart/form-data类型的
         boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-
-        /* pay attention to here */
         if(!isMultipart){
             throw new RuntimeException("The form's enctype attribute value must be multipart/form-data");
         }
-        //解析请求内容
         DiskFileItemFactory factory = new DiskFileItemFactory();//产生FileItem的工厂
-
-        //指定上传文件的临时文件存放目录，当上传文件的大小大于缓存区的大小就会产生临时存储区
-        // 指定临时文件的存放目录
         factory.setRepository(new File("/WEB-INF/files"));
         ServletFileUpload sfu = new ServletFileUpload(factory);
-
-        //如果这两条语句执行的话，那么上传的文件的大小就会受到限制
-//      因为此处为了方便，所以没有进行大小的限制
 //      sfu.setFileSizeMax(3*1024*1024);//单个文件大小限制
 //      sfu.setSizeMax(5*1024*1024);//总文件大小
-
         List<FileItem> items = new ArrayList<FileItem>();
         try {
             items = sfu.parseRequest(request);
@@ -84,24 +72,19 @@ public class ArtworkServlet extends HttpServlet {
             e.printStackTrace();
             throw new RuntimeException("解析请求失败");
         }
-        //遍历：
-        //因为可能存在多个上传文件表单，所以对于每一个表单的内容要进行一一的处理
+        /* map储存上传的信息 */
         Map<String,String> map = new HashMap<>();
 
         for(FileItem item:items){
-            //处理普通字段
             if(item.isFormField()){
-                processFormField(item,map);
+                processFormField(item,map);//处理普通字段
             }else{
-                //处理上传字段
-                processUploadField(item,map);
+                processUploadField(item,map);//处理上传字段
             }
         }
         Artwork artwork = new Artwork(0,map.get("info-title"),map.get("info-image"),map.get("info-video"),map.get("info-age")
                 ,map.get("info-size"), map.get("info-description"),0,map.get("location"));
-
         ArtworkService service = new ArtworkServiceImpl();
-
         service.insert(artwork);
         response.sendRedirect("./jsp/artworkmanagement.jsp");
     }

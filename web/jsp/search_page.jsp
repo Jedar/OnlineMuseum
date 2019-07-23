@@ -24,36 +24,27 @@
 <body>
 <jsp:include page="../inc/header.inc.jsp"/>
 
+<jsp:include page="../inc/search.inc.jsp"/>
+
 <%--nav--%>
-<div class="container-fluid">
-    <nav class="row bg-light" id="header-nav">
-        <div class="col-md-5 offset-md-1">
-            <ul class="nav nav-tabs nav-justified">
-                <li class="nav-item"><a href="./home.jsp" class="a-black nav-link">首页</a></li>
-                <li class="nav-item"><a href="search_page.jsp" class="a-black nav-link active">搜索</a></li>
-                <li class="nav-item"><a href="./detail.jsp" class="a-black nav-link active">详情</a></li>
-                <li class="nav-item"><a href="favorite_page.jsp" class="a-black nav-link">个人界面</a> </li>
-            </ul>
-        </div>
-    </nav>
-</div>
+<jsp:include page="../inc/nav.inc.jsp"/>
 
 <main class="container">
     <div class="row-fix">
         <form action="./search.jsp" class="row">
-            <div class="form-group col-7">
+            <div class="form-group col-5">
                 <label for="search-title">藏品名</label>
                 <input type="text" class="form-control" name="title" id="search-title" placeholder="藏品名" value="${requestScope.value.title}">
             </div>
-            <div class="form-group col-7">
+            <div class="form-group col-5">
                 <label for="search-description">藏品描述</label>
                 <input type="text" class="form-control" name="description" id="search-description" placeholder="藏品描述" value="${requestScope.value.description}">
             </div>
-            <div class="form-group col-7">
+            <div class="form-group col-5">
                 <label for="search-location">馆藏地点</label>
                 <input type="text" class="form-control" name="location" id="search-location" placeholder="馆藏地点" value="${requestScope.value.location}">
             </div>
-            <div class="form-group col-7">
+            <div class="form-group col-5">
                 <label for="search-sort">排序方式</label>
                 <select class="form-control" name="sort" id="search-sort">
                     <option value="view" ${requestScope.option1}>热度</option>

@@ -113,7 +113,6 @@ public class ArtworkDaoImpl implements ArtworkDao {
                 "    `arts`.`isDelete`," +
                 "    `arts`.`uploadID`" +
                 "FROM `arts` WHERE isDelete=? ORDER BY `view` DESC LIMIT 0,3;";
-
         return baseDao.getForList(Artwork.class,sql,false);
     }
 
@@ -133,13 +132,14 @@ public class ArtworkDaoImpl implements ArtworkDao {
                 "    `arts`.`isDelete`," +
                 "    `arts`.`uploadID`" +
                 "FROM `arts` WHERE isDelete=? ORDER BY `timeReleased` DESC LIMIT 0,3;";
-
         return baseDao.getForList(Artwork.class,sql,false);
     }
 
     @Override
     public List<Artwork> getCriteriaArtworks(CriteriaArtwork ca, String sortWay) {
-        String sql = "SELECT * FROM arts WHERE title LIKE ? AND description LIKE ? AND location LIKE ? AND isDelete = ? ORDER BY view DESC";
+        String sql = "SELECT * FROM arts " +
+                "WHERE title LIKE ? AND description LIKE ? AND location LIKE ? AND isDelete = ? " +
+                "ORDER BY view DESC";
         return baseDao.getForList(Artwork.class, sql, ca.getTitle(), ca.getDescription(), ca.getLocation(), false);
     }
 
