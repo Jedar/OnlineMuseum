@@ -164,12 +164,14 @@ public class ArtworkServlet extends HttpServlet {
         int pageSize = Integer.parseInt(request.getParameter("pageSize"));
         ArtworkService artworkService = new ArtworkServiceImpl();
         List<Artwork> artworks = artworkService.searchPage(title, description, location, sortWay, pageIndex, pageSize);
-
+        int total = artworkService.search(title, description, location, sortWay).size();
         JSONObject object = new JSONObject();
         object.put("success",true);
         object.put("index",mark);
+        object.put("total", total);
         object.put("artworkList",artworks);
 
+        System.out.println(artworks);
         try {
             response.getWriter().println(object.toJSONString());
         } catch (IOException e) {

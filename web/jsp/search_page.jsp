@@ -31,7 +31,7 @@
 
 <main class="container">
     <div class="row-fix">
-        <form action="./search.jsp" class="row">
+        <form class="row">
             <div class="form-group col-5">
                 <label for="search-title">藏品名</label>
                 <input type="text" class="form-control" name="title" id="search-title" placeholder="藏品名" value="${requestScope.value.title}">
@@ -52,7 +52,7 @@
                 </select>
             </div>
             <div class="form-group col-6">
-                <input  type="submit" class="btn btn-primary">
+                <button id="search-button" type="button" class="btn btn-primary">搜索</button>
             </div>
         </form>
     </div>

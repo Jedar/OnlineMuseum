@@ -19,6 +19,9 @@ public class CriteriaUser {
         this.username = username;
         this.address = address;
     }
+    public CriteriaUser(String username) {
+        this.username = username;
+    }
     public String getUsername() {
         if(username == null)
             return "%%";

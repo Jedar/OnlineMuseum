@@ -2,6 +2,7 @@ package fudan.ossw.servlet;
 
 import com.alibaba.fastjson.JSONObject;
 import fudan.ossw.dao.DaoFactory;
+import fudan.ossw.entity.CriteriaUser;
 import fudan.ossw.entity.Message;
 import fudan.ossw.entity.Request;
 import fudan.ossw.entity.User;
@@ -289,12 +290,20 @@ public class UserServlet extends HttpServlet {
         response.getWriter().println(json.toJSONString());
     }
 
+    private void searchUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String username = request.getParameter("username");
+        List<User> users = userService.getCriteriaUsers(username);
+        System.out.println(users);
+        json.put("success", true);
+        json.put("userList", users);
+        response.getWriter().println(json.toJSONString());
+    }
+
     private void sendRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int senderID = ((User)request.getSession().getAttribute("user")).getUserID();
-        String receiverName = request.getParameter("username");
+        int receiverID = Integer.parseInt(request.getParameter("receiverID"));
         String content = request.getParameter("content");
-        System.out.println("username:" + receiverName);
-        User receiver = userService.getUserByName(receiverName.trim());
+        User receiver = userService.getUserByID(receiverID);
         if(receiver == null) {
             json.put("success", false);
             json.put("message", "用户不存在");
@@ -305,7 +314,7 @@ public class UserServlet extends HttpServlet {
                 json.put("success", true);
             }else {
                 json.put("success", false);
-                json.put("message", "发送失败");
+                json.put("message", friendService.getErrorMessage());
             }
         }
         response.getWriter().println(json.toJSONString());
@@ -338,7 +347,7 @@ public class UserServlet extends HttpServlet {
         response.getWriter().println(json.toJSONString());
     }
 
-    private void sendMessage(HttpServletRequest request, HttpServletResponse response) {
+    private void sendMessage(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int userID = ((User)request.getSession().getAttribute("user")).getUserID();
         int friendID = Integer.parseInt(request.getParameter("friendID"));
         String content = request.getParameter("content");
@@ -350,12 +359,19 @@ public class UserServlet extends HttpServlet {
             json.put("success", false);
             json.put("message", "发送失败");
         }
+        response.getWriter().println(json.toJSONString());
     }
 
-    private void readMessage(HttpServletRequest request, HttpServletResponse response) {
+    private void readMessage(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int messageID = Integer.parseInt(request.getParameter("messageID"));
         MessageService messageService = new MessageServiceImpl();
-        messageService.readMessage(messageID);
+        if(messageService.readMessage(messageID)){
+            json.put("success", true);
+        }else {
+            json.put("success", false);
+            json.put("message", "后台数据出错");
+        }
+        response.getWriter().println(json);
     }
 
     private void deleteMessage(HttpServletRequest request, HttpServletResponse response) {

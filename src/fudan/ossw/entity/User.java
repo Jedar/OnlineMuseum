@@ -1,18 +1,41 @@
 package fudan.ossw.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 import java.sql.Date;
 
 public class User {
+    @JSONField(name="userID")
     private int userID;
+
+    @JSONField(name="username")
     private String username;
+
+    @JSONField(name="password", serialize = false)
     private String password;
+
+    @JSONField(name="email")
     private String email;
+
+    @JSONField(name="phone")
     private String phone;
+
+    @JSONField(name="address")
     private String address;
+
+    @JSONField(name="isDelete", serialize = false)
     private boolean isDelete;
+
+    @JSONField(name="isManager", serialize = false)
     private boolean isManager;
+
+    @JSONField(name="visible", serialize = false)
     private boolean visible;
+
+    @JSONField(name="lastLogin", serialize = false)
     private Date lastLogin;
+
+    @JSONField(name="signature")
     private String signature;
 
     public User() {

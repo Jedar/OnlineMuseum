@@ -32,7 +32,7 @@ public class MessageDaoImpl implements MessageDao {
                 "    `messages`.`sendTime`,\n" +
                 "    `messages`.`isRead`\n" +
                 "FROM `OnlineMuseum`.`messages`\n" +
-                "WHERE senderID=? AND isRead = ?;";
+                "WHERE receiverID=? AND isRead = ?;";
         return dao.getForList(Message.class,sql,receiverID, true);
     }
 
@@ -45,7 +45,7 @@ public class MessageDaoImpl implements MessageDao {
                 "    `messages`.`sendTime`,\n" +
                 "    `messages`.`isRead`\n" +
                 "FROM `OnlineMuseum`.`messages`\n" +
-                "WHERE senderID=? AND isRead = ?;";
+                "WHERE receiverID=? AND isRead = ?;";
         return dao.getForList(Message.class,sql,receiverID, false);
     }
 

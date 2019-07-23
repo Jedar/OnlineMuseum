@@ -1,6 +1,8 @@
 package fudan.ossw.service.impl;
 
 import fudan.ossw.dao.DaoFactory;
+import fudan.ossw.dao.FriendDao;
+import fudan.ossw.dao.RequestDao;
 import fudan.ossw.entity.Friend;
 import fudan.ossw.entity.Request;
 import fudan.ossw.entity.User;
@@ -17,7 +19,9 @@ import java.util.List;
  * @Version 1.0
  **/
 public class FriendServiceImpl implements FriendService {
+    private FriendDao friendDao = DaoFactory.getInstance().getFriendDao();
 
+    String errorMessage = "";
     @Override
     public int getErrorCode() {
         return 0;
@@ -25,12 +29,12 @@ public class FriendServiceImpl implements FriendService {
 
     @Override
     public String getErrorMessage() {
-        return null;
+        return errorMessage;
     }
 
     @Override
     public List<User> getFriendsList(int userID) {
-        List<Friend> friends = DaoFactory.getInstance().getFriendDao().getFriendList(userID);
+        List<Friend> friends = friendDao.getFriendList(userID);
         List<User> users = new ArrayList<>();
         for(Friend friend : friends) {
             users.add(DaoFactory.getInstance().getUserDao().getUserByID(friend.getPartyBID()));
@@ -53,8 +57,8 @@ public class FriendServiceImpl implements FriendService {
     public boolean deleteFriend(int userID, int friendID) {
         Friend friend1 = DaoFactory.getInstance().getFriendDao().getFriend(userID, friendID);
         Friend friend2 = DaoFactory.getInstance().getFriendDao().getFriend(friendID, userID);
-        return DaoFactory.getInstance().getFriendDao().deleteFriend(friend1.getFriendID()) &&
-                DaoFactory.getInstance().getFriendDao().deleteFriend(friend2.getFriendID());
+        return friendDao.deleteFriend(friend1.getFriendID()) &&
+                friendDao.deleteFriend(friend2.getFriendID());
     }
 
     @Override
@@ -67,7 +71,22 @@ public class FriendServiceImpl implements FriendService {
 
     @Override
     public boolean sendRequest(Request request) {
-        return DaoFactory.getInstance().getRequestDao().addRequest(request);
+        RequestDao requestDao = DaoFactory.getInstance().getRequestDao();
+        //检测重复发送
+        if(requestDao.getRequestList(request.getSenderID(), request.getReceiverID()).size() > 0) {
+            errorMessage = "已发送过申请信息";
+            return false;
+        }
+        //检测是否已经接收到对方的好友申请且处于未读状态
+        if(requestDao.getRequestList(request.getReceiverID(), request.getSenderID()).size() > 0) {
+            errorMessage = "您有未读的来自该用户的好友申请";
+            return false;
+        }
+        if (DaoFactory.getInstance().getRequestDao().addRequest(request)) {
+            return true;
+        }
+        errorMessage = "数据库出错，请重新发送";
+        return false;
     }
 
     @Override

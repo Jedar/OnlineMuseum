@@ -1,48 +1,8 @@
 $(function () {
-    $("#page-input").on('keypress',function(e) {
-        //pressed enter
-        if(e.which === 13) {
-            
-            var page = parseInt($("#page-input").val());
-            if (isNaN(page)) {
-                page = 1;
-            }
-            getPage(page);
-        }
-    });
-    $(".page-previous").on('click',function (e) {
-        var page = parseInt($("#page-input").val());
-        if (isNaN(page)) {
-            page = 1;
-        }
-        else {
-            page -= 1;
-        }
-        if (page < 1) {
-            page = 1;
-        }
-        getPage(page);
-    });
-    $(".page-next").on("click",function (e) {
-        var input = $("#page-input");
-        var page = parseInt(input.val());
-        if (isNaN(page)) {
-            page = 1;
-        }
-        else {
-            page += 1;
-        }
-        var max = parseInt(input.attr("max"));
-        if (page > max) {
-            page = max;
-        }
-        getPage(page);
-    })
-
-    function getPage(pageIndex) {
+    $("#search-button").on("click", function () {
         $.post("./searchArtwork.aws",
             {
-                mark:pageIndex,
+                mark:1,
                 title:$("#search-title").val(),
                 description:$("#search-description").val(),
                 location:$("#search-location").val(),
@@ -59,9 +19,74 @@ $(function () {
             }
 
         )
+    });
+
+    $("#page-input").on('keypress',function(e) {
+        //pressed enter
+        if(e.which === 13) {
+            
+            var page = parseInt($("#page-input").val());
+            if (isNaN(page)) {
+                page = 1;
+            }
+            getPage(page);
+        }
+    });
+
+    $(".page-previous").on('click',function (e) {
+        var page = parseInt($("#page-input").val());
+        if (isNaN(page)) {
+            page = 1;
+        }
+        else {
+            page -= 1;
+        }
+        if (page < 1) {
+            page = 1;
+        }
+        getPage(page);
+    });
+
+    $(".page-next").on("click",function (e) {
+        var input = $("#page-input");
+        var page = parseInt(input.val());
+        if (isNaN(page)) {
+            page = 1;
+        }
+        else {
+            page += 1;
+        }
+        var max = parseInt(input.attr("max"));
+        if (page > max) {
+            page = max;
+        }
+        getPage(page);
+    });
+
+    function getPage(pageIndex) {
+        $.post("./searchArtwork.aws",
+            {
+                mark:pageIndex,
+                title:$("#search-title").val(),
+                description:$("#search-description").val(),
+                location:$("#search-location").val(),
+                sortWay:$("#search-sort").val(),
+                pageSize:6
+            },function (result) {
+                result = JSON.parse(result);
+                if (result.success){
+                    setPage(result.total, result.index,result.artworkList);
+                }
+                else{
+                    showError("请求出错");
+                }
+            }
+
+        )
     }
 
-    function setPage(idx,list){
+    function setPage(total, idx, list){
+        $("")
         $("#page-input").val(idx);
         var i;
         var str = "";
