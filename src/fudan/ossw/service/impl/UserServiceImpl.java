@@ -98,7 +98,6 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean update(User user) {
         if (isWrongUser(user)){
-            System.out.println("");
             return false;
         }
         return userDao.updateUser(user.getUserID(),user);
@@ -183,10 +182,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser(int userID) {
         return userDao.getUserByID(userID);
-    }
-
-    @Override
-    public User getUserByName(String username) {
-        return userDao.getUserByName(username);
     }
 }

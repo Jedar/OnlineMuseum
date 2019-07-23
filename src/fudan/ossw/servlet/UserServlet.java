@@ -136,7 +136,7 @@ public class UserServlet extends HttpServlet {
     private void changeInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User)request.getSession().getAttribute("user");
         String password = request.getParameter("password");
-        if(!password.equals(user.getPassword())) {
+        if(!password.equals(user.getPassword().trim())) {
             json.put("success", false);
             json.put("message", "密码错误");
         }else {
@@ -145,6 +145,13 @@ public class UserServlet extends HttpServlet {
             String phone = request.getParameter("phone");
             String email = request.getParameter("email");
             String signature = request.getParameter("signature");
+            //检测用户名是否重复
+            if(!"".equals(username.trim()) && userService.getUserByName(username)!=null) {
+                json.put("success", false);
+                json.put("message", "用户名重复");
+                response.getWriter().println(json);
+                return;
+            }
             username = "".equals(username.trim())? user.getUsername() : username;
             address = "".equals(address.trim())? user.getAddress() : address;
             phone = "".equals(phone.trim())? user.getPhone() : phone;
@@ -153,7 +160,7 @@ public class UserServlet extends HttpServlet {
             User user1 = new User(user.getUserID(), username, password, email, phone, address);
             user1.setSignature(signature);
             UserService userService = new UserServiceImpl();
-            if(userService.update(user1)) { //检测用户名是否重复
+            if(userService.update(user1)) {
                 json.put("success", true);
                 user = userService.getUser(user.getUserID());
                 request.getSession().setAttribute("user", user);
@@ -164,7 +171,7 @@ public class UserServlet extends HttpServlet {
                 json.put("signature", user.getSignature());
             }else {
                 json.put("success", false);
-                json.put("message", "更新失败");
+                json.put("message", userService.getErrorMessage());
             }
         }
         response.getWriter().println(json);

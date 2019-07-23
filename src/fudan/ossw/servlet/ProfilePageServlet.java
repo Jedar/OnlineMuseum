@@ -27,8 +27,6 @@ public class ProfilePageServlet extends HttpServlet {
         int userID = ((User)request.getSession().getAttribute("user")).getUserID();
         List<User> friends = friendService.getFriendsList(userID);
         List<Artwork> favorite = favoriteService.getFavoriteList(userID);
-        System.out.println(friends);
-        System.out.println(favorite);
         request.setAttribute("friends", friends);
         request.setAttribute("favorite", favorite);
         request.getRequestDispatcher("./profile_page.jsp").forward(request, response);

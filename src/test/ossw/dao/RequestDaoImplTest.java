@@ -26,5 +26,7 @@ public class RequestDaoImplTest {
         list = dao.getRequestList(3);
 
         System.out.println(list.size() == 0);
+
+        dao.readRequest(1, 29, true);
     }
 }

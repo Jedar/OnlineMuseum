@@ -13,7 +13,6 @@ import java.util.List;
 public interface UserService extends BaseService {
     User login(String username, String password);
     User getUser(int userID);
-    User getUserByName(String username);
     User signup(User user);
     User getUserByName(String name);
     User getUserByID(int userID);
