@@ -1,9 +1,11 @@
 package fudan.ossw.servlet;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sun.deploy.net.HttpRequest;
 import fudan.ossw.dao.DaoFactory;
 import fudan.ossw.entity.Artwork;
 import fudan.ossw.entity.CriteriaArtwork;
+import fudan.ossw.entity.User;
 import fudan.ossw.service.ArtworkService;
 import fudan.ossw.service.impl.ArtworkServiceImpl;
 import org.apache.commons.fileupload.FileItem;
@@ -11,6 +13,7 @@ import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.FileUploadException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
 import javax.servlet.ServletException;
@@ -33,6 +36,7 @@ public class ArtworkServlet extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         String servletPath = request.getServletPath();
         String methodName = servletPath.substring(5, servletPath.length() - 4);
+        System.out.println(methodName);
         try {
             /*利用反射得到对应的方法*/
             Method method = getClass().getDeclaredMethod(methodName, HttpServletRequest.class, HttpServletResponse.class);
@@ -44,49 +48,14 @@ public class ArtworkServlet extends HttpServlet {
     }
 
     private void uploadArtwork(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        try {
-            request.setCharacterEncoding("UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-        }
-
-        response.setContentType("text/html;charset=UTF-8");
-        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
-        if(!isMultipart){
-            throw new RuntimeException("The form's enctype attribute value must be multipart/form-data");
-        }
-        DiskFileItemFactory factory = new DiskFileItemFactory();//产生FileItem的工厂
-        factory.setRepository(new File("/WEB-INF/files"));
-        ServletFileUpload sfu = new ServletFileUpload(factory);
-//      sfu.setFileSizeMax(3*1024*1024);//单个文件大小限制
-//      sfu.setSizeMax(5*1024*1024);//总文件大小
-        List<FileItem> items = new ArrayList<FileItem>();
-        try {
-            items = sfu.parseRequest(request);
-        }catch(FileUploadBase.FileSizeLimitExceededException e) {
-            response.getWriter().write("单个文件不能超过3M");
-        }
-        catch(FileUploadBase.SizeLimitExceededException e) {
-            response.getWriter().write("总文件不能超过5M");
-        }catch (FileUploadException e) {
-            e.printStackTrace();
-            throw new RuntimeException("解析请求失败");
-        }
-        /* map储存上传的信息 */
-        Map<String,String> map = new HashMap<>();
-
-        for(FileItem item:items){
-            if(item.isFormField()){
-                processFormField(item,map);//处理普通字段
-            }else{
-                processUploadField(item,map);//处理上传字段
-            }
-        }
-        Artwork artwork = new Artwork(0,map.get("info-title"),map.get("info-image"),map.get("info-video"),map.get("info-age")
-                ,map.get("info-size"), map.get("info-description"),0,map.get("location"));
+        System.out.println("upload start");
+        Artwork artwork = getArtworkInfo(request,response);
         ArtworkService service = new ArtworkServiceImpl();
-        service.insert(artwork);
-        response.sendRedirect("./jsp/artworkmanagement.jsp");
+        boolean flag = service.insert(artwork);
+        if (!flag){
+            System.out.println(service.getErrorMessage());
+        }
+        response.sendRedirect(request.getContextPath()+"/jsp/artworkmanagement.jsp");
     }
 
     private void deleteArtwork(HttpServletRequest request, HttpServletResponse response) {
@@ -147,8 +116,15 @@ public class ArtworkServlet extends HttpServlet {
 
     }
 
-    private void changeArtwork(HttpServletRequest request, HttpServletResponse response) {
-
+    private void changeArtwork(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        System.out.println("change start");
+        Artwork artwork = getArtworkInfo(request,response);
+        ArtworkService service = new ArtworkServiceImpl();
+        boolean flag = service.update(artwork);
+        if (!flag){
+            System.out.println(service.getErrorMessage());
+        }
+        response.sendRedirect(request.getContextPath()+"/jsp/artworkmanagement.jsp");
     }
 
     private void searchArtwork(HttpServletRequest request, HttpServletResponse response) {
@@ -185,21 +161,18 @@ public class ArtworkServlet extends HttpServlet {
         doPost(request,response);
     }
 
-    protected void processUploadField(FileItem item, Map<String, String> map) {
+    protected boolean processUploadField(FileItem item, Map<String, String> map) {
         try {
 //          InputStream in = item.getInputStream();
             //找一个存放文件的位置；存放的文件名
             String id = item.getFieldName();
             String fileName = item.getName();//上传的文件的文件名  C:\Users\wzhting\Desktop\a.txt  a.txt(浏览器不同)
             if(fileName!=null&&!fileName.equals("")){
-
                 //限定上传文件的类型，从他提供的方法中查看他是不是某一类型的文件
                 //这个函数如果开启的话，那么就只能上传是图片类型的数据
 //              if(!item.getContentType().startsWith("image")){
 //                  return;
 //              }
-
-
                 fileName = FilenameUtils.getName(fileName);
                 fileName = UUID.randomUUID().toString() +"_"+fileName;
 
@@ -219,8 +192,15 @@ public class ArtworkServlet extends HttpServlet {
                     storeDirectory.mkdirs();
                 }
 
+                File file = new File(storeDirectory, fileName);
                 //这个方法会自动的进行临时文件的清理，也就是上传完毕之后，他会自动的清除临时文件
-                item.write(new File(storeDirectory, fileName));
+                item.write(file);
+
+                System.out.println(item.getContentType());
+                File imageDir = new File(getServletContext().getRealPath("/img/"));
+                FileUtils.copyFileToDirectory(file,imageDir);
+
+                System.out.println(fileName);
                 map.put(id,fileName);
             }
 
@@ -228,8 +208,10 @@ public class ArtworkServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        return true;
     }
-    //利用hashcode来生成文件的目录
+
     private String genChildDirectory(String realPath, String fileName) {
         int hashCode = fileName.hashCode();
         int dir1 = hashCode&0xf;
@@ -246,32 +228,93 @@ public class ArtworkServlet extends HttpServlet {
 
     }
 
-    //按照日期生成子目录
-    private String genChildDirectory(String realPath) {
-        Date now = new Date();
-        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-        String str = df.format(now);
-
-        File file = new File(realPath,str);
-        if(!file.exists()){
-            file.mkdirs();
-        }
-
-        return str;
-    }
-
-    private void processFormField(FileItem item, Map<String, String> map) {
+    private boolean processFormField(FileItem item, Map<String, String> map) {
         //打印到控制台
         String fieldName = item.getFieldName();
         String fieldValue = "";
         try {
             //这里是为了解决表单提交的汉字在控制台输出乱码的问题，也就是得到表单里边的
             //数据在控制台输出不会乱码
-            fieldValue = item.getString("UTF-8");
+            fieldValue = item.getString("utf-8");
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
         System.out.println(fieldName+"="+fieldValue);
         map.put(fieldName,fieldValue);
+
+        return !"".equals(fieldValue);
+    }
+
+    private Artwork getArtworkInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        try {
+            request.setCharacterEncoding("UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+
+        response.setContentType("text/html;charset=UTF-8");
+        boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+        if(!isMultipart){
+            throw new RuntimeException("The form's enctype attribute value must be multipart/form-data");
+        }
+        DiskFileItemFactory factory = new DiskFileItemFactory();//产生FileItem的工厂
+        factory.setRepository(new File("/WEB-INF/files"));
+        ServletFileUpload sfu = new ServletFileUpload(factory);
+        sfu.setHeaderEncoding("utf-8");
+//      sfu.setFileSizeMax(3*1024*1024);//单个文件大小限制
+//      sfu.setSizeMax(5*1024*1024);//总文件大小
+        List<FileItem> items = new ArrayList<FileItem>();
+        try {
+            items = sfu.parseRequest(request);
+        }catch(FileUploadBase.FileSizeLimitExceededException e) {
+            response.getWriter().write("单个文件不能超过3M");
+        }
+        catch(FileUploadBase.SizeLimitExceededException e) {
+            response.getWriter().write("总文件不能超过5M");
+        }catch (FileUploadException e) {
+            e.printStackTrace();
+            throw new RuntimeException("解析请求失败");
+        }
+        /* map储存上传的信息 */
+        Map<String,String> map = new HashMap<>();
+
+        for(FileItem item:items){
+            boolean flag = true;
+            if(item.isFormField()){
+                flag = processFormField(item,map);//处理普通字段
+            }else{
+                flag = processUploadField(item,map);//处理上传字段
+            }
+            /* 异常情况 */
+            if (!flag){
+                response.sendRedirect("../WEB-INF/jsp/error.jsp");
+            }
+        }
+
+        int artID = 0;
+        if (map.get("artID") != null){
+            try {
+                artID = Integer.parseInt(map.get("artID"));
+            }
+            catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        User user = (User)request.getSession().getAttribute("user");
+        int uploadID = 1;
+        if (user != null){
+            uploadID = user.getUserID();
+        }
+
+        return new Artwork(artID,map.get("title"),
+                map.get("image"),
+                map.get("video"),
+                map.get("age"),
+                map.get("size"),
+                map.get("description"),
+                map.get("location"),
+                map.get("time"),
+                uploadID);
     }
 }

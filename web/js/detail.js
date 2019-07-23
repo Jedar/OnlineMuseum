@@ -10,5 +10,19 @@ $(function () {
                 showError(result.message);
             }
         });
-    })
+    });
+
+    $(".video-close").on("click",function () {
+        var video=document.getElementById("videoContent");
+        if (!video.paused){
+            video.pause();
+        }
+    });
+
+    $("#bt-video").on("click",function () {
+        var video=document.getElementById("videoContent");
+        if (video.paused){
+            video.play();
+        }
+    });
 });

@@ -28,5 +28,12 @@
     <orderEntry type="library" name="standard" level="project" />
     <orderEntry type="library" name="commons-fileupload-1.4" level="project" />
     <orderEntry type="library" name="commons-io-2.6" level="project" />
+    <orderEntry type="library" name="jquery.validate" level="application" />
+    <orderEntry type="library" name="messages_zh" level="application" />
+    <orderEntry type="library" name="jquery" level="application" />
+    <orderEntry type="library" name="jstl" level="project" />
+    <orderEntry type="library" name="standard" level="project" />
+    <orderEntry type="library" name="log4j-over-slf4j-1.7.26" level="project" />
+    <orderEntry type="library" name="log4j-1.2.17" level="project" />
   </component>
 </module>

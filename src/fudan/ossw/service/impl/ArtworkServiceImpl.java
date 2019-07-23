@@ -5,6 +5,8 @@ import fudan.ossw.dao.DaoFactory;
 import fudan.ossw.entity.Artwork;
 import fudan.ossw.entity.CriteriaArtwork;
 import fudan.ossw.service.ArtworkService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -16,6 +18,8 @@ import java.util.List;
  * @Version 1.0
  **/
 public class ArtworkServiceImpl implements ArtworkService{
+    private Logger logger = LoggerFactory.getLogger("artwork");
+
     private ArtworkDao dao = DaoFactory.getInstance().getArtworkDao();
 
     String errorMessage;
@@ -31,14 +35,39 @@ public class ArtworkServiceImpl implements ArtworkService{
 
     @Override
     public boolean insert(Artwork artwork) {
+        if (artwork.getImageFileName() == null || artwork.getImageFileName().equals("")){
+            artwork.setImageFileName("Test.jpg");
+        }
+        if (artwork.getVideoFileName() == null || artwork.getVideoFileName().equals("")){
+            artwork.setVideoFileName("test.mp4");
+        }
+
+        logger.info("Insert Artwork: title-{}",artwork.getTitle());
+
         return dao.addArtwork(artwork);
     }
 
     public boolean update(Artwork artwork) {
+        Artwork old = DaoFactory.getInstance().getArtworkDao().getArtwork(artwork.getArtID());
+        if (old == null){
+            errorMessage = "未找到更新的藏品";
+            return false;
+        }
+        if (artwork.getVideoFileName() == null || "".equals(artwork.getVideoFileName())){
+            artwork.setVideoFileName(old.getVideoFileName());
+        }
+        if (artwork.getImageFileName() == null || "".equals(artwork.getImageFileName())){
+            artwork.setImageFileName(old.getImageFileName());
+        }
+        artwork.setView(old.getView());
+
+        logger.info("Update Artwork: id-{}",old.getArtID());
+
         return DaoFactory.getInstance().getArtworkDao().updateArtwork(artwork.getArtID(), artwork);
     }
 
     public boolean delete(Artwork artwork) {
+        logger.info("Delete Artwork: title-{}",artwork.getTitle());
         return DaoFactory.getInstance().getArtworkDao().deleteArtwork(artwork.getArtID());
     }
 

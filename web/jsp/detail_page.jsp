@@ -57,7 +57,7 @@
                     <div>
                         <span class="invisible" id="id-num">${requestScope.collection.artID}</span>
                         <button id="bt-addToWish" class="btn btn-primary btn-sm"><i class="fa fa-star"></i> 加入收藏夹</button>
-                        <button id="bt-video" class="btn btn-info btn-sm"><i class="fa fa-file-video-o"></i> 观看藏品视频</button>
+                        <button id="bt-video" class="btn btn-info btn-sm" data-toggle="modal" data-target="#videoModal"><i class="fa fa-file-video-o"></i> 观看藏品视频</button>
                     </div>
                 </div>
             </div>
@@ -77,6 +77,35 @@
     </div>
     <br>
 </main>
+
+<div>
+    <div class="modal fade" id="videoModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h4 class="modal-title">藏品视频</h4>
+                    <button type="button" class="close video-close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    <video id="videoContent"  width="460" height="280" controls="controls">
+                        <source src="../video/${requestScope.collection.videoFileName}" type="video/mp4" />
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary video-close" data-dismiss="modal">关闭</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <jsp:include page="../inc/footer.inc.jsp"/>
 </body>

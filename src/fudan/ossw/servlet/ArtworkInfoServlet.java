@@ -24,7 +24,8 @@ public class ArtworkInfoServlet extends HttpServlet {
             addArtworkPage(req);
         }
         else {
-            /* 变更网页位置 */
+            addArtworkPage(req);
+            /* TODO:变更网页位置 */
         }
 
         req.getRequestDispatcher("./artworkinfo_page.jsp").forward(req,resp);
@@ -36,10 +37,12 @@ public class ArtworkInfoServlet extends HttpServlet {
     }
 
     private void addArtworkPage(HttpServletRequest req){
+        req.setAttribute("validateJS","../js/artworkinfo_upload.js");
         req.setAttribute("whatToDo","upload_artwork");
         req.setAttribute("btnName","上传艺术品");
         req.setAttribute("imageFileName","");
         req.setAttribute("action","uploadArtwork.aws");
+        req.setAttribute("artID",0);
     }
 
     private void fixArtworkPage(HttpServletRequest req){
@@ -55,7 +58,8 @@ public class ArtworkInfoServlet extends HttpServlet {
         Artwork artwork = service.getArtworkByID(artID);
 
         req.setAttribute("artwork",artwork);
-
+        req.setAttribute("artID",artwork.getArtID());
+        req.setAttribute("validateJS","../js/artworkinfo_modify.js");
         req.setAttribute("whatToDo","change_artwork");
         req.setAttribute("btnName","提交修改");
         req.setAttribute("imageFileName","../img/"+artwork.getImageFileName());

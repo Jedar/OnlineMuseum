@@ -64,6 +64,22 @@ public class Artwork {
         this.uploadID = 1;
     }
 
+    public Artwork(int artID, String title, String imageFileName, String videoFileName, String age, String size, String description, String location, String findTime,int uploadID) {
+        this.artID = artID;
+        this.title = title;
+        this.imageFileName = imageFileName;
+        this.videoFileName = videoFileName;
+        this.age = age;
+        this.size = size;
+        this.description = description;
+        this.location = location;
+        this.findTime = findTime;
+        this.uploadID = uploadID;
+        this.timeReleased = new Date(new java.util.Date().getTime());
+        this.isDelete = false;
+        this.view=0;
+    }
+
     public int getArtID() {
         return artID;
     }

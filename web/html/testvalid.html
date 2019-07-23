@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>菜鸟教程(runoob.com)</title>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <script>
+        $.validator.setDefaults({
+            submitHandler: function() {
+                alert("提交事件!");
+            }
+        });
+        $().ready(function() {
+// 在键盘按下并释放及提交后验证提交表单
+            $("#signupForm").validate({
+                rules: {
+                    title: "required",
+                    pop:"required",
+                    none:"required"
+                },
+                messages: {
+                    title: "请输入您的名字"
+                }
+            });
+        });
+    </script>
+    <style>
+        .error{
+            color:red;
+        }
+    </style>
+</head>
+<body>
+<form id="signupForm" class="form" action="" enctype="multipart/form-data" method="post">
+    <div class="card">
+        <div class="card-header">
+            藏品信息
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="form-group col-12">
+                    <label for="info-title">
+                        藏品名称
+                    </label>
+                    <input class="form-control" type="text" name="title" id="info-title" placeholder="Title">
+                </div>
+                <div class="form-group col-12">
+                    <label for="info">
+                        藏品
+                    </label>
+                    <input class="form-control" type="text" name="pop" id="info" placeholder="Title">
+                </div>
+            </div>
+        </div>
+        <div class="card-footer">
+            <div class="row">
+                <div class="offset-9 col-3">
+                    <input type="submit" class="btn btn-primary ${requestScope.whatToDo}" value="${requestScope.btnName}">
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

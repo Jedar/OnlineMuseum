@@ -15,9 +15,12 @@ $(function () {
     rgstAddress.change(checkAddress);
     userCheck.change(check);
 
-    var checkNumber;
-
-    setCheckNum();
+    $("#img-check-code").on("click",function () {
+        var img = $(this);
+        var address = img.attr("src");
+        address += "?msg=" + Math.random();
+        img.attr("src",address);
+    });
 
     function setCheckNum() {
         checkNumber = Math.floor(Math.random()*9000+1000);
@@ -32,6 +35,7 @@ $(function () {
         checkPhone();
         checkAddress();
         check();
+        alert("sign up");
         if (registerArr[0]&&registerArr[1]&&registerArr[2]&&registerArr[3]&&registerArr[4]&&registerArr[5]&&registerArr[6]){
             var pwd = md5($("#register-psw").val());
             $.post("./signup.us",{
@@ -39,7 +43,8 @@ $(function () {
                 password:pwd,
                 address:$("#register-address").val(),
                 phone:$("#register-phone").val(),
-                email:$("#register-email").val()
+                email:$("#register-email").val(),
+                checkCode:userCheck.val()
             },function (result) {
                 result = JSON.parse(result);
                 if(result.success){
@@ -51,7 +56,7 @@ $(function () {
                     window.location.href = result.link;
                 }
                 else{
-                    showError("注册失败，请检查注册信息");
+                    showError(result.message);
                 }
             });
         }
@@ -171,11 +176,6 @@ $(function () {
     function check() {
         if (!userCheck.val()){
             userCheck.siblings("div").html(getInfo("请输入验证码"));
-            userCheck.siblings("div").removeClass("invisible");
-            registerArr[6]=false;
-        }
-        else if (parseInt(userCheck.val())!==checkNumber){
-            userCheck.siblings("div").html(getInfo("验证码错误"));
             userCheck.siblings("div").removeClass("invisible");
             registerArr[6]=false;
         }

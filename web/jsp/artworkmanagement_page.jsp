@@ -17,7 +17,7 @@
     <script type="text/javascript" rel="script" src="../js/popper.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/util.js"></script>
-    <script type="text/javascript" rel="script" src="../js/artworkinfo.js"></script>
+    <script type="text/javascript" rel="script" src="../js/artwork.js"></script>
 </head>
 <body>
 <%--header--%>

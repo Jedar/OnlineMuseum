@@ -13,11 +13,14 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css"/>
     <link href="../font/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../css/util.css"/>
-    <script type="text/javascript" rel="script" src="../js/jquery-3.3.1.min.js"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/lib/jquery.js"></script>
     <script type="text/javascript" rel="script" src="../js/popper.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/util.js"></script>
-    <script type="text/javascript" rel="script" src="../js/artworkinfo.js"></script>
+    <%--下面的库用域验证表单信息--%>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+    <script type="text/javascript" rel="script" src="${requestScope.validateJS}"></script>
 </head>
 <body>
 <%--header--%>
@@ -28,7 +31,7 @@
 <jsp:include page="../inc/nav.inc.jsp"/>
 
 <main class="container row-fix">
-    <form onsubmit="return check()" class="form" action="${requestScope.action}" enctype="multipart/form-data" method="post">
+    <form id="artwork-info-form" class="form" action="${requestScope.action}" enctype="multipart/form-data" method="post">
         <div class="card">
             <div class="card-header">
                 藏品信息
@@ -36,10 +39,13 @@
             <div class="card-body">
                 <div class="row">
                     <div class="form-group col-12">
+                        <input class="form-control" type="hidden" name="artID" value="${requestScope.artID}">
+                    </div>
+                    <div class="form-group col-12">
                         <label for="info-title">
                             藏品名称
                         </label>
-                        <input class="form-control" type="text" name="info-tile" id="info-title" placeholder="Title" value="${requestScope.artwork.title}">
+                        <input class="form-control" type="text" name="title" id="info-title" placeholder="Title" value="${requestScope.artwork.title}">
                         <small class="form-text text-muted invisible" id="helpBlock-name">名称不能为空</small>
                     </div>
                     <div class="form-group col-12">
@@ -52,14 +58,14 @@
                             <label for="info-size">
                                 尺寸
                             </label>
-                            <input class="form-control" type="text" name="info-size" id="info-size" placeholder="address" value="${requestScope.artwork.size}">
+                            <input class="form-control" type="text" name="size" id="info-size" placeholder="address" value="${requestScope.artwork.size}">
                             <small class="form-text text-muted invisible">不能为空</small>
                         </div>
                         <div class="form-group">
                             <label for="info-location">
                                 馆藏地点
                             </label>
-                            <input class="form-control" type="text" name="info-name" id="info-location" placeholder="address" value="${requestScope.artwork.location}">
+                            <input class="form-control" type="text" name="location" id="info-location" placeholder="address" value="${requestScope.artwork.location}">
                             <small class="form-text text-muted invisible">不能为空</small>
                         </div>
                     </div>
@@ -68,14 +74,14 @@
                             <label for="info-age">
                                 年代
                             </label>
-                            <input class="form-control" type="text" name="info-age" id="info-age" placeholder="address" value="${requestScope.artwork.age}">
+                            <input class="form-control" type="text" name="age" id="info-age" placeholder="address" value="${requestScope.artwork.age}">
                             <small class="form-text text-muted invisible">不能为空</small>
                         </div>
                         <div class="form-group">
                             <label for="info-find-time">
                                 出土时间
                             </label>
-                            <input class="form-control" type="text" name="info-find-time" id="info-find-time" placeholder="address" value="${requestScope.artwork.findTime}">
+                            <input class="form-control" type="text" name="time" id="info-find-time" placeholder="address" value="${requestScope.artwork.findTime}">
                             <small class="form-text text-muted invisible">不能为空</small>
                         </div>
                     </div>
@@ -85,14 +91,14 @@
                             <label for="info-image">
                                 上传图片
                             </label>
-                            <input type="file" class="form-control" name="info-image" id="info-image" value="${requestScope.artwork.imageFileName}">
+                            <input accept="image/png,image/gif,image/jpeg" type="file" class="form-control" name="image" id="info-image" value="${requestScope.artwork.imageFileName}">
                             <small class="form-text text-muted invisible">不能为空</small>
                         </div>
                         <div class="form-group">
                             <label for="info-video">
                                 上传介绍视频
                             </label>
-                            <input type="file" class="form-control" name="info-video" id="info-video" value="${requestScope.artwork.title}">
+                            <input accept="audio/mp4,video/mp4" type="file" class="form-control" name="video" id="info-video" value="${requestScope.artwork.title}">
                             <small class="form-text text-muted invisible">不能为空</small>
                         </div>
                     </div>

@@ -57,10 +57,16 @@
                         <input class="form-control" type="tel" id="register-phone" name="phone" placeholder="电话">
                         <div class="conflictDiv invisible"><i class="fa fa-exclamation-circle fa-lg"></i> </div>
                     </div>
-                    <div class="form-group">
-                        <label for="user-check">验证码：</label>
-                        <input class="form-control" type="text" id="user-check" name="user-check">
-                        <label class="alert alert-info check-number">1234</label>
+                    <div class="form-group row">
+                        <div class="col-12">
+                            <label for="user-check">验证码：</label>
+                        </div>
+                        <div class="col-8">
+                            <input class="form-control" type="text" id="user-check" name="user-check">
+                        </div>
+                        <div class="col-3 offset-1">
+                            <img src="<%=request.getContextPath()%>/jsp/CheckCode" alt="验证码" id="img-check-code">
+                        </div>
                         <div class="conflictDiv invisible"><i class="fa fa-exclamation-circle fa-lg"></i> </div>
                     </div>
                 </form>
