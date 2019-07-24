@@ -11,4 +11,5 @@ public interface FavoriteService extends BaseService {
     boolean deleteFavorite(int userID, int artworkID);
     boolean addFavorite(int userID, int artworkID);
     boolean changeVisibility(int userID, int artworkID, boolean visible);
+    public List<Artwork> getRecommendArtworks(int userID);
 }

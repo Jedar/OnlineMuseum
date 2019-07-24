@@ -38,7 +38,6 @@ public class FriendServiceImpl implements FriendService {
         for(Friend friend : friends) {
             users.add(DaoFactory.getInstance().getUserDao().getUserByID(friend.getPartyBID()));
         }
-        users.add(DaoFactory.getInstance().getUserDao().getUserByID(userID));
         return users;
     }
 
@@ -105,11 +104,16 @@ public class FriendServiceImpl implements FriendService {
         for(User user : myFriends) {
             candidates.addAll(getFriendsList(user.getUserID()));
         }
+        List<Integer> myFriendsID = new ArrayList<>();
+        for(User user : myFriends) {
+            myFriendsID.add(user.getUserID());
+        }
         List<Integer> candidatesID = new ArrayList<>();
         for(User user : candidates) {
             candidatesID.add(user.getUserID());
         }
-        Map<Integer, Integer> map = new HashMap<>();
+        candidatesID.removeAll(myFriendsID);
+        Map<Integer, Integer> map = new TreeMap<>();
         for(int id : candidatesID) {
             if(map.containsKey(id)) {
                 int num = map.get(id);
@@ -118,15 +122,18 @@ public class FriendServiceImpl implements FriendService {
                 map.put(id, 1);
             }
         }
-        Collection<Integer> count = map.values();
-        int maxCount = Collections.max(count);
-        int maxNumber = 0;
-        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            // 得到value为maxCount的key，也就是数组中出现次数最多的数字
-            if (maxCount == entry.getValue()) {
-                maxNumber = entry.getKey();
-            }
+        //按值排序
+        List<Map.Entry<Integer,Integer>> list = new ArrayList<>(map.entrySet());
+        list.sort(Comparator.comparing(Map.Entry::getValue));
+        //去除自身
+        map.remove(userID);
+        List<User> recommendFriends = new ArrayList<>();
+        for (Integer integer : map.keySet()) {
+            recommendFriends.add(DaoFactory.getInstance().getUserDao().getUserByID(integer));
         }
-        return null;
+        if(recommendFriends.size() > 3)
+            return recommendFriends.subList(0, 2);
+        else
+            return recommendFriends;
     }
 }

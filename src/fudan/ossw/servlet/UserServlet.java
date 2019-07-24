@@ -326,6 +326,7 @@ public class UserServlet extends HttpServlet {
         FriendService friendService = new FriendServiceImpl();
         int userID = ((User)request.getSession().getAttribute("user")).getUserID();
         List<User> friends = friendService.getFriendsList(userID);
+        friends.add(userService.getUser(userID));
         List<User> friendList = new ArrayList<>();
         List<User> unFriendList = new ArrayList<>();
         boolean isFriend;
@@ -341,8 +342,6 @@ public class UserServlet extends HttpServlet {
             if(!isFriend)
                 unFriendList.add(user);
         }
-        System.out.println("friends: " + friendList);
-        System.out.println("unFriends: " + unFriendList);
         json.put("success", true);
         json.put("friendList", friendList);
         json.put("unFriendList", unFriendList);

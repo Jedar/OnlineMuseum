@@ -36,30 +36,31 @@
 <jsp:useBean id="receiverOfSendMessages" type="java.util.List<fudan.ossw.entity.User>" scope="request"/>
 <jsp:useBean id="senderOfRequests" type="java.util.List<fudan.ossw.entity.User>" scope="request"/>
 <jsp:useBean id="friends" type="java.util.List<fudan.ossw.entity.User>" scope="request"/>
+<jsp:useBean id="recommendFriends" type="java.util.List<fudan.ossw.entity.User>" scope="request"/>
 <main class="container">
     <div class="row">
         <div class="col-3">
-            <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <ul class="nav flex-column nav-pills bg-light" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                 <li>
                     <a class="nav-link active " id="v-pills-receivedMessage-tab" data-toggle="pill" href="#v-pills-receivedMessage" role="tab" aria-controls="v-pills-receivedMessage" aria-selected="true">收件箱 <span class="badge badge-pill badge-secondary">${readMessages.size() + unreadMessages.size()}</span></a>
                 </li>
                 <li class="mx-auto">
-                    <a class="nav-link" id="v-pills-readMessage-tab" data-toggle="pill" href="#v-pills-readMessage" role="tab" aria-controls="v-pills-readMessage" aria-selected="false">已读 <span class="badge badge-pill badge-secondary">${readMessages.size()}</span></a>
+                    <a class="nav-link" id="v-pills-readMessage-tab" data-toggle="pill" href="#v-pills-readMessage" role="tab" aria-controls="v-pills-readMessage" aria-selected="false"><i class="fa fa-envelope-open-o" aria-hidden="true"></i> 已读 <span class="badge badge-pill badge-secondary">${readMessages.size()}</span></a>
                 </li>
                 <li class="mx-auto">
-                    <a class="nav-link" id="v-pills-unreadMessage-tab" data-toggle="pill" href="#v-pills-unreadMessage" role="tab" aria-controls="v-pills-unreadMessage" aria-selected="false">未读 <span class="badge badge-pill badge-secondary">${unreadMessages.size()}</span></a>
+                    <a class="nav-link" id="v-pills-unreadMessage-tab" data-toggle="pill" href="#v-pills-unreadMessage" role="tab" aria-controls="v-pills-unreadMessage" aria-selected="false"><i class="fa fa-envelope-o" aria-hidden="true"></i> 未读 <span class="badge badge-pill badge-secondary">${unreadMessages.size()}</span></a>
                 </li>
                 <li>
-                    <a class="nav-link" id="v-pills-sendMessage-tab" data-toggle="pill" href="#v-pills-sendMessage" role="tab" aria-controls="v-pills-sendMessage" aria-selected="false">发件箱 <span class="badge badge-pill badge-secondary">${sendMessages.size()}</span></a>
+                    <a class="nav-link" id="v-pills-sendMessage-tab" data-toggle="pill" href="#v-pills-sendMessage" role="tab" aria-controls="v-pills-sendMessage" aria-selected="false"><i class="fa fa-share-square-o" aria-hidden="true"></i> 发件箱 <span class="badge badge-pill badge-secondary">${sendMessages.size()}</span></a>
                 </li>
                 <li>
-                    <a class="nav-link" id="v-pills-writeMessage-tab" data-toggle="pill" href="#v-pills-writeMessage" role="tab" aria-controls="v-pills-writeMessage" aria-selected="false">写信息</a>
+                    <a class="nav-link" id="v-pills-writeMessage-tab" data-toggle="pill" href="#v-pills-writeMessage" role="tab" aria-controls="v-pills-writeMessage" aria-selected="false"><i class="fa fa-pencil" aria-hidden="true"></i> 写信息</a>
                 </li>
                 <li>
-                    <a class="nav-link" id="v-pills-addFriend-tab" data-toggle="pill" href="#v-pills-addFriend" role="tab" aria-controls="v-pills-addFriend" aria-selected="false">添加好友</a>
+                    <a class="nav-link" id="v-pills-addFriend-tab" data-toggle="pill" href="#v-pills-addFriend" role="tab" aria-controls="v-pills-addFriend" aria-selected="false"><i class="fa fa-address-book-o" aria-hidden="true"></i> 添加好友</a>
                 </li>
                 <li>
-                    <a class="nav-link" id="v-pills-request-tab" data-toggle="pill" href="#v-pills-request" role="tab" aria-controls="v-pills-request" aria-selected="false">申请信息 <span class="badge badge-pill badge-secondary">${requests.size()}</span></a>
+                    <a class="nav-link" id="v-pills-request-tab" data-toggle="pill" href="#v-pills-request" role="tab" aria-controls="v-pills-request" aria-selected="false"><i class="fa fa-hand-peace-o" aria-hidden="true"></i> 申请信息 <span class="badge badge-pill badge-secondary">${requests.size()}</span></a>
                 </li>
             </ul>
         </div>
@@ -182,7 +183,34 @@
                 </div>
                 
                 <div class="tab-pane fade" id="v-pills-addFriend" role="tabpanel" aria-labelledby="v-pills-addFriend-tab">
-                    <div class="searchBar">
+                    <div class="card">
+                        <div class="card-header">
+                            你可能认识：
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <c:forEach items="${recommendFriends}" var="friend">
+                                    <li class="list-group-item">
+                                        <div class="row">
+                                            <figure class="col-2">
+                                                <img src="../img/019070.jpg" class="figure-img rounded" width="100" height="100" alt="" />
+                                            </figure>
+                                            <div class="col-4 offset-1 align-self-center">
+                                                <h4>${friend.username}</h4>
+                                                <p><i class="fa fa-map-marker" aria-hidden="true"></i>${friend.address}</p>
+                                            </div>
+                                            <div class="col-2 offset-2 align-self-center">
+                                                <div class="justify-content-center">
+                                                    <button type="button" class="btn btn-primary add-friend-button" data-toggle="modal" data-target="#addFriendRequest" data-whatever="${friend.userID}">加为好友</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </c:forEach>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="searchBar my-3">
                         <form class="form-inline" role="form">
                             <div class="input-group">
                                 <input type="text" class="form-control" id="search-friend-input" placeholder="搜索">

@@ -74,4 +74,9 @@ public class FavoriteServiceImpl implements FavoriteService {
     public boolean changeVisibility(int userID, int artworkID, boolean visible) {
         return DaoFactory.getInstance().getFavoriteDao().changeVisibility(userID, artworkID, visible);
     }
+
+    @Override
+    public List<Artwork> getRecommendArtworks(int userID) {
+        return null;
+    }
 }

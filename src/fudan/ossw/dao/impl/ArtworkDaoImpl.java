@@ -4,6 +4,7 @@ import fudan.ossw.dao.ArtworkDao;
 import fudan.ossw.dao.BaseDao;
 import fudan.ossw.entity.Artwork;
 import fudan.ossw.entity.CriteriaArtwork;
+import fudan.ossw.entity.Favorite;
 
 import java.util.List;
 

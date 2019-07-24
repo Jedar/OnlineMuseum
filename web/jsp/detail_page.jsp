@@ -80,6 +80,22 @@
         </aside>
     </div>
     <br>
+    <section class="container">
+        <div class="my-3">
+            <h3>可能感兴趣:</h3>
+        </div>
+        <div class="row">
+            <div class="item col-2">
+                <figure class="figure">
+                    <img src="../img/201904.jpg" class="figure-img img-fluid rounded" width="200" alt="...">
+                    <figcaption class="figure-caption"></figcaption>
+                </figure>
+                <div class="mx-auto">
+                    <a class="item-button" href="detail.jsp?id=">查看</a>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 
 <div>
