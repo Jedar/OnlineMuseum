@@ -45,8 +45,8 @@ public class JDBCDao<T> implements BaseDao<T> {
         ResultSet resultSet = null;
         try {
             /* 获取连接 */
-            ps = conn.prepareStatement(sql);
             conn = dataSource.getConnection();
+            ps = conn.prepareStatement(sql);
 
             /* 放入参数 */
             int idx = 1;
