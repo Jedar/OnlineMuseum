@@ -6,11 +6,11 @@ $(function () {
         },function (result) {
             result = JSON.parse(result);
             if(result.success){
-                showResult(result.userList);
+                showResult(result.unFriendList, result.friendList);
             }else{
                 showError(result.message);
             }
-        });
+        })
     });
 
     $("#search-result").on("click", ".add-friend-button", function () {
@@ -94,22 +94,41 @@ $(function () {
         });
     });
 
-    function showResult(list) {
+    function showResult(unFriendList, friendList) {
         var i;
+        var j;
         var str = "";
-        for(i in list) {
+        for(j in friendList) {
+            str += "                        <li class=\"list-group-item\">\n" +
+                "                                <div class=\"row\">\n" +
+                "                                    <figure class=\"col-2\">\n" +
+                "                                        <img src=\"../img/019070.jpg\" class=\"figure-img rounded\" width=\"100\" height=\"100\" alt=\"\" />\n" +
+                "                                    </figure>\n" +
+                "                                    <div class=\"col-4 offset-1 align-self-center\">\n" +
+                "                                        <h4>" + friendList[j].username + "</h4>\n" +
+                "                                        <p><i class=\"fa fa-map-marker\" aria-hidden=\"true\"></i>" + friendList[j].address + "</p>\n" +
+                "                                    </div>\n" +
+                "                                    <div class=\"col-2 offset-2 align-self-center\">\n" +
+                "                                        <div class=\"justify-content-center\">\n" +
+                "                                            <a class=\"btn btn-info friend-homepage\" href=\"friend.jsp?id="+ friendList[j].userID + "\">查看主页</a>\n" +
+                "                                        </div>\n" +
+                "                                    </div>\n" +
+                "                                </div>\n" +
+                "                            </li>"
+        }
+        for(i in unFriendList) {
             str += "                                <li class=\"list-group-item\">\n" +
                 "                                    <div class=\"row\">\n" +
                 "                                        <figure class=\"col-2\">\n" +
                 "                                            <img src=\"../img/019070.jpg\" class=\"figure-img rounded\" width=\"100\" height=\"100\" alt=\"\" />\n" +
                 "                                        </figure>\n" +
                 "                                        <div class=\"col-4 offset-1 align-self-center\">\n" +
-                "                                            <h4>" + list[i].username + "</h4>\n" +
-                "                                            <p><i class=\"fa fa-map-marker\" aria-hidden=\"true\"></i>" + list[i].address + "</p>\n" +
+                "                                            <h4>" + unFriendList[i].username + "</h4>\n" +
+                "                                            <p><i class=\"fa fa-map-marker\" aria-hidden=\"true\"></i>" + unFriendList[i].address + "</p>\n" +
                 "                                        </div>\n" +
                 "                                        <div class=\"col-2 offset-2 align-self-center\">\n" +
                 "                                            <div class=\"justify-content-center\">\n" +
-                "                                                <button type=\"button\" class=\"btn btn-primary add-friend-button\" data-toggle=\"modal\" data-target=\"#addFriendRequest\" data-whatever=\"" +list[i].userID+ "\">加为好友</button>\n" +
+                "                                                <button type=\"button\" class=\"btn btn-primary add-friend-button\" data-toggle=\"modal\" data-target=\"#addFriendRequest\" data-whatever=\"" +unFriendList[i].userID+ "\">加为好友</button>\n" +
                 "                                            </div>\n" +
                 "                                        </div>\n" +
                 "                                    </div>\n" +

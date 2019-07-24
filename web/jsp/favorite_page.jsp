@@ -17,7 +17,8 @@
 <jsp:include page="../inc/header.inc.jsp"/>
 
 <jsp:include page="../inc/nav.inc.jsp"/>
-<jsp:useBean id="favorite" type="java.util.List<fudan.ossw.entity.Artwork>" scope="request"/>
+
+<jsp:useBean id="favoriteVisibilityMap" type="java.util.Map<fudan.ossw.entity.Artwork,fudan.ossw.entity.Favorite>" scope="request"/>
 <main>
     <div class="container row-fix">
         <div class="card">
@@ -25,32 +26,40 @@
                 收藏夹
             </div>
             <ul class="list-group">
-                <c:forEach items="${favorite}" var="artwork">
+                <c:forEach items="${favoriteVisibilityMap}" var="entry">
                     <li class="list-group-item">
                         <div class="row">
                             <figure class="img-thumbnail col-2 offset-1">
-                                <img src="../img/${artwork.imageFileName}" width="150" height=150 alt="" />
+                                <img src="../img/${entry.key.imageFileName}" width="150" height=150 alt="" />
                             </figure>
-                            <div class="col-3 offset-1">
+                            <div class="col-4 offset-1">
                                 <table class="table">
                                     <tr>
                                         <td>名称</td>
-                                        <td>${artwork.title}</td>
+                                        <td>${entry.key.title}</td>
                                     </tr>
                                     <tr>
-                                        <td>年代</td>
-                                        <td>${artwork.age}</td>
+                                        <td>馆藏地点</td>
+                                        <td>${entry.key.location}</td>
                                     </tr>
                                     <tr>
-                                        <td>尺寸</td>
-                                        <td>${artwork.size}</td>
+                                        <td>热度</td>
+                                        <td>${entry.key.view}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>收藏时间</td>
+                                        <td>${entry.value.addTime}</td>
                                     </tr>
                                 </table>
                             </div>
                             <div class="col-3 offset-1 align-self-center">
-                                <div class="btn-group justify-content-center">
-                                    <a class="btn btn-info button-detail" href="./detail.jsp?id=${artwork.artID}">查看详情</a>
-                                    <button class="btn btn-danger button-delete" data-target="${artwork.artID}">删除藏品</button>
+                                <div class="btn-group justify-content-center my-3">
+                                    <a class="btn btn-info button-detail" href="./detail.jsp?id=${entry.key.artID}">查看详情</a>
+                                    <button class="btn btn-danger button-delete" data-target="${entry.key.artID}">删除藏品</button>
+                                </div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" <c:if test="${entry.value.visible}">checked</c:if> data-target="${entry.key.artID}" id="customSwitch${entry.key.artID}">
+                                    <label class="custom-control-label" for="customSwitch${entry.key.artID}">公开该藏品</label>
                                 </div>
                             </div>
                         </div>

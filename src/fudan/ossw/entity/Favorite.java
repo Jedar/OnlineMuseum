@@ -14,6 +14,7 @@ public class Favorite {
     int userID;
     int artID;
     Date addTime;
+    boolean visible;
 
     public Favorite() {
     }
@@ -56,4 +57,11 @@ public class Favorite {
         this.addTime = addTime;
     }
 
+    public boolean isVisible() {
+        return visible;
+    }
+
+    public void setVisible(boolean visible) {
+        this.visible = visible;
+    }
 }

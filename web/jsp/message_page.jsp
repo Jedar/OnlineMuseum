@@ -198,22 +198,7 @@
                         </div>
                         <div class="card-body">
                             <ul id="search-result" class="list-group list-group-flush">
-                                <li class="list-group-item">
-                                    <div class="row">
-                                        <figure class="col-2">
-                                            <img src="../img/019070.jpg" class="figure-img rounded" width="100" height="100" alt="" />
-                                        </figure>
-                                        <div class="col-4 offset-1 align-self-center">
-                                            <h4>Admin</h4>
-                                            <p><i class="fa fa-map-marker" aria-hidden="true"></i>上海</p>
-                                        </div>
-                                        <div class="col-2 offset-2 align-self-center">
-                                            <div class="justify-content-center">
-                                                <button type="button" class="btn btn-primary add-friend-button" data-toggle="modal" data-target="#addFriendRequest" data-whatever="@mdo">加为好友</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+
                             </ul>
                         </div>
                         <div class="modal fade" id="addFriendRequest" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

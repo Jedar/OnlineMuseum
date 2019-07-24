@@ -75,4 +75,9 @@ public class ArtworkServiceImpl implements ArtworkService{
     public Artwork getArtworkByID(int artworkID) {
         return dao.getArtwork(artworkID);
     }
+
+    @Override
+    public List<Artwork> getRecommendArtworks(int userID) {
+        return null;
+    }
 }

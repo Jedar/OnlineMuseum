@@ -19,4 +19,5 @@ public interface FriendService extends BaseService {
     boolean addFriend(int userID, int friendID);
     boolean sendRequest(Request request);
     boolean readRequest(int senderID, int receiverID, boolean agree);
+    List<User> getRecommendFriends(int userID);
 }

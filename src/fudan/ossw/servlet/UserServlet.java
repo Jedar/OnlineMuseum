@@ -276,6 +276,21 @@ public class UserServlet extends HttpServlet {
         response.getWriter().println(json.toJSONString());
     }
 
+    /*更改藏品公开性*/
+    private void changeFavoriteVisibility(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        int userID = ((User)request.getSession().getAttribute("user")).getUserID();
+        int artworkID = Integer.parseInt(request.getParameter("artworkID"));
+        boolean visible = Boolean.parseBoolean(request.getParameter("visible"));
+        FavoriteService favoriteService = new FavoriteServiceImpl();
+        if(favoriteService.changeVisibility(userID, artworkID, visible)) {
+            json.put("success", true);
+        }else{
+            json.put("success", false);
+            json.put("message", "数据出错");
+        }
+        response.getWriter().println(json.toJSONString());
+    }
+
     /*删除收藏夹*/
     private void deleteFavorite(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int artworkID = Integer.parseInt(request.getParameter("artworkID"));
@@ -293,9 +308,30 @@ public class UserServlet extends HttpServlet {
     private void searchUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         List<User> users = userService.getCriteriaUsers(username);
-        System.out.println(users);
+        System.out.println("users: " + users);
+        FriendService friendService = new FriendServiceImpl();
+        int userID = ((User)request.getSession().getAttribute("user")).getUserID();
+        List<User> friends = friendService.getFriendsList(userID);
+        List<User> friendList = new ArrayList<>();
+        List<User> unFriendList = new ArrayList<>();
+        boolean isFriend;
+        for(User user : users) {
+            isFriend = false;
+            for(User friend : friends) {
+                if(friend.getUsername().equals(user.getUsername())) {
+                    friendList.add(user);
+                    isFriend = true;
+                    break;
+                }
+            }
+            if(!isFriend)
+                unFriendList.add(user);
+        }
+        System.out.println("friends: " + friendList);
+        System.out.println("unFriends: " + unFriendList);
         json.put("success", true);
-        json.put("userList", users);
+        json.put("friendList", friendList);
+        json.put("unFriendList", unFriendList);
         response.getWriter().println(json.toJSONString());
     }
 

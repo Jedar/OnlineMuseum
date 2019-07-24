@@ -8,8 +8,7 @@ import fudan.ossw.entity.Request;
 import fudan.ossw.entity.User;
 import fudan.ossw.service.FriendService;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * @ClassName FriendServiceImpl
@@ -39,6 +38,7 @@ public class FriendServiceImpl implements FriendService {
         for(Friend friend : friends) {
             users.add(DaoFactory.getInstance().getUserDao().getUserByID(friend.getPartyBID()));
         }
+        users.add(DaoFactory.getInstance().getUserDao().getUserByID(userID));
         return users;
     }
 
@@ -96,5 +96,37 @@ public class FriendServiceImpl implements FriendService {
            return addFriend(senderID, receiverID);
         }
         return true;
+    }
+
+    @Override
+    public List<User> getRecommendFriends(int userID) {
+        List<User> myFriends = getFriendsList(userID);
+        List<User> candidates = new ArrayList<>();
+        for(User user : myFriends) {
+            candidates.addAll(getFriendsList(user.getUserID()));
+        }
+        List<Integer> candidatesID = new ArrayList<>();
+        for(User user : candidates) {
+            candidatesID.add(user.getUserID());
+        }
+        Map<Integer, Integer> map = new HashMap<>();
+        for(int id : candidatesID) {
+            if(map.containsKey(id)) {
+                int num = map.get(id);
+                map.put(id, num + 1);
+            }else {
+                map.put(id, 1);
+            }
+        }
+        Collection<Integer> count = map.values();
+        int maxCount = Collections.max(count);
+        int maxNumber = 0;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            // 得到value为maxCount的key，也就是数组中出现次数最多的数字
+            if (maxCount == entry.getValue()) {
+                maxNumber = entry.getKey();
+            }
+        }
+        return null;
     }
 }
