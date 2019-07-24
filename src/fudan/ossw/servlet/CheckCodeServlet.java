@@ -13,6 +13,10 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
 
+/*
+ *用于生成验证码的servlet
+ */
+
 @WebServlet(name="CheckCodeServlet",value="/jsp/CheckCode")
 public class CheckCodeServlet extends HttpServlet {
 

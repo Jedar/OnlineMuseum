@@ -15,7 +15,7 @@
 </head>
 <body>
 <jsp:include page="../inc/header.inc.jsp"/>
-
+<jsp:include page="../inc/search.inc.jsp"/>
 <jsp:include page="../inc/nav.inc.jsp"/>
 
 <jsp:useBean id="favoriteVisibilityMap" type="java.util.Map<fudan.ossw.entity.Artwork,fudan.ossw.entity.Favorite>" scope="request"/>

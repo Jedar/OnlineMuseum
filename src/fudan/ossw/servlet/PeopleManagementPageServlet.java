@@ -21,6 +21,7 @@ public class PeopleManagementPageServlet extends HttpServlet {
 
         User user = (User)req.getSession().getAttribute("user");
 
+        /* 得到所有用户名单 */
         List<User> users = service.getAllUser();
 
         req.setAttribute("users",users);

@@ -201,7 +201,7 @@
                                             </div>
                                             <div class="col-2 offset-2 align-self-center">
                                                 <div class="justify-content-center">
-                                                    <button type="button" class="btn btn-primary add-friend-button" data-toggle="modal" data-target="#addFriendRequest" data-whatever="${friend.userID}">加为好友</button>
+                                                    <button type="button" class="btn btn-primary add-friend-button recommend-friend-item" data-toggle="modal" data-target="#addFriendRequest" data-whatever="${friend.userID}">加为好友</button>
                                                 </div>
                                             </div>
                                         </div>

@@ -25,6 +25,7 @@ public class HomePageServlet extends HttpServlet {
 
         List<Artwork> newest = service.getNewestList();
 
+        /* 将数据存放在requestScope中 */
         for (int i = 0; i < heat.size(); i++){
             req.setAttribute("heat"+i,heat.get(i));
         }

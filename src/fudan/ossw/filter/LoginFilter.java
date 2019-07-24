@@ -45,8 +45,10 @@ public class LoginFilter implements Filter {
         httpRequest.setCharacterEncoding(encoding);
         httpResponse.setCharacterEncoding(encoding);
 
+        /* 获取网页白名单 */
         String servletPath = httpRequest.getServletPath();
         List<String> urls = Arrays.asList(uncheckedUrls.split(","));
+        /* 如果在白名单内，通过过滤器 */
         if (urls.contains(servletPath)) {
             filterChain.doFilter(httpRequest, httpResponse);
             return;

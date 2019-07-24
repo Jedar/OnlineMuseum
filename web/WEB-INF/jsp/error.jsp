@@ -11,6 +11,6 @@
     <title>Error</title>
 </head>
 <body>
-<h1>Error Occur</h1><a href="/jsp/home.jsp">Click here to back</a>
+<h1>Error Occur</h1><a href="../jsp/home.jsp">Click here to back</a>
 </body>
 </html>

@@ -4,11 +4,11 @@ package fudan.ossw.entity;
 import java.sql.Timestamp;
 
 public class Favorite {
-    int favoriteID;
-    int userID;
-    int artID;
-    Timestamp addTime;
-    boolean visible;
+    private int favoriteID;
+    private int userID;
+    private int artID;
+    private Timestamp addTime;
+    private boolean visible;
 
     public Favorite() {
     }

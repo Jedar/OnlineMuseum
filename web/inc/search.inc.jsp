@@ -10,11 +10,11 @@
     <div class="header-top row justify-content-center">
         <h2 class="logo col-md-3">Online Museum</h2>
         <div class="searchBar col-md-3 offset-md-4">
-            <form class="form-inline" role="form">
+            <form class="form-inline" role="form" action="./search.jsp" method="get">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="搜索">
+                    <input type="text" class="form-control" placeholder="搜索" name="title">
                     <span class="input-group-btn">
-                        <button class="btn btn-primary" type="button"><i class="fa fa-search"></i>Search</button>
+                        <button class="btn btn-primary" type="submit"><i class="fa fa-search"></i>Search</button>
                     </span>
                 </div><!-- /input-group -->
             </form>

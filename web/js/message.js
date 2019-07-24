@@ -36,6 +36,10 @@ $(function () {
         receiverID = $(this).attr("data-whatever");
     });
 
+    $(".recommend-friend-item").on("click",function () {
+        receiverID = $(this).attr("data-whatever");
+    });
+
     $(".agreeRequest").on("click", function () {
         var btn = $(this);
         var senderID = $(this).attr("data-target");

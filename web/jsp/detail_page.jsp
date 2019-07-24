@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page import="fudan.ossw.dao.ArtworkDao" %>
 <%@ page import="fudan.ossw.dao.impl.ArtworkDaoImpl" %>
 <%@ page import="fudan.ossw.entity.Artwork" %><%--
@@ -22,6 +23,12 @@
     <script type="text/javascript" rel="script" src="../js/detail.js"></script>
 </head>
 <body>
+
+<%
+    System.out.println(request.getAttribute("recommendArtworks"));
+%>
+
+<jsp:useBean id="recommendArtworks" type="java.util.List<fudan.ossw.entity.Artwork>" scope="request"/>
 
 <%--header--%>
 <jsp:include page="../inc/header.inc.jsp"/>
@@ -66,36 +73,16 @@
                 </div>
             </div>
         </section>
-        <aside class="asideBar col-md-2 row-fix">
+        <aside class="asideBar col-md-2 row-fix ${requestScope.recommendNav}">
             <div class="list-group" id="artist-list">
                 <span class="list-group-item list-group-item-info">推荐藏品</span>
-                <a href="#" class="list-group-item list-group-item-action">青铜器</a>
-                <a href="#" class="list-group-item list-group-item-action">青花瓷</a>
-                <a href="#" class="list-group-item list-group-item-action">水墨画</a>
-                <a href="#" class="list-group-item list-group-item-action">山水画</a>
-                <a href="#" class="list-group-item list-group-item-action">梅花图</a>
-                <a href="#" class="list-group-item list-group-item-action">菊花图</a>
-                <a href="#" class="list-group-item list-group-item-action">天王石像</a>
+                <c:forEach items="${recommendArtworks}" var="artwork">
+                    <a href="./detail.jsp?id=${artwork.artID}" class="list-group-item list-group-item-action">${artwork.title}</a>
+                </c:forEach>
             </div>
         </aside>
     </div>
     <br>
-    <section class="container">
-        <div class="my-3">
-            <h3>可能感兴趣:</h3>
-        </div>
-        <div class="row">
-            <div class="item col-2">
-                <figure class="figure">
-                    <img src="../img/201904.jpg" class="figure-img img-fluid rounded" width="200" alt="...">
-                    <figcaption class="figure-caption"></figcaption>
-                </figure>
-                <div class="mx-auto">
-                    <a class="item-button" href="detail.jsp?id=">查看</a>
-                </div>
-            </div>
-        </div>
-    </section>
 </main>
 
 <div>
