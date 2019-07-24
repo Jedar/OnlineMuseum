@@ -21,6 +21,6 @@ public class FavoriteDaoImplTest {
         list = dao.getFavoriteList(2);
 
         System.out.println(list.size() == 0);
-
+        System.out.println();
     }
 }
