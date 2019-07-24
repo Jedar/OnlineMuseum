@@ -18,6 +18,10 @@
     <script type="text/javascript" rel="script" src="../js/popper.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/bootstrap.min.js"></script>
     <script type="text/javascript" rel="script" src="../js/util.js"></script>
+    <%--下面的库用域验证表单信息--%>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/jquery.validate.min.js"></script>
+    <script src="https://static.runoob.com/assets/jquery-validation-1.14.0/dist/localization/messages_zh.js"></script>
+
     <script type="text/javascript" rel="script" src="../js/peoplepage.js"></script>
 </head>
 <body>

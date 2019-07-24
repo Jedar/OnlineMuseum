@@ -7,6 +7,15 @@
         <welcome-file>index.jsp</welcome-file>
     </welcome-file-list>
 
+    <error-page>
+        <exception-type>java.lang.Exception</exception-type>
+        <location>/WEB-INF/jsp/error.jsp</location>
+    </error-page>
+
+    <context-param>
+        <param-name>encoding</param-name>
+        <param-value>UTF-8</param-value>
+    </context-param>
     <!--检测用户是否登录的过滤器配置-->
     <!--用户信息存放到session中的键的名字-->
     <context-param>

@@ -6,6 +6,22 @@ $.validator.setDefaults({
 });
 
 $().ready(function() {
+    $("#info-image").on("change",function () {
+        var file = this.files[0];
+        var img = $("#img-preview");
+        if (!file){
+            img.addClass('invisible');
+            return;
+        }
+        if (!(/^image\/png$|jpeg$/.test(file.type))){
+            img.addClass('invisible');
+            return;
+        }
+        img.removeClass('invisible');
+        var oburl = window.URL.createObjectURL(file);
+        img.attr("src", oburl) ;
+    });
+
     $("#artwork-info-form").validate({
         rules:{
             title:{

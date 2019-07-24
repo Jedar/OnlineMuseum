@@ -21,6 +21,7 @@ public class LoginFilter implements Filter {
     private String sessionKey;
     private String redirectUrl;
     private String uncheckedUrls;
+    private String encoding;
     public LoginFilter() {
         super();
     }
@@ -32,12 +33,18 @@ public class LoginFilter implements Filter {
         sessionKey = servletContext.getInitParameter("userSessionKey");
         redirectUrl = servletContext.getInitParameter("redirectPage");
         uncheckedUrls = servletContext.getInitParameter("uncheckedUrls");
+        encoding = servletContext.getInitParameter("encoding");
     }
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest httpRequest = (HttpServletRequest) servletRequest;
         HttpServletResponse httpResponse = (HttpServletResponse) servletResponse;
+
+        /* 设置编码 */
+        httpRequest.setCharacterEncoding(encoding);
+        httpResponse.setCharacterEncoding(encoding);
+
         String servletPath = httpRequest.getServletPath();
         List<String> urls = Arrays.asList(uncheckedUrls.split(","));
         if (urls.contains(servletPath)) {

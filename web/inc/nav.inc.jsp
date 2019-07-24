@@ -13,7 +13,7 @@
                 <li class="nav-item"><a href="./home.jsp" class="a-black nav-link ${requestScope.navItemHome}">首页</a></li>
                 <li class="nav-item"><a href="./search.jsp" class="a-black nav-link ${requestScope.navItemSearch}">搜索</a></li>
                 <li class="nav-item"><a href="./detail.jsp" class="a-black nav-link ${requestScope.navItemDetail}">详情</a></li>
-                <li class="nav-item"><a href="./favorite.jsp" class="a-black nav-link ${requestScope.navItemPerson}">个人界面</a> </li>
+                <li class="nav-item"><a href="./profile.jsp" class="a-black nav-link ${requestScope.navItemPerson}">个人界面</a> </li>
             </ul>
         </div>
     </nav>

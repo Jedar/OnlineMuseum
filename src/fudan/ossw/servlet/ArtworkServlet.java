@@ -174,20 +174,30 @@ public class ArtworkServlet extends HttpServlet {
             String fileName = item.getName();//上传的文件的文件名
             String contentType = item.getContentType();
             String putDir = "";
+            String postfix = "";
 
-            if (contentType.startsWith("image")){
+            System.out.println(fileName);
+            System.out.println(contentType);
+
+            if (contentType.startsWith("image/png")){
                 putDir = "/img/";
+                postfix = ".png";
             }
-            else if (contentType.startsWith("video")){
+            if (contentType.startsWith("image/jpeg")){
+                putDir = "/img/";
+                postfix = ".jpeg";
+            }
+            else if (contentType.startsWith("video/mp4")){
                 putDir = "/video/";
+                postfix = ".mp4";
             }
             else {
-                return false;
+                return true;
             }
 
             if(fileName!=null&&!fileName.equals("")){
-                fileName = FilenameUtils.getName(fileName);
-                fileName = UUID.randomUUID().toString() +"_"+fileName;
+//                fileName = FilenameUtils.getName(fileName);
+                fileName = UUID.randomUUID().toString() + postfix;
                 String realPath = getServletContext().getRealPath("/WEB-INF/files");
 //                System.out.println(realPath);
                 String childDirectory = genChildDirectory(realPath,fileName);
@@ -289,7 +299,7 @@ public class ArtworkServlet extends HttpServlet {
             }
             /* 异常情况 */
             if (!flag){
-                response.sendRedirect("../WEB-INF/jsp/error.jsp");
+                throw new RuntimeException("处理异常");
             }
         }
         int artID = 0;

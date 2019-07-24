@@ -56,6 +56,9 @@ public class FriendServiceImpl implements FriendService {
     public boolean deleteFriend(int userID, int friendID) {
         Friend friend1 = DaoFactory.getInstance().getFriendDao().getFriend(userID, friendID);
         Friend friend2 = DaoFactory.getInstance().getFriendDao().getFriend(friendID, userID);
+        if(friend1 == null || friend2 == null){
+            return false;
+        }
         return friendDao.deleteFriend(friend1.getFriendID()) &&
                 friendDao.deleteFriend(friend2.getFriendID());
     }
