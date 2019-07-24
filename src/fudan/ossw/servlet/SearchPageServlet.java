@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 
 @WebServlet(name = "SearchPageServlet", value = "/jsp/search.jsp")
@@ -45,6 +46,10 @@ public class SearchPageServlet extends HttpServlet {
         if (sort == null){
             sort = "view";
         }
+
+        title = new String(title.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
+        description = new String(description.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
+        location = new String(location.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
 
         ArtworkService service = new ArtworkServiceImpl();
 

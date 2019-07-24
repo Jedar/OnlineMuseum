@@ -107,6 +107,6 @@ public class ArtworkServiceImpl implements ArtworkService{
 
     @Override
     public List<Artwork> getRecommendArtworks(int userID) {
-        return null;
+        return getHeatList();
     }
 }
