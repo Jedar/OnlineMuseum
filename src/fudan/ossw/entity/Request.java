@@ -1,26 +1,21 @@
 package fudan.ossw.entity;
-import java.sql.Date;
 
-/**
- * @ClassName dao.impl.RequestDaoImpl
- * @Description TODO
- * @Author Peng Deng
- * @Date 2019/7/17 10:33
- * @Version 1.0
- **/
+
+import java.sql.Timestamp;
+
 public class Request {
     private int requestID;
     private int senderID;
     private int receiverID;
     private String content;
-    private Date sendTime;
+    private Timestamp sendTime;
     private boolean agree;
     private boolean isRead;
 
     public Request() {
     }
 
-    public Request(int requestID, int senderID, int receiverID, String content, Date sendTime, boolean agree, boolean isRead) {
+    public Request(int requestID, int senderID, int receiverID, String content, Timestamp sendTime, boolean agree, boolean isRead) {
         this.requestID = requestID;
         this.senderID = senderID;
         this.receiverID = receiverID;
@@ -62,11 +57,11 @@ public class Request {
         this.content = content;
     }
 
-    public Date getSendTime() {
+    public Timestamp getSendTime() {
         return sendTime;
     }
 
-    public void setSendTime(Date sendTime) {
+    public void setSendTime(Timestamp sendTime) {
         this.sendTime = sendTime;
     }
 

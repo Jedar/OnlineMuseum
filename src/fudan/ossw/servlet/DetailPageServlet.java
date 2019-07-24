@@ -2,6 +2,7 @@ package fudan.ossw.servlet;
 
 import fudan.ossw.dao.ArtworkDao;
 import fudan.ossw.dao.impl.ArtworkDaoImpl;
+import fudan.ossw.data.ScopeKey;
 import fudan.ossw.entity.Artwork;
 import fudan.ossw.entity.User;
 import fudan.ossw.service.ArtworkService;
@@ -20,6 +21,11 @@ public class DetailPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
         request.setAttribute("navItemDetail","active");
+
+        /* 暂存用户访问的页面，用于登陆后的页面返回 */
+        request.getSession().setAttribute(ScopeKey.blockPage,request.getServletPath());
+
+
         ArtworkService service = new ArtworkServiceImpl();
         String idStr = request.getParameter("id");
         int id = 1;

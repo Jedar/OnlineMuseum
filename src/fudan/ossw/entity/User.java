@@ -1,6 +1,7 @@
 package fudan.ossw.entity;
 
-import java.sql.Date;
+
+import java.sql.Timestamp;
 
 public class User {
     private int userID;
@@ -12,7 +13,7 @@ public class User {
     private boolean isDelete;
     private boolean isManager;
     private boolean visible;
-    private Date lastLogin;
+    private Timestamp lastLogin;
     private String signature;
 
     public User() {
@@ -26,7 +27,7 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.signature = "这个人很懒，什么都没有留下";
-        this.lastLogin = new Date(new java.util.Date().getTime());
+        this.lastLogin = new Timestamp(new java.util.Date().getTime());
         isDelete = false;
         isManager = false;
         visible = false;
@@ -40,17 +41,17 @@ public class User {
         this.phone = "12345678987";
         this.address = "China";
         this.signature = "这个人很懒，什么都没有留下";
-        this.lastLogin = new Date(new java.util.Date().getTime());
+        this.lastLogin = new Timestamp(new java.util.Date().getTime());
         isDelete = false;
         isManager = false;
         visible = false;
     }
 
-    public Date getLastLogin() {
+    public Timestamp getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(Date lastLogin) {
+    public void setLastLogin(Timestamp lastLogin) {
         this.lastLogin = lastLogin;
     }
 

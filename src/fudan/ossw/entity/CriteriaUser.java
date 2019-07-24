@@ -10,8 +10,9 @@ import java.sql.Date;
  * @Version 1.0
  **/
 public class CriteriaUser {
-    String username;
-    String address;
+    private String username;
+    private String address;
+
     public CriteriaUser() {
 
     }

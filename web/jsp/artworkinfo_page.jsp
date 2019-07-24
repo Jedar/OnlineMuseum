@@ -98,7 +98,7 @@
                             <label for="info-video">
                                 上传介绍视频
                             </label>
-                            <input accept="audio/mp4,video/mp4" type="file" class="form-control" name="video" id="info-video" value="${requestScope.artwork.title}">
+                            <input accept="video/mp4" type="file" class="form-control" name="video" id="info-video" value="${requestScope.artwork.title}">
                             <small class="form-text text-muted invisible">不能为空</small>
                         </div>
                     </div>
