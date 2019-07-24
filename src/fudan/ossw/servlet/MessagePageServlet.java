@@ -51,6 +51,7 @@ public class MessagePageServlet extends HttpServlet {
             senderOfRequests.add(userService.getUser(request1.getSenderID()));
         }
         List<User> friends = friendService.getFriendsList(userID);
+        List<User> recommendFriends = friendService.getRecommendFriends(userID);
         request.setAttribute("readMessages", readMessages);
         request.setAttribute("senderOfReadMessages", senderOfReadMessages);
         request.setAttribute("unreadMessages", unreadMessages);
@@ -60,6 +61,7 @@ public class MessagePageServlet extends HttpServlet {
         request.setAttribute("requests", requests);
         request.setAttribute("senderOfRequests", senderOfRequests);
         request.setAttribute("friends", friends);
+        request.setAttribute("recommendFriends", recommendFriends);
         request.getRequestDispatcher("./message_page.jsp").forward(request, response);
     }
 }
