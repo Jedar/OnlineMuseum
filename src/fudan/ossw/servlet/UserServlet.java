@@ -337,6 +337,7 @@ public class UserServlet extends HttpServlet {
         response.getWriter().println(json.toJSONString());
     }
 
+    /*搜索用户*/
     private void searchUser(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("username");
         List<User> users = userService.getCriteriaUsers(username);
@@ -366,6 +367,7 @@ public class UserServlet extends HttpServlet {
         response.getWriter().println(json.toJSONString());
     }
 
+    /*发送好友请求*/
     private void sendRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int senderID = ((User)request.getSession().getAttribute("user")).getUserID();
         int receiverID = Integer.parseInt(request.getParameter("receiverID"));
@@ -387,12 +389,13 @@ public class UserServlet extends HttpServlet {
         response.getWriter().println(json.toJSONString());
     }
 
+    /*阅读好友请求*/
     private void readRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int receiverID = ((User)request.getSession().getAttribute("user")).getUserID();
-        int senderID  = Integer.parseInt(request.getParameter("senderID").trim());
+        int requestID  = Integer.parseInt(request.getParameter("requestID").trim());
         boolean agree = Boolean.parseBoolean(request.getParameter("agree"));
         FriendService friendService = new FriendServiceImpl();
-        if(friendService.readRequest(senderID, receiverID, agree)){
+        if(friendService.readRequest(requestID, agree)){
             json.put("success", true);
         }else {
             json.put("success", false);
@@ -401,6 +404,7 @@ public class UserServlet extends HttpServlet {
         response.getWriter().println(json.toJSONString());
     }
 
+    /*删除好友*/
     private void deleteFriend(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int userID = ((User)request.getSession().getAttribute("user")).getUserID();
         int friendID = Integer.parseInt(request.getParameter("friendID"));
@@ -414,6 +418,7 @@ public class UserServlet extends HttpServlet {
         response.getWriter().println(json.toJSONString());
     }
 
+    /*发送消息*/
     private void sendMessage(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int userID = ((User)request.getSession().getAttribute("user")).getUserID();
         int friendID = Integer.parseInt(request.getParameter("friendID"));
@@ -429,6 +434,7 @@ public class UserServlet extends HttpServlet {
         response.getWriter().println(json.toJSONString());
     }
 
+    /*阅读消息*/
     private void readMessage(HttpServletRequest request, HttpServletResponse response) throws IOException {
         int messageID = Integer.parseInt(request.getParameter("messageID"));
         MessageService messageService = new MessageServiceImpl();
@@ -441,6 +447,7 @@ public class UserServlet extends HttpServlet {
         response.getWriter().println(json);
     }
 
+    /*删除消息*/
     private void deleteMessage(HttpServletRequest request, HttpServletResponse response) {
         int messageID = Integer.parseInt(request.getParameter("messageID"));
         MessageService messageService = new MessageServiceImpl();

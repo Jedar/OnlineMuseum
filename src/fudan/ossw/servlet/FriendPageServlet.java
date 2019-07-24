@@ -23,6 +23,7 @@ public class FriendPageServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /*初始化好友主页*/
         String idStr = request.getParameter("id");
         int friendID = 1;
         if(idStr != null){
@@ -37,8 +38,8 @@ public class FriendPageServlet extends HttpServlet {
         User friend = userService.getUser(friendID);
         FavoriteService favoriteService = new FavoriteServiceImpl();
         List<Artwork> recentFavorite = favoriteService.getRecentFavorite(friendID);
-        request.setAttribute("friend", friend);
-        request.setAttribute("recentFavorite",recentFavorite);
+        request.setAttribute("friend", friend);  /*用户个人信息*/
+        request.setAttribute("recentFavorite",recentFavorite);  /*最近的公开藏品信息*/
         request.getRequestDispatcher("./friend_page.jsp").forward(request,response);
     }
 }

@@ -82,7 +82,7 @@
                                 </div>
                                 <div class="col-2 offset-2 align-self-center">
                                     <div class="justify-content-center">
-                                        <a class="btn btn-info favorite-detail" href="detail_page.jsp?id=${artwork.artID}">查看详情</a>
+                                        <a class="btn btn-info favorite-detail" href="detail.jsp?id=${artwork.artID}">查看详情</a>
                                         <br><br>
                                         <button class="btn btn-danger favorite-delete" data-target="${artwork.artID}">删除藏品</button>
                                     </div>

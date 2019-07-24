@@ -40,7 +40,7 @@ $(function () {
         var btn = $(this);
         var senderID = $(this).attr("data-target");
         $.post( "./readRequest.us", {
-            senderID:senderID,
+            requestID:senderID,
             agree:true
         },function (result) {
             result = JSON.parse(result);
@@ -57,7 +57,7 @@ $(function () {
         var btn = $(this);
         var senderID = $(this).attr("data-target");
         $.post( "./readRequest.us", {
-            senderID:senderID,
+            requestID:senderID,
             agree:false
         },function (result) {
             result = JSON.parse(result);

@@ -30,6 +30,7 @@ public class FavoritePageServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        /*初始化收藏夹*/
         FavoriteService favoriteService = new FavoriteServiceImpl();
         int userID = ((User)request.getSession().getAttribute("user")).getUserID();
         ArtworkService artworkService = new ArtworkServiceImpl();
@@ -38,7 +39,7 @@ public class FavoritePageServlet extends HttpServlet {
         for(Favorite favorite : favorites) {
             favoriteVisibilityMap.put(artworkService.getArtworkByID(favorite.getArtID()), favorite);
         }
-        request.setAttribute("favoriteVisibilityMap", favoriteVisibilityMap);
+        request.setAttribute("favoriteVisibilityMap", favoriteVisibilityMap);    /*用户的藏品信息及其收藏的时间可见性等*/
         request.getRequestDispatcher("./favorite_page.jsp").forward(request, response);
     }
 }

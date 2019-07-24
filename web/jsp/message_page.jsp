@@ -283,9 +283,9 @@
                                         </c:if>
                                         <c:if test="${!requests.get(i).isRead}">
                                             <div class="justify-content-center wrapper">
-                                                <button class="btn btn-info agreeRequest" type="button" data-target="${request.senderID}">同意</button>
+                                                <button class="btn btn-info agreeRequest" type="button" data-target="${request.requestID}">同意</button>
                                                 <br><br>
-                                                <button class="btn btn-danger refuseRequest" type="button" data-target="${request.senderID}">拒绝</button>
+                                                <button class="btn btn-danger refuseRequest" type="button" data-target="${request.requestID}">拒绝</button>
                                             </div>
                                         </c:if>
                                     </div>
