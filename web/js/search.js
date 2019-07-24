@@ -1,24 +1,7 @@
 $(function () {
-    $("#search-button").on("click", function () {
-        $.post("./searchArtwork.aws",
-            {
-                mark:1,
-                title:$("#search-title").val(),
-                description:$("#search-description").val(),
-                location:$("#search-location").val(),
-                sortWay:$("#search-sort").val(),
-                pageSize:6
-            },function (result) {
-                result = JSON.parse(result);
-                if (result.success){
-                    setPage(result.index,result.artworkList);
-                }
-                else{
-                    showError("请求出错");
-                }
-            }
-
-        )
+    $("#search-page-btn").on("click",function () {
+        var page = 1;
+        getPage(page);
     });
 
     $("#page-input").on('keypress',function(e) {
@@ -75,7 +58,7 @@ $(function () {
             },function (result) {
                 result = JSON.parse(result);
                 if (result.success){
-                    setPage(result.total, result.index,result.artworkList);
+                    setPage(result.index,result.totalNumber,result.artworkList);
                 }
                 else{
                     showError("请求出错");
@@ -85,15 +68,15 @@ $(function () {
         )
     }
 
-    function setPage(total, idx, list){
-        $("")
+    function setPage(idx,totalNumber,list){
         $("#page-input").val(idx);
+        $("#totalPageNumber").html("/"+totalNumber);
         var i;
         var str = "";
         for(i in list){
             str += "<div class=\"item\">\n" +
                 "                    <figure>\n" +
-                "                        <a href=\"detail.jsp?id="+list[i].artwordID+"\">\n" +
+                "                        <a href=\"detail.jsp?id="+list[i].artID+"\" >\n" +
                 "                            <img src=\"../img/"+list[i].imageFileName+"\" alt=\"\">\n" +
                 "                        </a>\n" +
                 "                    </figure>\n" +
@@ -103,7 +86,7 @@ $(function () {
                 "                    </div>\n" +
                 "                    <p>"+list[i].description+"</p>\n" +
                 "                    <div>\n" +
-                "                        <a class=\"item-button\"  href=\"detail.jsp?id="+list[i].artwordID+" \">查看</a>\n" +
+                "                        <a class=\"item-button\"  href=\"detail.jsp?id="+list[i].artID+" \">查看</a>\n" +
                 "                        <a class=\"item-button\" href=\"#\">热度<span class=\"heat-number\">"+list[i].view+"</span> </a>\n" +
                 "                    </div>\n" +
                 "                </div>"

@@ -5,6 +5,8 @@ import fudan.ossw.dao.UserDao;
 import fudan.ossw.entity.CriteriaUser;
 import fudan.ossw.entity.User;
 import fudan.ossw.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.Date;
 import java.util.List;
@@ -19,6 +21,8 @@ import java.util.regex.Pattern;
  * @Version 1.0
  **/
 public class UserServiceImpl implements UserService {
+    private Logger logger = LoggerFactory.getLogger("user");
+
     private String message;
 
     private int code;
@@ -52,6 +56,9 @@ public class UserServiceImpl implements UserService {
             message = STR_ERROR;
             return null;
         }
+
+        logger.info("Login:id-{},name-{}",user.getUserID(),username);
+
         user.setLastLogin(new Date(new java.util.Date().getTime()));
         userDao.updateUser(user.getUserID(),user);
         return user;
@@ -70,6 +77,7 @@ public class UserServiceImpl implements UserService {
             return null;
         }
 
+        logger.info("Sign Up: id-{},name-{}",user.getUserID(),user.getUsername());
         boolean flag = userDao.addUser(user);
         if (flag){
             return userDao.getUserByName(user.getUsername());
@@ -101,11 +109,13 @@ public class UserServiceImpl implements UserService {
         if (isWrongUser(user)){
             return false;
         }
+        logger.info("Update: id-{},name-{},admin-{}",user.getUserID(),user.getUsername(),user.getIsManager());
         return userDao.updateUser(user.getUserID(),user);
     }
 
     @Override
     public boolean delete(int userID) {
+        logger.info("Delete User: id",userID);
         return userDao.deleteUser(userID);
     }
 
@@ -121,6 +131,7 @@ public class UserServiceImpl implements UserService {
             return false;
         }
 
+        logger.info("Insert User: id-{},name-{}",user.getUserID(),user.getUsername());
         boolean flag = userDao.addUser(user);
         if (flag){
             return true;

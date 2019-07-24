@@ -51,13 +51,17 @@
                         <tr><td>年代:</td><td>${requestScope.collection.age}</td></tr>
                         <tr><td>尺寸:</td><td>${requestScope.collection.size}</td></tr>
                         <tr><td>描述:</td><td>${requestScope.collection.description}</td></tr>
+                        <tr><td>出土年份:</td><td>${requestScope.collection.findTime}</td></tr>
                         <tr><td>馆藏地点:</td><td>${requestScope.collection.location}</td></tr>
                         <tr><td>热度:</td><td>${requestScope.collection.view}</td></tr>
                     </table>
                     <div>
                         <span class="invisible" id="id-num">${requestScope.collection.artID}</span>
                         <button id="bt-addToWish" class="btn btn-primary btn-sm"><i class="fa fa-star"></i> 加入收藏夹</button>
-                        <button id="bt-video" class="btn btn-info btn-sm"><i class="fa fa-file-video-o"></i> 观看藏品视频</button>
+                        <button id="bt-video" class="btn btn-info btn-sm" data-toggle="modal" data-target="#videoModal"><i class="fa fa-file-video-o"></i> 观看藏品视频</button>
+                        <a class="text-white btn btn-link btn-secondary  btn-sm ${requestScope.manageStr}" href="./artworkinfo.jsp?method=change&id=${requestScope.collection.artID}">
+                            <i class="fa fa-cogs"></i>管理该藏品
+                        </a>
                     </div>
                 </div>
             </div>
@@ -77,6 +81,35 @@
     </div>
     <br>
 </main>
+
+<div>
+    <div class="modal fade" id="videoModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- 模态框头部 -->
+                <div class="modal-header">
+                    <h4 class="modal-title">藏品视频</h4>
+                    <button type="button" class="close video-close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- 模态框主体 -->
+                <div class="modal-body">
+                    <video id="videoContent"  width="460" height="280" controls="controls">
+                        <source src="../video/${requestScope.collection.videoFileName}" type="video/mp4" />
+                        Your browser does not support HTML5 video.
+                    </video>
+                </div>
+
+                <!-- 模态框底部 -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary video-close" data-dismiss="modal">关闭</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <jsp:include page="../inc/footer.inc.jsp"/>
 </body>

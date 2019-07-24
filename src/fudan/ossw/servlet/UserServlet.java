@@ -3,6 +3,7 @@ package fudan.ossw.servlet;
 import com.alibaba.fastjson.JSONObject;
 import fudan.ossw.dao.DaoFactory;
 import fudan.ossw.entity.CriteriaUser;
+import fudan.ossw.data.ErrorCode;
 import fudan.ossw.entity.Message;
 import fudan.ossw.entity.Request;
 import fudan.ossw.entity.User;
@@ -50,7 +51,7 @@ public class UserServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doPost(request,response);
     }
 
     /*用户登陆*/
@@ -90,6 +91,19 @@ public class UserServlet extends HttpServlet {
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
         String email = request.getParameter("email");
+        String checkCode = request.getParameter("checkCode");
+
+        String rightCheckCode = (String)request.getSession().getAttribute(CheckCodeServlet.ATTR_NAME);
+
+        if (rightCheckCode == null || !rightCheckCode.equals(checkCode)){
+            json.put("success", false);
+            json.put("message", "验证码错误");
+            json.put("code", ErrorCode.CHECK_CODE_ERROR);
+            json.put("link",request.getContextPath());
+            response.getWriter().println(json);
+            return;
+        }
+
         User user = userService.signup(new User(-1, name, pwd, email, phone, address));
         if(user == null) {
             json.put("success", false);

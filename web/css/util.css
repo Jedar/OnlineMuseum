@@ -24,6 +24,15 @@
     background: #8795a2;
 }
 
+/* handle jquery validate */
+.error{
+    color:red;
+}
+
+.conflictDiv{
+    color: red;
+}
+
 .row-fix{
     padding-top: 1em;
 }

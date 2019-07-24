@@ -1,4 +1,35 @@
 $(function () {
+    $("#settings-form").validate({
+        rules:{
+            "inputUsername":{
+                rangelength:[4,15]
+            },
+            "inputEmail":{
+                email:true
+            },
+            "inputPhone":{
+                rangelength:[11,11]
+            },
+            "inputOldPassword":{
+                required: true
+            }
+        },
+        messages:{
+            "inputUsername":{
+                rangelength:"昵称长度应该介于4与15之间"
+            },
+            "inputEmail":{
+                email:"邮箱不符合格式"
+            },
+            "inputPhone":{
+                rangelength:"手机号码不符合格式"
+            },
+            "inputOldPassword":{
+                required: "请输入验证密码"
+            }
+        }
+    });
+
     $(".favorite-delete").on("click",function () {
         var target = $(this).attr("data-target");
         var node = $(this).parents(".list-group-item");
@@ -40,6 +71,11 @@ $(function () {
     });
 
     $("#changeInfo").on("click", function () {
+        /* 检验格式是否合法 */
+        if (! $("#settings-form").valid()) {
+            return;
+        }
+
         var username = $("#inputUsername").val();
         var password = md5($("#inputOldPassword").val());
         var email = $("#inputEmail").val();

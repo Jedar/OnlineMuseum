@@ -26,6 +26,6 @@ public class ArtworkServiceImplTest {
 
     private static void testSearchPage() {
         ArtworkService service = new ArtworkServiceImpl();
-        System.out.println(service.search("", "", "", ""));
+        System.out.println(service.search("玉", "", "", ""));
     }
 }
