@@ -91,7 +91,7 @@
                             <label for="info-image">
                                 上传图片
                             </label>
-                            <input accept="image/png,image/gif,image/jpeg" type="file" class="form-control" name="image" id="info-image" value="${requestScope.artwork.imageFileName}">
+                            <input accept="image/png,image/jpeg" type="file" class="form-control" name="image" id="info-image" value="${requestScope.artwork.imageFileName}">
                             <small class="form-text text-muted invisible">不能为空</small>
                         </div>
                         <div class="form-group">

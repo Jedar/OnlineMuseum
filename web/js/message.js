@@ -1,4 +1,23 @@
 $(function () {
+    var receiverID;
+
+    $("#send-friend-request").on("click", function () {
+        var content = $("#message-text").val();
+        $.post( "./sendRequest.us", {
+            receiverID:receiverID,
+            content:content
+        },function (result) {
+            result = JSON.parse(result);
+            if(result.success){
+                showTip("发送成功！");
+                $("#message-text").val("");
+            }else{
+                showError(result.message);
+            }
+        });
+    });
+
+
     $("#search-friend-button").on("click", function () {
         var username = $("#search-friend-input").val();
         $.post( "./searchUser.us", {
@@ -14,21 +33,7 @@ $(function () {
     });
 
     $("#search-result").on("click", ".add-friend-button", function () {
-        var receiverID = $(this).attr("data-whatever");
-        $("#send-friend-request").on("click", function () {
-            var content = $("#message-text").val();
-            $.post( "./sendRequest.us", {
-                receiverID:receiverID,
-                content:content
-            },function (result) {
-                result = JSON.parse(result);
-                if(result.success){
-                    showTip("发送成功！");
-                }else{
-                    showError(result.message);
-                }
-            });
-        });
+        receiverID = $(this).attr("data-whatever");
     });
 
     $(".agreeRequest").on("click", function () {
