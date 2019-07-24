@@ -3,6 +3,7 @@ package fudan.ossw.servlet;
 import fudan.ossw.dao.ArtworkDao;
 import fudan.ossw.dao.impl.ArtworkDaoImpl;
 import fudan.ossw.entity.Artwork;
+import fudan.ossw.entity.User;
 import fudan.ossw.service.ArtworkService;
 import fudan.ossw.service.impl.ArtworkServiceImpl;
 
@@ -35,6 +36,17 @@ public class DetailPageServlet extends HttpServlet {
 
         Artwork artwork = service.getArtworkByID(id);
         request.setAttribute("collection",artwork);
+
+        String manageStr = "invisible";
+        User user = (User)request.getSession().getAttribute("user");
+        if (user == null){
+            manageStr = "invisible";
+        }
+        else if (user.getIsManager()){
+            manageStr = "";
+        }
+
+        request.setAttribute("manageStr",manageStr);
 
         request.getRequestDispatcher("./detail_page.jsp").forward(request,resp);
     }
