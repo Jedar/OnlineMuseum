@@ -1,8 +1,9 @@
 package fudan.ossw.entity;
 
+import java.sql.Timestamp;
+
 import com.alibaba.fastjson.annotation.JSONField;
 
-import java.sql.Date;
 
 public class User {
     @JSONField(name="userID")
@@ -33,7 +34,7 @@ public class User {
     private boolean visible;
 
     @JSONField(name="lastLogin", serialize = false)
-    private Date lastLogin;
+    private Timestamp lastLogin;
 
     @JSONField(name="signature")
     private String signature;
@@ -49,7 +50,7 @@ public class User {
         this.phone = phone;
         this.address = address;
         this.signature = "这个人很懒，什么都没有留下";
-        this.lastLogin = new Date(new java.util.Date().getTime());
+        this.lastLogin = new Timestamp(new java.util.Date().getTime());
         isDelete = false;
         isManager = false;
         visible = false;
@@ -63,17 +64,17 @@ public class User {
         this.phone = "12345678987";
         this.address = "China";
         this.signature = "这个人很懒，什么都没有留下";
-        this.lastLogin = new Date(new java.util.Date().getTime());
+        this.lastLogin = new Timestamp(new java.util.Date().getTime());
         isDelete = false;
         isManager = false;
         visible = false;
     }
 
-    public Date getLastLogin() {
+    public Timestamp getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(Date lastLogin) {
+    public void setLastLogin(Timestamp lastLogin) {
         this.lastLogin = lastLogin;
     }
 

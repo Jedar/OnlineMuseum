@@ -1,5 +1,6 @@
 package fudan.ossw.servlet;
 
+import fudan.ossw.data.ScopeKey;
 import fudan.ossw.entity.Artwork;
 import fudan.ossw.entity.CriteriaArtwork;
 import fudan.ossw.service.ArtworkService;
@@ -18,6 +19,9 @@ public class SearchPageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setAttribute("navItemSearch","active");
+
+        /* 暂存用户访问的页面，用于登陆后的页面返回 */
+        req.getSession().setAttribute(ScopeKey.blockPage,req.getServletPath());
 
         String title;
         String description;

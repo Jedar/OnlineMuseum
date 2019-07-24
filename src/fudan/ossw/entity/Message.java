@@ -1,19 +1,19 @@
 package fudan.ossw.entity;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Message {
     private int messageID;
     private int senderID;
     private int receiverID;
     private String content;
-    private Date sendTime;
+    private Timestamp sendTime;
     private boolean isRead;
 
     public Message() {
     }
 
-    public Message(int messageID, int senderID, int receiverID, String content, Date sendTime, boolean isRead) {
+    public Message(int messageID, int senderID, int receiverID, String content,Timestamp sendTime, boolean isRead) {
         this.messageID = messageID;
         this.senderID = senderID;
         this.receiverID = receiverID;
@@ -54,11 +54,11 @@ public class Message {
         this.content = content;
     }
 
-    public Date getSendTime() {
+    public Timestamp getSendTime() {
         return sendTime;
     }
 
-    public void setSendTime(Date sendTime) {
+    public void setSendTime(Timestamp sendTime) {
         this.sendTime = sendTime;
     }
 

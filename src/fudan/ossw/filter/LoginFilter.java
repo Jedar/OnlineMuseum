@@ -1,5 +1,6 @@
 package fudan.ossw.filter;
 
+import fudan.ossw.data.ScopeKey;
 import fudan.ossw.entity.User;
 
 import javax.servlet.*;
@@ -44,7 +45,10 @@ public class LoginFilter implements Filter {
             return;
         }
         User user = (User)httpRequest.getSession().getAttribute(sessionKey);
+        /* 未登录拦截 */
         if ((user == null)) {
+            httpRequest.getSession().setAttribute(ScopeKey.blockPage,httpRequest.getServletPath());
+
             httpResponse.sendRedirect(httpRequest.getContextPath() + redirectUrl);
             return;
         }

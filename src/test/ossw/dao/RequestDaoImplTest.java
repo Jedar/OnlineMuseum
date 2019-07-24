@@ -11,7 +11,7 @@ public class RequestDaoImplTest {
     public static void main(String[] args) {
         RequestDao dao = new RequestDaoImpl();
 
-        Request request = new Request(1,2,3,"Hello",new java.sql.Date(new java.util.Date().getTime()),false,false);
+        Request request = new Request(1,2,3,"Hello",new java.sql.Timestamp(new java.util.Date().getTime()),false,false);
 
         dao.addRequest(request);
 

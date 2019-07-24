@@ -1,19 +1,13 @@
 package fudan.ossw.entity;
 
-import java.sql.Date;
 
-/**
- * @ClassName Favorite
- * @Description TODO
- * @Author Peng Deng
- * @Date 2019/7/17 10:26
- * @Version 1.0
- **/
+import java.sql.Timestamp;
+
 public class Favorite {
     int favoriteID;
     int userID;
     int artID;
-    Date addTime;
+    Timestamp addTime;
     boolean visible;
 
     public Favorite() {
@@ -49,11 +43,11 @@ public class Favorite {
         this.artID = artID;
     }
 
-    public Date getAddTime() {
+    public Timestamp getAddTime() {
         return addTime;
     }
 
-    public void setAddTime(Date addTime) {
+    public void setAddTime(Timestamp addTime) {
         this.addTime = addTime;
     }
 

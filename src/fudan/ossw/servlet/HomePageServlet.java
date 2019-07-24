@@ -1,5 +1,6 @@
 package fudan.ossw.servlet;
 
+import fudan.ossw.data.ScopeKey;
 import fudan.ossw.entity.Artwork;
 import fudan.ossw.service.ArtworkService;
 import fudan.ossw.service.impl.ArtworkServiceImpl;
@@ -15,6 +16,9 @@ import java.util.List;
 public class HomePageServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        /* 暂存用户访问的页面，用于登陆后的页面返回 */
+        req.getSession().setAttribute(ScopeKey.blockPage,req.getServletPath());
+
         ArtworkService service = new ArtworkServiceImpl();
 
         List<Artwork> heat = service.getHeatList();

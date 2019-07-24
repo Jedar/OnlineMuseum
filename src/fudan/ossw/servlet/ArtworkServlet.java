@@ -167,50 +167,46 @@ public class ArtworkServlet extends HttpServlet {
         doPost(request,response);
     }
 
-    protected boolean processUploadField(FileItem item, Map<String, String> map) {
+    private boolean processUploadField(FileItem item, Map<String, String> map) {
         try {
-//          InputStream in = item.getInputStream();
             //找一个存放文件的位置；存放的文件名
             String id = item.getFieldName();
-            String fileName = item.getName();//上传的文件的文件名  C:\Users\wzhting\Desktop\a.txt  a.txt(浏览器不同)
+            String fileName = item.getName();//上传的文件的文件名
+            String contentType = item.getContentType();
+            String putDir = "";
+
+            if (contentType.startsWith("image")){
+                putDir = "/img/";
+            }
+            else if (contentType.startsWith("video")){
+                putDir = "/video/";
+            }
+            else {
+                return false;
+            }
+
             if(fileName!=null&&!fileName.equals("")){
-                //限定上传文件的类型，从他提供的方法中查看他是不是某一类型的文件
-                //这个函数如果开启的话，那么就只能上传是图片类型的数据
-//              if(!item.getContentType().startsWith("image")){
-//                  return;
-//              }
                 fileName = FilenameUtils.getName(fileName);
                 fileName = UUID.randomUUID().toString() +"_"+fileName;
-
-                //存放路径
                 String realPath = getServletContext().getRealPath("/WEB-INF/files");
-                System.out.println(realPath);
-                //生成一个子目录,也就是在realPath下面生成新的子目录，并且返回子目录
-                //这个地方是根据日期来生成目录
-                //如果是根据时间来上传东西的话，那么对于同一天上传的东西，都会在同一个目录下
-                //并且每次上传即使是相同的名字，也会产生不同的hashcode从而都能偶得到保存
+//                System.out.println(realPath);
                 String childDirectory = genChildDirectory(realPath,fileName);
-
                 //创造新的存放目录
                 File storeDirectory = new File(realPath+File.separator+childDirectory);
                 //如果目录不存在，那么就创建它
                 if(!storeDirectory.exists()){
                     storeDirectory.mkdirs();
                 }
-
                 File file = new File(storeDirectory, fileName);
                 //这个方法会自动的进行临时文件的清理，也就是上传完毕之后，他会自动的清除临时文件
                 item.write(file);
-
-                System.out.println(item.getContentType());
-                File imageDir = new File(getServletContext().getRealPath("/img/"));
+//                System.out.println(item.getContentType());
+                File imageDir = new File(getServletContext().getRealPath(putDir));
                 FileUtils.copyFileToDirectory(file,imageDir);
 
-                System.out.println(fileName);
+//                System.out.println(fileName);
                 map.put(id,fileName);
             }
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -296,7 +292,6 @@ public class ArtworkServlet extends HttpServlet {
                 response.sendRedirect("../WEB-INF/jsp/error.jsp");
             }
         }
-
         int artID = 0;
         if (map.get("artID") != null){
             try {

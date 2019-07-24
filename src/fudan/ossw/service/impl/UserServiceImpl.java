@@ -8,7 +8,7 @@ import fudan.ossw.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService {
 
         logger.info("Login:id-{},name-{}",user.getUserID(),username);
 
-        user.setLastLogin(new Date(new java.util.Date().getTime()));
+        user.setLastLogin(new Timestamp(new java.util.Date().getTime()));
         userDao.updateUser(user.getUserID(),user);
         return user;
     }

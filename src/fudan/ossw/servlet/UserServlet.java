@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import fudan.ossw.dao.DaoFactory;
 import fudan.ossw.entity.CriteriaUser;
 import fudan.ossw.data.ErrorCode;
+import fudan.ossw.data.ScopeKey;
 import fudan.ossw.entity.Message;
 import fudan.ossw.entity.Request;
 import fudan.ossw.entity.User;
@@ -25,7 +26,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -59,6 +60,14 @@ public class UserServlet extends HttpServlet {
         String name = request.getParameter("username");
         String pwd = request.getParameter("password");
         User user = userService.login(name, pwd);
+
+        /* 获取登陆后跳转的页面 */
+        String url = getServletConfig().getInitParameter("homePage");
+        String blockPage = (String)request.getSession().getAttribute(ScopeKey.blockPage);
+        if (blockPage != null){
+            url = blockPage;
+        }
+
         if(user == null) {
             json.put("success", false);
             json.put("message", userService.getErrorMessage());
@@ -71,7 +80,7 @@ public class UserServlet extends HttpServlet {
             json.put("success", true);
             json.put("message", userService.getErrorMessage());
             json.put("code",userService.getErrorCode());
-            json.put("link",request.getContextPath()+"/jsp/home.jsp");
+            json.put("link",request.getContextPath()+url);
             response.getWriter().println(json.toJSONString());
         }
     }
@@ -87,13 +96,22 @@ public class UserServlet extends HttpServlet {
     /*用户注册*/
     private void signup(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String name = request.getParameter("username");
-        String pwd = request.getParameter("password");
         String address = request.getParameter("address");
         String phone = request.getParameter("phone");
-        String email = request.getParameter("email");
+        String pwd = request.getParameter("password");
         String checkCode = request.getParameter("checkCode");
+        String email = request.getParameter("email");
 
         String rightCheckCode = (String)request.getSession().getAttribute(CheckCodeServlet.ATTR_NAME);
+
+        /* 获取注册后跳转的页面 */
+
+        String blockPage = (String)request.getSession().getAttribute(ScopeKey.blockPage);
+        String url = getServletConfig().getInitParameter("homePage");
+        /* 如果是正常跳转的化直接跳转到首页 */
+        if (blockPage != null){
+            url = blockPage;
+        }
 
         if (rightCheckCode == null || !rightCheckCode.equals(checkCode)){
             json.put("success", false);
@@ -108,16 +126,16 @@ public class UserServlet extends HttpServlet {
         if(user == null) {
             json.put("success", false);
             json.put("message", userService.getErrorMessage());
-            json.put("code",userService.getErrorCode());
             json.put("link",request.getContextPath());
+            json.put("code",userService.getErrorCode());
             response.getWriter().println(json);
         }else {
             HttpSession session = request.getSession();
             session.setAttribute("user", user);
             json.put("success", true);
             json.put("message", userService.getErrorMessage());
+            json.put("link",request.getContextPath()+url);
             json.put("code",userService.getErrorCode());
-            json.put("link",request.getContextPath()+"/jsp/home.jsp");
             response.getWriter().println(json);
         }
     }
@@ -357,7 +375,7 @@ public class UserServlet extends HttpServlet {
             json.put("success", false);
             json.put("message", "用户不存在");
         }else{
-            Request addRequest = new Request(-1, senderID, receiver.getUserID(), content, new Date(new java.util.Date().getTime()), false, false);
+            Request addRequest = new Request(-1, senderID, receiver.getUserID(), content, new Timestamp(new java.util.Date().getTime()), false, false);
             FriendService friendService = new FriendServiceImpl();
             if(friendService.sendRequest(addRequest)) {
                 json.put("success", true);
@@ -400,7 +418,7 @@ public class UserServlet extends HttpServlet {
         int userID = ((User)request.getSession().getAttribute("user")).getUserID();
         int friendID = Integer.parseInt(request.getParameter("friendID"));
         String content = request.getParameter("content");
-        Message message = new Message(-1, userID, friendID, content, new Date(new java.util.Date().getTime()), false);
+        Message message = new Message(-1, userID, friendID, content, new Timestamp(new java.util.Date().getTime()), false);
         MessageService messageService = new MessageServiceImpl();
         if(messageService.sendMessage(message)){
             json.put("success", true);

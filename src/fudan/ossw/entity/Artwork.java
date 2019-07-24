@@ -2,7 +2,7 @@ package fudan.ossw.entity;
 
 import com.alibaba.fastjson.annotation.JSONField;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 
 public class Artwork {
     @JSONField(name="artID")
@@ -36,7 +36,7 @@ public class Artwork {
     private String findTime;
 
     @JSONField(name="timeReleased", serialize=false)
-    private Date timeReleased;
+    private Timestamp timeReleased;
 
     @JSONField(name="delete", serialize=false)
     private boolean isDelete = false;
@@ -59,7 +59,7 @@ public class Artwork {
         this.view = view;
         this.location = location;
         this.findTime = "";
-        this.timeReleased = new Date(new java.util.Date().getTime());
+        this.timeReleased = new Timestamp(new java.util.Date().getTime());
         this.isDelete = false;
         this.uploadID = 1;
     }
@@ -75,7 +75,7 @@ public class Artwork {
         this.location = location;
         this.findTime = findTime;
         this.uploadID = uploadID;
-        this.timeReleased = new Date(new java.util.Date().getTime());
+        this.timeReleased = new Timestamp(new java.util.Date().getTime());
         this.isDelete = false;
         this.view=0;
     }
@@ -160,11 +160,11 @@ public class Artwork {
         this.findTime = findTime;
     }
 
-    public Date getTimeReleased() {
+    public Timestamp getTimeReleased() {
         return timeReleased;
     }
 
-    public void setTimeReleased(Date timeReleased) {
+    public void setTimeReleased(Timestamp timeReleased) {
         this.timeReleased = timeReleased;
     }
 
