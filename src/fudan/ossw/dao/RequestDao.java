@@ -13,6 +13,8 @@ public interface RequestDao {
 
     public List<Request> getRequestList(int userID);
 
+    public List<Request> getRequestList(int senderID, int receiverID);
+
     public boolean deleteRequest(int requestID);
 
     public Request getRequest(int requestID);

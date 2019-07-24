@@ -69,4 +69,10 @@ public class RequestDaoImpl implements RequestDao {
         String sql = "SELECT * FROM requests WHERE requestID = ?";
         return dao.get(Request.class, sql, requestID);
     }
+
+    @Override
+    public List<Request> getRequestList(int senderID, int receiverID) {
+        String sql = "SELECT * FROM requests WHERE senderID = ? AND receiverID = ? and isRead = ?";
+        return dao.getForList(Request.class, sql, senderID, receiverID, false);
+    }
 }

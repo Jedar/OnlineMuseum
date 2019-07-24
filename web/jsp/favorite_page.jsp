@@ -1,8 +1,5 @@
-<%@ page import="java.util.List" %>
-<%@ page import="fudan.ossw.dao.ArtworkDao" %>
-<%@ page import="fudan.ossw.dao.impl.ArtworkDaoImpl" %>
-<%@ page import="fudan.ossw.entity.Artwork" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
     <title>Favorite</title>
@@ -21,6 +18,7 @@
 
 <jsp:include page="../inc/nav.inc.jsp"/>
 
+<jsp:useBean id="favoriteVisibilityMap" type="java.util.Map<fudan.ossw.entity.Artwork,fudan.ossw.entity.Favorite>" scope="request"/>
 <main>
     <div class="container row-fix">
         <div class="card">
@@ -28,43 +26,45 @@
                 收藏夹
             </div>
             <ul class="list-group">
-                <%
-                    List<Artwork> favorite = (List<Artwork>)request.getAttribute("favorite");
-                    for(Artwork artwork : favorite) {
-                %>
-                <li class="list-group-item">
-                    <div class="row">
-                        <figure class="img-thumbnail col-2 offset-1">
-                            <img src="../img/<%=artwork.getImageFileName()%>" width="150" height=150 alt="" />
-                        </figure>
-                        <div class="col-3 offset-1">
-                            <table class="table">
-                                <tr>
-                                    <td>名称</td>
-                                    <td><%=artwork.getTitle()%></td>
-                                </tr>
-                                <tr>
-                                    <td>年代</td>
-                                    <td><%=artwork.getAge()%></td>
-                                </tr>
-                                <tr>
-                                    <td>尺寸</td>
-                                    <td><%=artwork.getSize()  %></td>
-                                </tr>
-                            </table>
-                        </div>
-                        <div class="col-3 offset-1 align-self-center">
-                            <div class="btn-group justify-content-center">
-                                <a class="btn btn-info button-detail" href="./detail.jsp?id=<%=artwork.getArtID()%>">查看详情</a>
-                                <button class="btn btn-danger button-delete" data-target="<%=artwork.getArtID()%>">删除藏品</button>
+                <c:forEach items="${favoriteVisibilityMap}" var="entry">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <figure class="img-thumbnail col-2 offset-1">
+                                <img src="../img/${entry.key.imageFileName}" width="150" height=150 alt="" />
+                            </figure>
+                            <div class="col-4 offset-1">
+                                <table class="table">
+                                    <tr>
+                                        <td>名称</td>
+                                        <td>${entry.key.title}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>馆藏地点</td>
+                                        <td>${entry.key.location}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>热度</td>
+                                        <td>${entry.key.view}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>收藏时间</td>
+                                        <td>${entry.value.addTime}</td>
+                                    </tr>
+                                </table>
+                            </div>
+                            <div class="col-3 offset-1 align-self-center">
+                                <div class="btn-group justify-content-center my-3">
+                                    <a class="btn btn-info button-detail" href="./detail.jsp?id=${entry.key.artID}">查看详情</a>
+                                    <button class="btn btn-danger button-delete" data-target="${entry.key.artID}">删除藏品</button>
+                                </div>
+                                <div class="custom-control custom-switch">
+                                    <input type="checkbox" class="custom-control-input" <c:if test="${entry.value.visible}">checked</c:if> data-target="${entry.key.artID}" id="customSwitch${entry.key.artID}">
+                                    <label class="custom-control-label" for="customSwitch${entry.key.artID}">公开该藏品</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </li>
-                <%
-                    }
-                %>
-
+                    </li>
+                </c:forEach>
             </ul>
             <div class="card-footer">
                 <div class="container align-content-center">

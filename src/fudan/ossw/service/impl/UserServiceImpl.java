@@ -2,6 +2,7 @@ package fudan.ossw.service.impl;
 
 import fudan.ossw.dao.DaoFactory;
 import fudan.ossw.dao.UserDao;
+import fudan.ossw.entity.CriteriaUser;
 import fudan.ossw.entity.User;
 import fudan.ossw.service.UserService;
 import org.slf4j.Logger;
@@ -193,5 +194,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUser(int userID) {
         return userDao.getUserByID(userID);
+    }
+
+    @Override
+    public List<User> getCriteriaUsers(String username) {
+        CriteriaUser cu = new CriteriaUser(username);
+        return userDao.getCriteriaUsers(cu);
     }
 }

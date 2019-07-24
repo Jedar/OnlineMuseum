@@ -20,4 +20,5 @@ public interface FavoriteDao {
 
     public int getFavoriteCount(int userID);
 
+    public boolean changeVisibility(int userID, int artworkID, boolean visible);
 }

@@ -1,7 +1,4 @@
-<%@ page import="fudan.ossw.entity.User" %>
-<%@ page import="java.util.List" %>
-<%@ page import="fudan.ossw.entity.Favorite" %>
-<%@ page import="fudan.ossw.entity.Artwork" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Peng Deng
   Date: 2019/7/20

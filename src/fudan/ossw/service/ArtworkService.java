@@ -14,4 +14,5 @@ public interface ArtworkService extends BaseService {
     Artwork getArtworkByID(int artworkID);
     List<Artwork> search(String title, String description, String location, String sortWay);
     List<Artwork> searchPage(String title, String description, String location, String sortWay, int mark, int pageSize);
+    List<Artwork> getRecommendArtworks(int userID);
 }

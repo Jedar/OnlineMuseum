@@ -1,7 +1,6 @@
 package fudan.ossw.servlet;
 
 import com.alibaba.fastjson.JSONObject;
-import com.sun.deploy.net.HttpRequest;
 import fudan.ossw.dao.DaoFactory;
 import fudan.ossw.entity.Artwork;
 import fudan.ossw.entity.CriteriaArtwork;
@@ -152,6 +151,7 @@ public class ArtworkServlet extends HttpServlet {
         object.put("artworkList",artworks);
         object.put("totalNumber",pageNumber);
 
+        System.out.println(artworks);
         try {
             response.getWriter().println(object.toJSONString());
         } catch (IOException e) {

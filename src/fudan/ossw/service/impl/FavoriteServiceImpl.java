@@ -40,6 +40,11 @@ public class FavoriteServiceImpl implements FavoriteService {
     }
 
     @Override
+    public List<Favorite> getFavorites(int userID) {
+        return DaoFactory.getInstance().getFavoriteDao().getFavoriteList(userID);
+    }
+
+    @Override
     public List<Artwork> getRecentFavorite(int userID) {
         List<Favorite> recentFavorite = DaoFactory.getInstance().getFavoriteDao().getRecentFavorite(userID);
         List<Artwork> artworks = new LinkedList<>();
@@ -63,5 +68,10 @@ public class FavoriteServiceImpl implements FavoriteService {
     @Override
     public boolean deleteFavorite(int userID, int artworkID) {
         return DaoFactory.getInstance().getFavoriteDao().cancelFavorite(userID, artworkID);
+    }
+
+    @Override
+    public boolean changeVisibility(int userID, int artworkID, boolean visible) {
+        return DaoFactory.getInstance().getFavoriteDao().changeVisibility(userID, artworkID, visible);
     }
 }

@@ -29,6 +29,7 @@ $(function () {
         }
         getPage(page);
     });
+
     $(".page-next").on("click",function (e) {
         var input = $("#page-input");
         var page = parseInt(input.val());

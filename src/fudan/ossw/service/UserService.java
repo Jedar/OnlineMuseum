@@ -1,4 +1,5 @@
 package fudan.ossw.service;
+import fudan.ossw.entity.CriteriaUser;
 import fudan.ossw.entity.User;
 
 import java.util.List;
@@ -20,4 +21,5 @@ public interface UserService extends BaseService {
     boolean update(User user);
     boolean delete(int userID);
     boolean insert(User user);
+    List<User> getCriteriaUsers(String username);
 }
