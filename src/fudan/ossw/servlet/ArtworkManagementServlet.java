@@ -19,8 +19,10 @@ public class ArtworkManagementServlet extends HttpServlet {
 
         ArtworkService service = new ArtworkServiceImpl();
 
+        /* 搜索得到艺术品列表 */
         List<Artwork> artworks = service.search("","","","view");
 
+        /* 放置于参数中 */
         request.setAttribute("artworkList",artworks);
 
         request.getRequestDispatcher("./artworkmanagement_page.jsp").forward(request,resp);

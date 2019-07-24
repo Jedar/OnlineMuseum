@@ -12,12 +12,14 @@ public class JDBCDao<T> implements BaseDao<T> {
     private BasicDataSource dataSource = null;
 
     public JDBCDao(){
+        /* 获取配置文件内容 */
         Properties properties = PropertyRepository.getInstance().getJdbcProperties();
         String url = properties.getProperty("url");
         String user = properties.getProperty("user");
         String password = properties.getProperty("password");
         String driver = properties.getProperty("driver");
 
+        /* 初始化数据库 */
         dataSource = new BasicDataSource();
         dataSource.setUrl(url);
         dataSource.setUsername(user);
@@ -29,6 +31,7 @@ public class JDBCDao<T> implements BaseDao<T> {
         int maxWait = Integer.parseInt(properties.getProperty("ds_max_wait"));
         int maxIdle = Integer.parseInt(properties.getProperty("ds_max_idle"));
 
+        /* 设置连接池连接属性 */
         dataSource.setInitialSize(initSize);
         dataSource.setMaxWaitMillis(maxWait);
         dataSource.setMinIdle(minIdle);
@@ -41,14 +44,20 @@ public class JDBCDao<T> implements BaseDao<T> {
         PreparedStatement ps = null;
         ResultSet resultSet = null;
         try {
-            conn = dataSource.getConnection();
+            /* 获取连接 */
             ps = conn.prepareStatement(sql);
+            conn = dataSource.getConnection();
 
+            /* 放入参数 */
             int idx = 1;
             for(Object object:args){
                 ps.setObject(idx++,object);
             }
+
+            /* 执行语句 */
             resultSet = ps.executeQuery();
+
+            /* 将结果放置于对象中 */
             Map<String,Object> map = new HashMap<>();
             T entity;
             while (resultSet.next()){
@@ -59,6 +68,7 @@ public class JDBCDao<T> implements BaseDao<T> {
                     Object value = resultSet.getObject(key);
                     map.put(key,value);
                 }
+                /* 利用反射得到实例 */
                 entity = clazz.getDeclaredConstructor().newInstance();
                 for(Map.Entry<String,Object> entry:map.entrySet()){
                     String name = entry.getKey();
@@ -72,6 +82,7 @@ public class JDBCDao<T> implements BaseDao<T> {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            /* 释放连接 */
             release(resultSet,ps,conn);
         }
         return list;
@@ -87,6 +98,7 @@ public class JDBCDao<T> implements BaseDao<T> {
             return list.get(0);
         }
 
+        /* 返回值可能为空 */
         return entity;
     }
 
@@ -96,17 +108,22 @@ public class JDBCDao<T> implements BaseDao<T> {
         PreparedStatement ps = null;
         int exeNum = 0;
         try {
+            /* 获取连接 */
             conn = dataSource.getConnection();
             ps = conn.prepareStatement(sql);
 
+            /* 放置参数 */
             int idx = 1;
             for(Object object:args){
                 ps.setObject(idx++,object);
             }
+
+            /* 执行语句 */
             exeNum = ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
+            /* 释放连接 */
             release(null,ps,conn);
         }
 

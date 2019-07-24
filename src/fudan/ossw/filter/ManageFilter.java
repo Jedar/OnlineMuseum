@@ -20,6 +20,7 @@ public class ManageFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) req;
         HttpServletResponse httpResponse = (HttpServletResponse) resp;
         User user = (User)httpRequest.getSession().getAttribute(sessionKey);
+        /* 如果不是管理员，不让通行 */
         if ((user == null)) {
             httpResponse.sendRedirect(httpRequest.getContextPath() + homePage);
             return;

@@ -17,6 +17,7 @@ public class ArtworkInfoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String method = req.getParameter("method");
 
+        /* 根据请求的方法初始化不同的参数 */
         if ("change".equals(method)){
             fixArtworkPage(req);
         }
@@ -25,9 +26,9 @@ public class ArtworkInfoServlet extends HttpServlet {
         }
         else {
             addArtworkPage(req);
-            /* TODO:变更网页位置 */
         }
 
+        /* 重定向网页 */
         req.getRequestDispatcher("./artworkinfo_page.jsp").forward(req,resp);
     }
 
@@ -46,6 +47,7 @@ public class ArtworkInfoServlet extends HttpServlet {
     }
 
     private void fixArtworkPage(HttpServletRequest req){
+        /* 如果是修改艺术品信息的页面，获取艺术品信息 */
         ArtworkService service = new ArtworkServiceImpl();
         String artIDStr = req.getParameter("id");
         int artID = 0;
@@ -57,6 +59,7 @@ public class ArtworkInfoServlet extends HttpServlet {
         }
         Artwork artwork = service.getArtworkByID(artID);
 
+        /* 初始化参数 */
         req.setAttribute("artwork",artwork);
         req.setAttribute("artID",artwork.getArtID());
         req.setAttribute("validateJS","../js/artworkinfo_modify.js");

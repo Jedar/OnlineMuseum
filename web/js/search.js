@@ -18,6 +18,7 @@ $(function () {
 
     $(".page-previous").on('click',function (e) {
         var page = parseInt($("#page-input").val());
+        var max = parseInt(input.attr("max"));
         if (isNaN(page)) {
             page = 1;
         }
@@ -26,6 +27,9 @@ $(function () {
         }
         if (page < 1) {
             page = 1;
+        }
+        if (page > max){
+            page = max;
         }
         getPage(page);
     });
@@ -40,6 +44,9 @@ $(function () {
             page += 1;
         }
         var max = parseInt(input.attr("max"));
+        if (page < 1) {
+            page = 1;
+        }
         if (page > max) {
             page = max;
         }
@@ -71,6 +78,7 @@ $(function () {
     function setPage(idx,totalNumber,list){
         $("#page-input").val(idx);
         $("#totalPageNumber").html("/"+totalNumber);
+        $("#page-input").attr("max",totalNumber);
         var i;
         var str = "";
         for(i in list){

@@ -46,6 +46,7 @@ public class ArtworkServlet extends HttpServlet {
         }
     }
 
+    /* 处理上传艺术品事务 */
     private void uploadArtwork(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("upload start");
         Artwork artwork = getArtworkInfo(request,response);
@@ -57,6 +58,7 @@ public class ArtworkServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath()+"/jsp/artworkmanagement.jsp");
     }
 
+    /* 处理删除艺术品事务 */
     private void deleteArtwork(HttpServletRequest request, HttpServletResponse response) {
         int artID = 0;
         try {
@@ -115,6 +117,7 @@ public class ArtworkServlet extends HttpServlet {
 
     }
 
+    /* 处理改变艺术品事务 */
     private void changeArtwork(HttpServletRequest request, HttpServletResponse response) throws IOException {
         System.out.println("change start");
         Artwork artwork = getArtworkInfo(request,response);
@@ -126,6 +129,7 @@ public class ArtworkServlet extends HttpServlet {
         response.sendRedirect(request.getContextPath()+"/jsp/artworkmanagement.jsp");
     }
 
+    /* 处理艺术品翻页事务 */
     private void searchArtwork(HttpServletRequest request, HttpServletResponse response) {
 
         String title = request.getParameter("title");
@@ -159,26 +163,25 @@ public class ArtworkServlet extends HttpServlet {
         }
     }
 
-    private void artworkDetail(HttpServletRequest request, HttpServletResponse response) {
-
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request,response);
     }
 
+    /* 处理文件域 */
     private boolean processUploadField(FileItem item, Map<String, String> map) {
         try {
             //找一个存放文件的位置；存放的文件名
             String id = item.getFieldName();
-            String fileName = item.getName();//上传的文件的文件名
+            //上传的文件的文件名
+            String fileName = item.getName();
+            //上传文件类型
             String contentType = item.getContentType();
+            //上传文件放置目录
             String putDir = "";
+            //上传文件后缀名
             String postfix = "";
 
-            System.out.println(fileName);
-            System.out.println(contentType);
-
+            /* 判断后缀名 */
             if (contentType.startsWith("image/png")){
                 putDir = "/img/";
                 postfix = ".png";
@@ -196,25 +199,27 @@ public class ArtworkServlet extends HttpServlet {
             }
 
             if(fileName!=null&&!fileName.equals("")){
-//                fileName = FilenameUtils.getName(fileName);
+                /* 使用UUID获取文件名 */
                 fileName = UUID.randomUUID().toString() + postfix;
+                /* 文件暂存路径 */
                 String realPath = getServletContext().getRealPath("/WEB-INF/files");
-//                System.out.println(realPath);
+
                 String childDirectory = genChildDirectory(realPath,fileName);
-                //创造新的存放目录
+                /* 创造新的存放目录 */
                 File storeDirectory = new File(realPath+File.separator+childDirectory);
-                //如果目录不存在，那么就创建它
+                /* 如果目录不存在，那么就创建它 */
                 if(!storeDirectory.exists()){
                     storeDirectory.mkdirs();
                 }
                 File file = new File(storeDirectory, fileName);
-                //这个方法会自动的进行临时文件的清理，也就是上传完毕之后，他会自动的清除临时文件
+                /* 这个方法会自动的进行临时文件的清理，也就是上传完毕之后，他会自动的清除临时文件 */
                 item.write(file);
-//                System.out.println(item.getContentType());
+
+                /* 将缓存好的文件移动到目标目录下 */
                 File imageDir = new File(getServletContext().getRealPath(putDir));
                 FileUtils.copyFileToDirectory(file,imageDir);
 
-//                System.out.println(fileName);
+                /* 将文件名放至map里用于储存在数据库中 */
                 map.put(id,fileName);
             }
         } catch (Exception e) {
@@ -224,6 +229,7 @@ public class ArtworkServlet extends HttpServlet {
         return true;
     }
 
+    /* 随机生成子文件名 */
     private String genChildDirectory(String realPath, String fileName) {
         int hashCode = fileName.hashCode();
         int dir1 = hashCode&0xf;
@@ -240,6 +246,7 @@ public class ArtworkServlet extends HttpServlet {
 
     }
 
+    /* 处理文本域 */
     private boolean processFormField(FileItem item, Map<String, String> map) {
         //打印到控制台
         String fieldName = item.getFieldName();
@@ -257,6 +264,7 @@ public class ArtworkServlet extends HttpServlet {
         return !"".equals(fieldValue);
     }
 
+    /* 从表单数据中得到一个艺术品实例 */
     private Artwork getArtworkInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
         try {
             request.setCharacterEncoding("UTF-8");

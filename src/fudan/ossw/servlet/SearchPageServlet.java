@@ -34,6 +34,7 @@ public class SearchPageServlet extends HttpServlet {
         location = (String)req.getParameter("location");
         sort = (String)req.getParameter("sort");
 
+        /* 防止搜索条件为空 */
         if (title == null){
             title = "";
         }
@@ -47,14 +48,18 @@ public class SearchPageServlet extends HttpServlet {
             sort = "view";
         }
 
+        /* 转换编码 */
         title = new String(title.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
         description = new String(description.getBytes(StandardCharsets.ISO_8859_1),StandardCharsets.UTF_8);
         location = new String(location.getBytes(StandardCharsets.ISO_8859_1), StandardCharsets.UTF_8);
 
+
+        /* 搜索业务 */
         ArtworkService service = new ArtworkServiceImpl();
 
         List<Artwork> list = service.search(title,description,location,sort);
 
+        /*  计算页面下标*/
         int totalNumber = list.size();
 
         list = service.searchPage(title,description,location,sort,0,6);
