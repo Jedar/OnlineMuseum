@@ -6,7 +6,9 @@ import fudan.ossw.data.ScopeKey;
 import fudan.ossw.entity.Artwork;
 import fudan.ossw.entity.User;
 import fudan.ossw.service.ArtworkService;
+import fudan.ossw.service.FavoriteService;
 import fudan.ossw.service.impl.ArtworkServiceImpl;
+import fudan.ossw.service.impl.FavoriteServiceImpl;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -56,11 +58,12 @@ public class DetailPageServlet extends HttpServlet {
         }
 
         /* 控制推荐艺术品栏的呈现 */
+        FavoriteService favoriteService = new FavoriteServiceImpl();
         List<Artwork> recommendArtworks = new ArrayList<>();
         String recommendNav = "invisible";
         if (user != null){
             recommendNav = "";
-            recommendArtworks = service.getRecommendArtworks(user.getUserID());
+            recommendArtworks = favoriteService.getRecommendArtworks(user.getUserID());
         }
 
         request.setAttribute("navItemDetail","active");
